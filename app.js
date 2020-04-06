@@ -1,3 +1,4 @@
+var isAppReady = false;
 var collection = [];
 var profileId;
 var wallet = 0;
@@ -5,250 +6,11 @@ var packsOpened = 0;
 var cashAdded = 0;
 var timeoutFunctions = [];
 var apiHome = 'http://localhost:8000';
-var energyCards = [
-    'en-US-SWSH-Energy-001-grass-energy.jpg',
-    'en-US-SWSH-Energy-002-fire-energy.jpg',
-    'en-US-SWSH-Energy-003-water-energy.jpg',
-    'en-US-SWSH-Energy-004-lightning-energy.jpg',
-    'en-US-SWSH-Energy-005-psychic-energy.jpg',
-    'en-US-SWSH-Energy-006-fighting-energy.jpg',
-    'en-US-SWSH-Energy-007-darkness-energy.jpg',
-    'en-US-SWSH-Energy-008-metal-energy.jpg',
-    'en-US-SWSH-Energy-009-fairy-energy.jpg'
-];
 
-var commonCards = [
-    'en-US-SWSH1-002-roselia.jpg',
-    'en-US-SWSH1-003-roselia.jpg',
-    'en-US-SWSH1-005-cottonee.jpg',
-    'en-US-SWSH1-007-maractus.jpg',
-    'en-US-SWSH1-010-grookey.jpg',
-    'en-US-SWSH1-011-grookey.jpg',
-    'en-US-SWSH1-016-blipbug.jpg',
-    'en-US-SWSH1-017-blipbug.jpg',
-    'en-US-SWSH1-020-gossifleur.jpg',
-    'en-US-SWSH1-022-vulpix-1.jpg',
-    'en-US-SWSH1-027-salandit.jpg',
-    'en-US-SWSH1-030-scorbunny.jpg',
-    'en-US-SWSH1-031-scorbunny.png',
-    'en-US-SWSH1-037-sizzlipede.jpg',
-    'en-US-SWSH1-038-sizzlipede.jpg',
-    'en-US-SWSH1-040-shellder.jpg',
-    'en-US-SWSH1-042-krabby.jpg',
-    'en-US-SWSH1-043-krabby.jpg',
-    'en-US-SWSH1-045-goldeen.jpg',
-    'en-US-SWSH1-046-goldeen.jpg',
-    'en-US-SWSH1-054-sobble.jpg',
-    'en-US-SWSH1-055-sobble.jpg',
-    'en-US-SWSH1-060-chewtle.jpg',
-    'en-US-SWSH1-063-snom.jpg',
-    'en-US-SWSH1-065-pikachu.jpg',
-    'en-US-SWSH1-067-chinchou.jpg',
-    'en-US-SWSH1-068-chinchou.jpg',
-    'en-US-SWSH1-070-joltik.jpg',
-    'en-US-SWSH1-073-yamper.jpg',
-    'en-US-SWSH1-074-yamper.jpg',
-    'en-US-SWSH1-077-pincurchin.jpg',
-    'en-US-SWSH1-081-galarian-ponyta.jpg',
-    'en-US-SWSH1-083-gastly.jpg',
-    'en-US-SWSH1-087-munna.jpg',
-    'en-US-SWSH1-089-sinistea.jpg',
-    'en-US-SWSH1-092-diglett.jpg',
-    'en-US-SWSH1-096-rhyhorn.jpg',
-    'en-US-SWSH1-097-rhyhorn.jpg',
-    'en-US-SWSH1-101-baltoy.jpg',
-    'en-US-SWSH1-102-baltoy.jpg',
-    'en-US-SWSH1-105-mudbray.jpg',
-    'en-US-SWSH1-107-silicobra.jpg',
-    'en-US-SWSH1-108-silicobra.jpg',
-    'en-US-SWSH1-111-clobbopus.jpg',
-    'en-US-SWSH1-112-clobbopus.jpg',
-    'en-US-SWSH1-117-galarian-zigzagoon.jpg',
-    'en-US-SWSH1-121-skorupi.jpg',
-    'en-US-SWSH1-123-croagunk.jpg',
-    'en-US-SWSH1-125-nickit.jpg',
-    'en-US-SWSH1-127-galarian-meowth.jpg',
-    'en-US-SWSH1-129-mawile.jpg',
-    'en-US-SWSH1-130-ferroseed.jpg',
-    'en-US-SWSH1-133-pawniard.jpg',
-    'en-US-SWSH1-136-cufant.jpg',
-    'en-US-SWSH1-143-hoothoot.jpg',
-    'en-US-SWSH1-145-minccino.jpg',
-    'en-US-SWSH1-146-minccino.jpg',
-    'en-US-SWSH1-150-rookidee.jpg',
-    'en-US-SWSH1-152-wooloo.jpg',
-    'en-US-SWSH1-153-wooloo.jpg'
-];
-
-var uncommonCards = [
-    'en-US-SWSH1-012-thwackey.jpg',
-    'en-US-SWSH1-013-thwackey.jpg',
-    'en-US-SWSH1-018-dottler.jpg',
-    'en-US-SWSH1-021-eldegoss.jpg',
-    'en-US-SWSH1-026-heatmor.jpg',
-    'en-US-SWSH1-028-salazzle.jpg',
-    'en-US-SWSH1-032-raboot.jpg',
-    'en-US-SWSH1-033-raboot.jpg',
-    'en-US-SWSH1-044-kingler.jpg',
-    'en-US-SWSH1-047-seaking.jpg',
-    'en-US-SWSH1-051-qwilfish.jpg',
-    'en-US-SWSH1-052-mantine.jpg',
-    'en-US-SWSH1-056-drizzile.jpg',
-    'en-US-SWSH1-057-drizzile.jpg',
-    'en-US-SWSH1-071-galvantula.jpg',
-    'en-US-SWSH1-084-haunter.jpg',
-    'en-US-SWSH1-093-dugtrio.jpg',
-    'en-US-SWSH1-094-hitmonlee.jpg',
-    'en-US-SWSH1-095-hitmonchan.jpg',
-    'en-US-SWSH1-098-rhydon.jpg',
-    'en-US-SWSH1-100-sudowoodo.jpg',
-    'en-US-SWSH1-118-galarian-linoone.jpg',
-    'en-US-SWSH1-131-ferrothorn.jpg',
-    'en-US-SWSH1-132-galarian-stunfisk.jpg',
-    'en-US-SWSH1-134-bisharp.jpg',
-    'en-US-SWSH1-151-corvisquire.jpg',
-    'en-US-SWSH1-154-dubwool.jpg',
-    'en-US-SWSH1-156-air-balloon.jpg',
-    'en-US-SWSH1-157-bede.jpg',
-    'en-US-SWSH1-158-big-charm.jpg',
-    'en-US-SWSH1-159-crushing-hammer.jpg',
-    'en-US-SWSH1-160-energy-retrieval.jpg',
-    'en-US-SWSH1-161-energy-search.jpg',
-    'en-US-SWSH1-162-energy-switch.jpg',
-    'en-US-SWSH1-163-evolution-incense.jpg',
-    'en-US-SWSH1-164-great-ball.jpg',
-    'en-US-SWSH1-165-hop.jpg',
-    'en-US-SWSH1-166-hyper-potion.jpg',
-    'en-US-SWSH1-167-lucky-egg.jpg',
-    'en-US-SWSH1-168-lum-berry.jpg',
-    'en-US-SWSH1-170-metal-saucer.jpg',
-    'en-US-SWSH1-171-ordinary-rod.jpg',
-    'en-US-SWSH1-172-pal-pad.jpg',
-    'en-US-SWSH1-173-poke-kid.jpg',
-    'en-US-SWSH1-174-pokegear-30.jpg',
-    'en-US-SWSH1-175-pokemon-catcher.jpg',
-    'en-US-SWSH1-176-pokemon-center-lady.jpg',
-    'en-US-SWSH1-177-potion.jpg',
-    'en-US-SWSH1-179-quick-ball.jpg',
-    'en-US-SWSH1-180-rare-candy.jpg',
-    'en-US-SWSH1-181-rotom-bike.jpg',
-    'en-US-SWSH1-182-sitrus-berry.jpg',
-    'en-US-SWSH1-183-switch.jpg',
-    'en-US-SWSH1-184-team-yell-grunt.jpg',
-    'en-US-SWSH1-185-vitality-band.jpg',
-    'en-US-SWSH1-186-aurora-energy.jpg'
-];
-
-var rareCards = {
-    '03 rare': [
-        'en-US-SWSH1-004-roserade.jpg',
-        'en-US-SWSH1-006-whimsicott.jpg',
-        'en-US-SWSH1-008-durant.jpg',
-        'en-US-SWSH1-014-rillaboom.jpg',
-        'en-US-SWSH1-015-rillaboom.jpg',
-        'en-US-SWSH1-019-orbeetle.jpg',
-        'en-US-SWSH1-023-ninetales.jpg',
-        'en-US-SWSH1-029-turtonator.jpg',
-        'en-US-SWSH1-034-cinderace.jpg',
-        'en-US-SWSH1-035-cinderace.jpg',
-        'en-US-SWSH1-036-cinderace.jpg',
-        'en-US-SWSH1-039-centiskorch.jpg',
-        'en-US-SWSH1-041-cloyster.jpg',
-        'en-US-SWSH1-048-lapras.jpg',
-        'en-US-SWSH1-058-inteleon.jpg',
-        'en-US-SWSH1-059-inteleon.jpg',
-        'en-US-SWSH1-061-drednaw.jpg',
-        'en-US-SWSH1-062-cramorant.jpg',
-        'en-US-SWSH1-064-frosmoth.jpg',
-        'en-US-SWSH1-066-raichu.jpg',
-        'en-US-SWSH1-069-lanturn.jpg',
-        'en-US-SWSH1-075-boltund.jpg',
-        'en-US-SWSH1-076-boltund.jpg',
-        'en-US-SWSH1-078-morpeko.jpg',
-        'en-US-SWSH1-082-galarian-rapidash.jpg',
-        'en-US-SWSH1-085-gengar.jpg',
-        'en-US-SWSH1-088-musharna.jpg',
-        'en-US-SWSH1-090-polteageist.jpg',
-        'en-US-SWSH1-099-rhyperior.jpg',
-        'en-US-SWSH1-103-claydol.jpg',
-        'en-US-SWSH1-106-mudsdale.jpg',
-        'en-US-SWSH1-109-sandaconda.jpg',
-        'en-US-SWSH1-110-sandaconda.jpg',
-        'en-US-SWSH1-113-grapploct.jpg',
-        'en-US-SWSH1-114-stonjourner.jpg',
-        'en-US-SWSH1-128-galarian-perrserker.jpg',
-        'en-US-SWSH1-135-corviknight.jpg',
-        'en-US-SWSH1-137-copperajah.jpg',
-        'en-US-SWSH1-140-snorlax.jpg',
-        'en-US-SWSH1-144-noctowl.jpg',
-        'en-US-SWSH1-147-cinccino.jpg',
-        'en-US-SWSH1-148-oranguru.jpg',
-        'en-US-SWSH1-149-drampa.jpg'
-    ],
-    '04 rare holo': [
-        'en-US-SWSH1-001-celebi-v.jpg',
-        'en-US-SWSH1-009-dhelmise-v.jpg',
-        'en-US-SWSH1-024-torkoal-v.jpg',
-        'en-US-SWSH1-025-victini-v.jpg',
-        'en-US-SWSH1-049-lapras-v.jpg',
-        'en-US-SWSH1-050-lapras-vmax.jpg',
-        'en-US-SWSH1-053-keldeo-v.jpg',
-        'en-US-SWSH1-072-tapu-koko-v.jpg',
-        'en-US-SWSH1-079-morpeko-v.jpg',
-        'en-US-SWSH1-080-morpeko-vmax.jpg',
-        'en-US-SWSH1-086-wobbuffet-v.jpg',
-        'en-US-SWSH1-091-indeedee-v.jpg',
-        'en-US-SWSH1-104-regirock-v.jpg',
-        'en-US-SWSH1-115-stonjourner-v.jpg',
-        'en-US-SWSH1-116-stonjourner-vmax.jpg',
-        'en-US-SWSH1-119-galarian-obstagoon.jpg',
-        'en-US-SWSH1-120-sableye-v.jpg',
-        'en-US-SWSH1-122-drapion.jpg',
-        'en-US-SWSH1-124-toxicroak.jpg',
-        'en-US-SWSH1-126-thievul.jpg',
-        'en-US-SWSH1-138-zacian-v.jpg',
-        'en-US-SWSH1-139-zamazenta-v.jpg',
-        'en-US-SWSH1-141-snorlax-v.jpg',
-        'en-US-SWSH1-142-snorlax-vmax.jpg',
-        'en-US-SWSH1-155-cramorant-v.jpg',
-        'en-US-SWSH1-169-marnie.jpg',
-        'en-US-SWSH1-178-professors-research.jpg'
-    ],
-    '05 rare ultra': [
-        'en-US-SWSH1-187-dhelmise-v.jpg',
-        'en-US-SWSH1-188-torkoal-v.jpg',
-        'en-US-SWSH1-189-lapras-v.jpg',
-        'en-US-SWSH1-190-morpeko-v.jpg',
-        'en-US-SWSH1-191-wobbuffet-v.jpg',
-        'en-US-SWSH1-192-indeedee-v.jpg',
-        'en-US-SWSH1-193-stonjourner-v.jpg',
-        'en-US-SWSH1-194-sableye-v.jpg',
-        'en-US-SWSH1-195-zacian-v.jpg',
-        'en-US-SWSH1-196-zamazenta-v.jpg',
-        'en-US-SWSH1-197-snorlax-v.jpg',
-        'en-US-SWSH1-198-cramorant-v.jpg',
-        'en-US-SWSH1-199-bede.jpg',
-        'en-US-SWSH1-200-marnie.jpg',
-        'en-US-SWSH1-201-professors-research.jpg',
-        'en-US-SWSH1-202-team-yell-grunt-1.jpg'
-    ],
-    '06 rare secret': [
-        'en-US-SWSH1-203-lapras-vmax.jpg',
-        'en-US-SWSH1-204-morpeko-vmax.jpg',
-        'en-US-SWSH1-205-stonjourner-vmax.jpg',
-        'en-US-SWSH1-206-snorlax-vmax.jpg',
-        'en-US-SWSH1-207-bede.jpg',
-        'en-US-SWSH1-208-marnie.jpg',
-        'en-US-SWSH1-209-professors-research.jpg',
-        'en-US-SWSH1-210-team-yell-grunt.jpg',
-        'en-US-SWSH1-211-zacian-v-1.jpg',
-        'en-US-SWSH1-212-zamazenta-v.jpg',
-        'en-US-SWSH1-213-air-balloon.jpg',
-        'en-US-SWSH1-214-metal-saucer.jpg',
-        'en-US-SWSH1-215-ordinary-rod.jpg',
-        'en-US-SWSH1-216-quick-ball.jpg'
-    ],
-};
+var energyCards = [];
+var commonCards = [];
+var uncommonCards = [];
+var rareCards = {};
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -360,7 +122,28 @@ $(document).ready(function() {
             }
         );
     });
+
+    loadCards('SSH');
 });
+
+function loadCards(expansion_set) {
+    var apiEndpoint = apiHome + '/load_cards.php';
+    $.getJSON(
+        apiEndpoint,
+        {expansion_set: expansion_set},
+        function(data) {
+            energyCards = data.energyCards ?? [];
+            commonCards = data.commonCards ?? [];
+            uncommonCards = data.uncommonCards ?? [];
+            rareCards = {
+                '03 rare': data.rareCards ?? [],
+                '04 rare holo': data.rareHoloCards ?? [],
+                '05 rare ultra': data.rareUltraCards ?? [],
+                '06 rare secret': data.rareSecretCards ?? [],
+            };
+        }
+    );
+}
 
 function saveProfile() {
     if (!profileId) {
