@@ -269,14 +269,14 @@ function shuffle(a) {
 /**
  * Returns one of the following rarity keys:
  * - rare
- * - rare holo (1 in every 4 packs = 18/72)
- * - rare ultra (1 in every 8 packs = 9/72)
- * - rare secret (1 in every 72 packs = 1/72)
+ * - rare holo (1 in every 4 packs = 36/144)
+ * - rare ultra (1 in every 16 packs = 9/144)
+ * - rare secret (1 in every 72 packs = 2/144)
  */
 function determineRarity() {
-    var rand = Math.floor(Math.random() * 72) + 1; // roll a D72
+    var rand = Math.floor(Math.random() * 144) + 1; // roll a D144
 
-    if (rand == 1) { // range size = 1
+    if (rand >= 1 && rand <= 2) { // range size = 2
         return '06 rare secret';
     }
 
@@ -284,7 +284,7 @@ function determineRarity() {
         return '05 rare ultra';
     }
 
-    if (rand >= 21 && rand <= 38) { // range size = 18
+    if (rand >= 21 && rand <= 56) { // range size = 36
         return '04 rare holo';
     }
 
