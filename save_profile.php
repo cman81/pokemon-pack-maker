@@ -1,11 +1,7 @@
 <?php
-    class MyDB extends SQLite3 {
-        function __construct() {
-            $this->open('db/pokemon.db');
-        }
-    }
+    require_once "PokemonDB.class.php";
 
-    $db = new MyDB();
+    $db = new PokemonDB();
     if(!$db) {
         $out = [
             'status' => 'error',

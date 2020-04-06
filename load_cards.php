@@ -1,9 +1,5 @@
 <?php
-    class MyDB extends SQLite3 {
-        function __construct() {
-            $this->open('db/pokemon.db');
-        }
-    }
+    require_once "PokemonDB.class.php";
 
     $out = [
         'energyCards' => [],
@@ -27,7 +23,7 @@
 
     $sql = "SELECT * FROM cards WHERE expansion_set = :expansion_set";
 
-    $db = new MyDB();
+    $db = new PokemonDB();
     $stmt = $db->prepare($sql);
 
     // passing values to the parameters

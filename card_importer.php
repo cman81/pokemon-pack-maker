@@ -1,4 +1,5 @@
 <?php
+    require_once "PokemonDB.class.php";
 
     $cards_to_import = [
         'en-US-SWSH1-203-lapras-vmax.jpg',
@@ -17,13 +18,7 @@
         'en-US-SWSH1-216-quick-ball.jpg'
     ];
 
-    class MyDB extends SQLite3 {
-        function __construct() {
-            $this->open('db/pokemon.db');
-        }
-    }
-
-    $db = new MyDB();
+    $db = new PokemonDB();
     if(!$db) {
         $out = [
             'status' => 'error',
