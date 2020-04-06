@@ -5,7 +5,7 @@ var wallet = 0;
 var packsOpened = 0;
 var cashAdded = 0;
 var timeoutFunctions = [];
-var apiHome = 'http://localhost:8000';
+var apiHome = 'http://localhost:8000/api';
 
 var energyCards = [];
 var commonCards = [];
