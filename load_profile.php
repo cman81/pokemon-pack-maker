@@ -35,7 +35,7 @@
     }
 
     $out['collection'] = [];
-    $sql = "SELECT * FROM owned_cards WHERE profile_id = '" . $_GET['name'] . "'";
+    $sql = "SELECT * FROM card_collection_map WHERE profile_id = '" . $_GET['name'] . "'";
     $ret = $db->query($sql);
     while($row = $ret->fetchArray(SQLITE3_ASSOC) ) {
         $out['collection'][] = [

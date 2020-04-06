@@ -52,13 +52,13 @@ img.uncommon {
     font-weight: bold;
 }
 .card-wrapper.rare.holo {
-    background-color: #1A237E;
+    background-color: #444;
     color: #ccc;
 }
 .card-wrapper.rare.ultra {
     background-color: #FFEE58;
 }
 .card-wrapper.rare.secret {
-    background-color: #444;
+    background-color: #1A237E;
     color: #ccc;
 }

@@ -42,7 +42,7 @@
     }
 
     $sql = "
-        DELETE FROM owned_cards
+        DELETE FROM card_collection_map
         WHERE profile_id = :profile_id
     ";
     $stmt = $db->prepare($sql);
@@ -63,7 +63,7 @@
 
     foreach ($_POST['collection'] as $this_card) {
         $sql = "
-            INSERT INTO owned_cards (profile_id, card, rarity, quantity)
+            INSERT INTO card_collection_map (profile_id, card, rarity, quantity)
             VALUES (:profile_id, :card, :rarity, :quantity)
         ";
         $stmt = $db->prepare($sql);
