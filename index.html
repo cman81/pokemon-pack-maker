@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <title>Pokemon Pack Generator!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Pokemon Pack Generator!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link load-profile" href="#">Ryan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link load-profile" href="#">Samantha</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="top container">
+        <div class="row">
+            <div class="col">
+                <h2>Actions</h2>
+                <p>
+                    <input type="button" value="Open a new pack!" id="open-pack" class="btn btn-success" />
+                    <input type="button" value="Latest Pack" id="view-pack" class="btn btn-primary" />
+                    <input type="button" value="Collection" id="view-collection" class="btn btn-primary" />
+                </p>
+                <p>
+                    <input type="button" value="$1" id="dollar-1" class="add-cash btn btn-outline-success" />
+                    <input type="button" value="$5" id="dollar-5" class="add-cash btn btn-outline-success" />
+                    <input type="button" value="$10" id="dollar-10" class="add-cash btn btn-outline-success" />
+                    <input type="button" value="$20" id="dollar-20" class="add-cash btn btn-outline-success" />
+                </p>
+            </div>
+            <div class="col">
+                <h3>Stats</h3>
+                <div>Cash added to Wallet: <span id="cash-added">$0.00</span></div>
+                <div>Wallet: <span id="wallet">$0.00</span></div>
+                <div>Packs Open: <span id="packs-opened">0</span></div>
+                <div>Unique Cards: <span id="unique-card-count">0</span> of 216</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container main">
+        <div class="row">
+            <div class="col">
+                <div class="pack section">
+                    <h2>Pack Contents</h2>
+                    <div id="pack">
+                        <div id="status-message"></div>
+                    </div>
+                </div>
+                <div class="collection section">
+                    <h2>Collection</h2>
+                    <div id="collection">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <audio id="whoosh">
+        <source src="high-whoosh.mp3">
+        </source>
+        Your browser isn't invited for super fun audio time.
+    </audio>
+    <audio id="magic-spell">
+        <source src="magic-spell.mp3">
+        </source>
+        Your browser isn't invited for super fun audio time.
+    </audio>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
