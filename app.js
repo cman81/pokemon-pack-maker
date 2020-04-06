@@ -211,7 +211,7 @@ function generatePack() {
     // 1 random energy
     const energyCardsClone = [...energyCards];
     pack.push({
-        'img': '00 energy/' + energyCardsClone[Math.floor(Math.random() * energyCardsClone.length)],
+        'img': energyCardsClone[Math.floor(Math.random() * energyCardsClone.length)],
         'rarity': 'energy'
     });
 
@@ -220,7 +220,7 @@ function generatePack() {
     commonCardsClone = shuffle(commonCardsClone);
     for (var i = 0; i < 5; i++) {
         pack.push({
-            'img': '01 common/' + commonCardsClone.pop(),
+            'img': commonCardsClone.pop(),
             'rarity': 'common'
         });
     }
@@ -230,7 +230,7 @@ function generatePack() {
     uncommonCardsClone = shuffle(uncommonCardsClone);
     for (var i = 0; i < 3; i++) {
         pack.push({
-            'img': '02 uncommon/' + uncommonCardsClone.pop(),
+            'img': uncommonCardsClone.pop(),
             'rarity': 'uncommon'
         });
     }
@@ -243,7 +243,7 @@ function generatePack() {
     console.log(`Your rare card was a: ${rarityKey}!`);
     rareCardsClone = rareCardsClone[rarityKey];
     pack.push({
-        'img': rarityKey + '/' + rareCardsClone[Math.floor(Math.random() * rareCardsClone.length)],
+        'img': rareCardsClone[Math.floor(Math.random() * rareCardsClone.length)],
         'rarity': rarityKey.substring(3),
     });
 
@@ -269,27 +269,26 @@ function shuffle(a) {
 /**
  * Returns one of the following rarity keys:
  * - rare
- * - rare holo (1 in every 4 packs)
- * - rare ultra (1 in every 8 packs)
- * - rare secret (1 in every 72 packs)
+ * - rare holo (1 in every 4 packs = 18/72)
+ * - rare ultra (1 in every 8 packs = 9/72)
+ * - rare secret (1 in every 72 packs = 1/72)
  */
 function determineRarity() {
-    var rand = Math.floor(Math.random() * 4) + 1; // roll a D4
-    if (rand <= 3) {
-        return '03 rare';
+    var rand = Math.floor(Math.random() * 72) + 1; // roll a D72
+
+    if (rand == 1) { // range size = 1
+        return '06 rare secret';
     }
 
-    var rand = Math.floor(Math.random() * 3) + 1; // flip a D3
-    if (rand <= 2) {
-        return '04 rare holo';
-    }
-
-    var rand = Math.floor(Math.random() * 9) + 1; // roll a D9
-    if (rand <= 8) {
+    if (rand >= 11 && rand <= 19) { // range size = 9
         return '05 rare ultra';
     }
 
-    return '06 rare secret';
+    if (rand >= 21 && rand <= 38) { // range size = 18
+        return '04 rare holo';
+    }
+
+    return '03 rare';
 }
 
 function activateSection(name) {
