@@ -1,4 +1,3 @@
-var isAppReady = false;
 var collection = [];
 var profileId;
 var wallet = 0;
@@ -6,6 +5,7 @@ var packsOpened = 0;
 var cashAdded = 0;
 var timeoutFunctions = [];
 var apiHome = 'http://localhost:8000/api';
+var lastProfileUpdate = 0;
 
 var energyCards = [];
 var commonCards = [];
@@ -192,8 +192,7 @@ function saveProfile() {
         name: profileId,
         wallet: wallet,
         packsOpened: packsOpened,
-        cashAdded: cashAdded,
-        collection: collection
+        cashAdded: cashAdded
     };
 
     $.post(
@@ -351,4 +350,10 @@ function updateStats() {
         return values;
     }, { set: {}, count: 0 }).count;
     $('#unique-card-count').html(uniqueCardCount);
+
+    now = Date.now();
+    if (now - lastProfileUpdate > 2000) { // wait 2 seconds before saving again
+        saveProfile();
+        lastProfileUpdate = now;
+    }
 }
