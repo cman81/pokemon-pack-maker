@@ -1,4 +1,3 @@
-var collection = [];
 var profileId;
 var wallet = 0;
 var packsOpened = 0;
@@ -7,10 +6,13 @@ var timeoutFunctions = [];
 var apiHome = 'http://localhost:8000/api';
 var lastProfileUpdate = 0;
 
+var collection = [];
+var battleDeck = [];
 var energyCards = [];
 var commonCards = [];
 var uncommonCards = [];
 var rareCards = {};
+
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -43,17 +45,18 @@ $(document).ready(function() {
     });
 
     $('#view-collection').click(function() {
-        compileCollection();
+        collection = compileCollection(collection);
 
         activateSection('collection');
         renderCards(collection, 50, '#collection');
     });
 
-    $('.section').on('mouseover', '.pokemon-card:not(.rare)', function() {
+    $('.section').on('mouseover', '.pokemon-card', function() {
+        if ($(this).hasClass('rare')) {
+            playSound('#bigwhoosh');
+            return;
+        }
         playSound('#whoosh');
-    });
-    $('.section').on('mouseover', '.pokemon-card.rare', function() {
-        playSound('#bigwhoosh');
     });
 
     $('.add-cash').click(function() {
@@ -77,11 +80,21 @@ $(document).ready(function() {
                 collection = data.collection ?? [];
 
                 updateStats();
-                compileCollection();
+                collection = compileCollection(collection);
                 activateSection('collection');
                 renderCards(collection, 50, '#collection');
             }
         );
+    });
+
+    $('#collection').on('click', '.pokemon-card', function() {
+        var index = $(this).parent('.card-wrapper').index();
+        battleDeck.push({
+            img: collection[index].img,
+            rarity: collection[index].rarity,
+            quantity: 1
+        });
+        battleDeck = compileCollection(battleDeck);
     });
 
     loadCards('SSH');
@@ -93,7 +106,7 @@ $(document).ready(function() {
  * Find all instances of a given card and merge them into a single array element with an updated
  * 'quantity' field
  */
-function compileCollection() {
+function compileCollection(collection) {
     var collectionClone = [...collection];
     collectionClone.sort(function(a, b) {
         var firstIdx = parseInt(a.img.match(/\d{3}/), 10);
@@ -128,7 +141,7 @@ function compileCollection() {
         const lastIdx = consolidatedCollection.length - 1;
         consolidatedCollection[lastIdx].quantity += collectionClone[i].quantity;
     }
-    collection = consolidatedCollection;
+    return consolidatedCollection;
 }
 
 function addPackToCollection() {
@@ -142,7 +155,7 @@ function addPackToCollection() {
         });
     });
 
-    compileCollection();
+    collection = compileCollection(collection);
 
     if (!profileId) {
         return pack;
