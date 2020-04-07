@@ -49,8 +49,11 @@ $(document).ready(function() {
         renderCards(collection, 50, '#collection');
     });
 
-    $('.section').on('mouseover', '.pokemon-card', function() {
+    $('.section').on('mouseover', '.pokemon-card:not(.rare)', function() {
         playSound('#whoosh');
+    });
+    $('.section').on('mouseover', '.pokemon-card.rare', function() {
+        playSound('#bigwhoosh');
     });
 
     $('.add-cash').click(function() {
@@ -213,6 +216,7 @@ function playSound(cssId) {
     }
 
     $('#whoosh')[0].pause();
+    $('#bigwhoosh')[0].pause();
     sound.currentTime = 0;
     sound.play();
 }

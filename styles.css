@@ -6,7 +6,7 @@ body {
     background-color: white;
 }
 .pokemon-card {
-    width: 200px;
+    width: 165px;
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     -webkit-transition:  -webkit-transform .2s ease-out;
@@ -19,13 +19,19 @@ body {
 .pokemon-card:hover {
     opacity: 1;
     z-index: 9999;
-    -webkit-transform:scale(2);
-    -moz-transform:scale(2);
-    -o-transform:scale(2);
-    transform:scale(2);
+    -webkit-transform:scale(2.25);
+    -moz-transform:scale(2.25);
+    -o-transform:scale(2.25);
+    transform:scale(2.25);
 }
 img.energy {
     opacity: 0.3;
+}
+.pokemon-card.energy:hover {
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
 }
 img.common {
     opacity: 0.6;
@@ -33,11 +39,17 @@ img.common {
 img.uncommon {
     opacity: 0.8;
 }
+.pokemon-card.rare:hover {
+    -webkit-transform:scale(3);
+    -moz-transform:scale(3);
+    -o-transform:scale(3);
+    transform:scale(3);
+}
 .section {
     display: none;
 }
 .main.container {
-    min-height: 800px;
+    min-height: 900px;
 }
 .top.container {
     padding-top: 10px;
