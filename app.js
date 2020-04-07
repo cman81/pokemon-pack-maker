@@ -239,10 +239,10 @@ function generatePack() {
         'rarity': 'energy'
     });
 
-    // 5 random common cards
+    // 6 random common cards
     var commonCardsClone = [...commonCards];
     commonCardsClone = shuffle(commonCardsClone);
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 6; i++) {
         pack.push({
             'img': commonCardsClone.pop(),
             'rarity': 'common'
