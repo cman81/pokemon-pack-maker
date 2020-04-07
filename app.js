@@ -95,6 +95,8 @@ $(document).ready(function() {
     });
 
     $('#collection').on('click', '.pokemon-card', function() {
+        $(this).animate({left: "300px", opacity: 0}, 250, function () { $(this).removeAttr('style'); });
+
         var index = $(this).parent('.card-wrapper').index();
         battleDeck.push({
             img: collection[index].img,
@@ -102,6 +104,13 @@ $(document).ready(function() {
             quantity: 1
         });
         battleDeck = compileCollection(battleDeck);
+    });
+
+    $('#battle-deck').on('click', '.pokemon-card', function() {
+        var index = $(this).parent('.card-wrapper').index();
+        battleDeck[index].quantity--;
+        battleDeck = compileCollection(battleDeck);
+        renderCards(battleDeck, 0, '#battle-deck');
     });
 
     loadCards('SSH');
@@ -135,7 +144,11 @@ function compileCollection(collection) {
 
     var consolidatedCollection = [];
     for (var i = 0; i < collectionClone.length; i++) {
-        if (i == 0) {
+        if (collectionClone[i].quantity < 1) {
+            // skip if quantity = 0
+            continue;
+        }
+        if (consolidatedCollection.length == 0) {
             consolidatedCollection.push(collectionClone[i]);
             continue;
         }
@@ -261,7 +274,6 @@ function renderCards(pack, timeInterval, cssId) {
                     ${quantitySpan}
                 </div>
             `);
-            playSound();
         }, time));
         time += timeInterval;
     });
