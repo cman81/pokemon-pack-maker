@@ -51,6 +51,13 @@ $(document).ready(function() {
         renderCards(collection, 50, '#collection');
     });
 
+    $('#main-actions').on('click', '#view-battle-deck', function() {
+        battleDeck = compileCollection(battleDeck);
+
+        activateSection('battle-deck');
+        renderCards(battleDeck, 50, '#battle-deck');
+    });
+
     $('.section').on('mouseover', '.pokemon-card', function() {
         if ($(this).hasClass('rare')) {
             playSound('#bigwhoosh');
