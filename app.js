@@ -144,7 +144,21 @@ function addPackToCollection() {
         return pack;
     }
 
-// TODO: add this pack to the collection (server-side)
+    // add this pack to the collection (server-side)
+    var apiEndpoint = apiHome + '/add_to_collection.php';
+    var payload = {
+        name: profileId,
+        pack: pack
+    };
+
+    $.post(
+        apiEndpoint,
+        payload,
+        function(data) {
+            console.log(data);
+        },
+        'json'
+    );
 
     return pack;
 }
