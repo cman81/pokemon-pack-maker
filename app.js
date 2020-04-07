@@ -74,6 +74,7 @@ $(document).ready(function() {
                 collection = data.collection ?? [];
 
                 updateStats();
+                compileCollection();
                 activateSection('collection');
                 renderCards(collection, 50, '#collection');
             }
@@ -84,7 +85,7 @@ $(document).ready(function() {
 });
 
 /**
- * Sort the collection from least rare to most rare, then place energy cards at the end.
+ * Sort the collection by card number, then place energy cards at the end.
  * 
  * Find all instances of a given card and merge them into a single array element with an updated
  * 'quantity' field
