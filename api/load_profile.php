@@ -31,14 +31,34 @@
     }
 
     $out['collection'] = [];
-    $sql = "SELECT * FROM card_collection_map WHERE profile_id = '" . $_GET['name'] . "'";
-    $ret = $db->query($sql);
+    $sql = "
+        SELECT ccm.profile_id, ccm.card, c.rarity
+        FROM card_collection_map ccm
+        INNER JOIN cards c ON c.card_id = ccm.card
+        WHERE ccm.profile_id = :profile_id
+    ";
+
+    $stmt = $db->prepare($sql);
+
+    // passing values to the parameters
+    $stmt->bindValue(':profile_id', $_GET['name']);
+
+    $ret = $stmt->execute();
+
     while($row = $ret->fetchArray(SQLITE3_ASSOC) ) {
-        $out['collection'][] = [
+        $key = $row['card'];
+
+        if (isset($out['collection'][$key])) {
+            $out['collection'][$key]['quantity']++;
+            continue;
+        }
+        $out['collection'][$key] = [
             'img' => $row['card'],
             'rarity' => $row['rarity'],
-            'quantity' => $row['quantity']
+            'quantity' => 1,
         ];
     }
+
+    $out['collection'] = array_values($out['collection']);
 
     exit(json_encode($out));
