@@ -58,20 +58,24 @@
     }
 
     foreach ($_POST['collection'] as $this_card) {
-        $sql = "
-            INSERT INTO card_collection_map (profile_id, card, rarity, quantity)
-            VALUES (:profile_id, :card, :rarity, :quantity)
-        ";
-        $stmt = $db->prepare($sql);
+        if (empty($this_card['quantity'])) {
+            $this_card['quantity'] = 1;
+        }
 
-        // passing values to the parameters
-        $stmt->bindValue(':profile_id', $_POST['name']);
-        $stmt->bindValue(':card', $this_card['img']);
-        $stmt->bindValue(':rarity', $this_card['rarity']);
-        $stmt->bindValue(':quantity', $this_card['quantity']);
+        for ($i = 0; $i < $this_card['quantity']; $i++) {
+            $sql = "
+                INSERT INTO card_collection_map (profile_id, card)
+                VALUES (:profile_id, :card)
+            ";
+            $stmt = $db->prepare($sql);
 
-        // execute the update statement
-        $is_success = $stmt->execute();
+            // passing values to the parameters
+            $stmt->bindValue(':profile_id', $_POST['name']);
+            $stmt->bindValue(':card', $this_card['img']);
+
+            // execute the update statement
+            $is_success = $stmt->execute();
+        }
     }
 
     $out = [

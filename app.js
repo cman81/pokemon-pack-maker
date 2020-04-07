@@ -27,16 +27,7 @@ $(document).ready(function() {
         }
 
         playSound('#magic-spell');
-        var pack = generatePack();
-
-        // add this pack to the collection
-        $.each(pack, function(index, value) {
-            collection.push({
-                ...value,
-                'quantity': 1
-            });
-        });
-        saveProfile();
+        var pack = addPackToCollection();
 
         // render the generated pack!
         pack = shuffle(pack);
@@ -52,41 +43,7 @@ $(document).ready(function() {
     });
 
     $('#view-collection').click(function() {
-        var collectionClone = [...collection];
-        collectionClone.sort(function(a, b) {
-            var firstIdx = parseInt(a.img.match(/\d{3}/), 10);
-            var secondIdx = parseInt(b.img.match(/\d{3}/), 10);
-
-            if (a.rarity == 'energy' && b.rarity == 'energy') {
-                return firstIdx - secondIdx;
-            }
-            if (a.rarity != 'energy' && b.rarity != 'energy') {
-                return firstIdx - secondIdx;
-            }
-            if (a.rarity == 'energy') {
-                return 1;
-            }
-            if (b.rarity == 'energy') {
-                return -1;
-            }
-        });
-
-        var consolidatedCollection = [];
-        for (var i = 0; i < collectionClone.length; i++) {
-            if (i == 0) {
-                consolidatedCollection.push(collectionClone[i]);
-                continue;
-            }
-
-            if (collectionClone[i].img != collectionClone[i - 1].img) {
-                consolidatedCollection.push(collectionClone[i]);
-                continue;
-            }
-
-            const lastIdx = consolidatedCollection.length - 1;
-            consolidatedCollection[lastIdx].quantity += collectionClone[i].quantity;
-        }
-        collection = consolidatedCollection;
+        compileCollection();
 
         activateSection('collection');
         renderCards(collection, 50, '#collection');
@@ -125,6 +82,72 @@ $(document).ready(function() {
 
     loadCards('SSH');
 });
+
+/**
+ * Sort the collection from least rare to most rare, then place energy cards at the end.
+ * 
+ * Find all instances of a given card and merge them into a single array element with an updated
+ * 'quantity' field
+ */
+function compileCollection() {
+    var collectionClone = [...collection];
+    collectionClone.sort(function(a, b) {
+        var firstIdx = parseInt(a.img.match(/\d{3}/), 10);
+        var secondIdx = parseInt(b.img.match(/\d{3}/), 10);
+
+        if (a.rarity == 'energy' && b.rarity == 'energy') {
+            return firstIdx - secondIdx;
+        }
+        if (a.rarity != 'energy' && b.rarity != 'energy') {
+            return firstIdx - secondIdx;
+        }
+        if (a.rarity == 'energy') {
+            return 1;
+        }
+        if (b.rarity == 'energy') {
+            return -1;
+        }
+    });
+
+    var consolidatedCollection = [];
+    for (var i = 0; i < collectionClone.length; i++) {
+        if (i == 0) {
+            consolidatedCollection.push(collectionClone[i]);
+            continue;
+        }
+
+        if (collectionClone[i].img != collectionClone[i - 1].img) {
+            consolidatedCollection.push(collectionClone[i]);
+            continue;
+        }
+
+        const lastIdx = consolidatedCollection.length - 1;
+        consolidatedCollection[lastIdx].quantity += collectionClone[i].quantity;
+    }
+    collection = consolidatedCollection;
+}
+
+function addPackToCollection() {
+    var pack = generatePack();
+
+    // add this pack to the collection (client-side)
+    $.each(pack, function (index, value) {
+        collection.push({
+            ...value,
+            'quantity': 1
+        });
+    });
+
+    compileCollection();
+
+    if (!profileId) {
+        return pack;
+    }
+
+// TODO: add this pack to the collection (server-side)
+
+    return pack;
+}
 
 function loadCards(expansion_set) {
     var apiEndpoint = apiHome + '/load_cards.php';
@@ -193,7 +216,8 @@ function renderCards(pack, timeInterval, cssId) {
 
             $(cssId).append(`
                 <div class="card-wrapper ${value.rarity}">
-                    <img src="sword and shield/${value.img}" class="${value.rarity} pokemon-card front" />
+                    <img src="sword and shield/${value.img}"
+                        class="${value.rarity} pokemon-card front" />
                     <br />
                     <span class="rarity">${value.rarity}</span>
                     ${quantitySpan}

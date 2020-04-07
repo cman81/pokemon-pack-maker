@@ -49,12 +49,15 @@
         $key = $row['card'];
 
         if (isset($out['collection'][$key])) {
+            // this card is a duplicate
             $out['collection'][$key]['quantity']++;
             continue;
         }
+
+        // this card is a unique
         $out['collection'][$key] = [
             'img' => $row['card'],
-            'rarity' => $row['rarity'],
+            'rarity' => get_friendly_rarity_name($row['rarity']),
             'quantity' => 1,
         ];
     }
@@ -62,3 +65,7 @@
     $out['collection'] = array_values($out['collection']);
 
     exit(json_encode($out));
+
+    function get_friendly_rarity_name($rarity_id) {
+        return substr($rarity_id, 3);
+    }
