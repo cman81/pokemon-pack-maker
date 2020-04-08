@@ -32,7 +32,7 @@
 
     $out['collection'] = [];
     $sql = "
-        SELECT ccm.profile_id, ccm.card, c.rarity
+        SELECT ccm.profile_id, ccm.card, c.rarity, c.market_value
         FROM card_collection_map ccm
         INNER JOIN cards c ON c.card_id = ccm.card
         WHERE ccm.profile_id = :profile_id
@@ -59,6 +59,7 @@
             'img' => $row['card'],
             'rarity' => get_friendly_rarity_name($row['rarity']),
             'quantity' => 1,
+            'marketValue' => $row['market_value'],
         ];
     }
 

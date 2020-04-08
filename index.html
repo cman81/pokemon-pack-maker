@@ -21,6 +21,9 @@
                 <li class="nav-item">
                     <a class="nav-link load-profile" href="#">Samantha</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link load-profile" href="#">Dad</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -62,7 +65,13 @@
                 </div>
                 <div class="collection section">
                     <h2>Collection</h2>
-                    <div class="instructions">Click on a card to add it to your deck.</div>
+                    <div class="instructions">
+                        Click on a card to:
+                        <select id="collection-click-action">
+                            <option value="add-to-deck">add it to your deck.</option>
+                            <option value="sell-extras">sell extra copies (keep 5).</option>
+                        </select>
+                    </div>
                     <div id="collection">
                     </div>
                 </div>

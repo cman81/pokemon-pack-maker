@@ -33,7 +33,10 @@
     while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
         $rarity = $row['rarity'];
         $key = $json_field_map[$rarity];
-        $out[$key][] = $row['card_id'];
+        $out[$key][] = [
+            'cardId' => $row['card_id'],
+            'marketValue' => $row['market_value'],
+        ];
     }
 
     exit(json_encode($out));
