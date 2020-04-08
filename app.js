@@ -236,8 +236,8 @@ function addPackToCollection() {
     // add this pack to the collection (server-side)
     var apiEndpoint = apiHome + '/add_to_collection.php';
     var payload = {
-        name: profileId,
-        pack: pack
+        collectionId: profileId,
+        cards: pack
     };
 
     $.post(

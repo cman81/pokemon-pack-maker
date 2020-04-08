@@ -32,16 +32,16 @@
 
     $out['collection'] = [];
     $sql = "
-        SELECT ccm.profile_id, ccm.card, c.rarity, c.market_value
+        SELECT ccm.collection_id, ccm.card, c.rarity, c.market_value
         FROM card_collection_map ccm
         INNER JOIN cards c ON c.card_id = ccm.card
-        WHERE ccm.profile_id = :profile_id
+        WHERE ccm.collection_id = :collection_id
     ";
 
     $stmt = $db->prepare($sql);
 
     // passing values to the parameters
-    $stmt->bindValue(':profile_id', $_GET['name']);
+    $stmt->bindValue(':collection_id', $_GET['name']);
 
     $ret = $stmt->execute();
 

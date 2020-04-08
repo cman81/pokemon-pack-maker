@@ -15,7 +15,7 @@
         WHERE ownership_id IN (
             SELECT ownership_id
             FROM card_collection_map
-            WHERE profile_id = :profile_id
+            WHERE collection_id = :collection_id
             AND card = :card
             LIMIT :quantity
         );
@@ -23,7 +23,7 @@
     $stmt = $db->prepare($sql);
 
     // passing values to the parameters
-    $stmt->bindValue(':profile_id', $_GET['name']);
+    $stmt->bindValue(':collection_id', $_GET['name']);
     $stmt->bindValue(':card', $_GET['cardId']);
     $stmt->bindValue(':quantity', $_GET['sellQty']);
 

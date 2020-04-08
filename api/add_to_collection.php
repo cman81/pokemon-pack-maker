@@ -12,15 +12,15 @@
 
     // SQL statement to update status of a task to completed
     $count = 0;
-    foreach ($_POST['pack'] as $this_card) {
+    foreach ($_POST['cards'] as $this_card) {
         $sql = "
-            INSERT INTO card_collection_map (profile_id, card)
-            VALUES (:profile_id, :card)
+            INSERT INTO card_collection_map (collection_id, card)
+            VALUES (:collection_id, :card)
         ";
         $stmt = $db->prepare($sql);
 
         // passing values to the parameters
-        $stmt->bindValue(':profile_id', $_POST['name']);
+        $stmt->bindValue(':collection_id', $_POST['collectionId']);
         $stmt->bindValue(':card', $this_card['img']);
 
         // execute the update statement
@@ -31,6 +31,6 @@
 
     $out = [
         'status' => 'success',
-        'status_message' => "{$count} cards added the collection of {$_POST['name']}"
+        'status_message' => "{$count} cards added to the collection called: {$_POST['collectionId']}"
     ];
     exit(json_encode($out));
