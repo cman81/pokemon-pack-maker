@@ -127,8 +127,9 @@ $(document).ready(function() {
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         let $modal = $(this);
-        $modal.find('.modal-title').text(operation);
-        //$modal.find('.modal-body input').val(recipient);
+        $modal.find('.modal-title').html(pokemonModal[operation].title ?? '');
+        $modal.find('.modal-body').html(pokemonModal[operation].body ?? '');
+        $modal.find('.modal-footer').html(pokemonModal[operation].footer ?? '');
     });
 
     $('.battle-deck .modal').on('click', 'img', function() {

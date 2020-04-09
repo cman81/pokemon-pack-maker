@@ -10,8 +10,9 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Pokemon Pack Maker!</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -79,11 +80,11 @@
                     <h2>Battle Deck</h2>
                     <div class="actions">
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target=".battle-deck .modal" data-operation="Save Deck">
+                            data-target=".battle-deck .modal.save-load" data-operation="save">
                             Save Deck
                         </button>
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target=".battle-deck .modal" data-operation="Load Deck">
+                            data-target=".battle-deck .save-load" data-operation="load">
                             Load Deck
                         </button>
                     </div>
@@ -91,27 +92,27 @@
                     <div id="battle-deck">
                     </div>
 
-                    <div class="modal" tabindex="-1" role="dialog"><!-- this is hidden -->
+                    <div class="modal save-load" tabindex="-1" role="dialog">
+                        <!-- this is hidden -->
                         <div class="modal-dialog modal-lg" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title">Modal title</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Which deck do you want to pick?</p>
+                                    <img src="sword and shield/en-US-SWSH1-203-lapras-vmax.jpg" data-collection-id="4"
+                                        data-dismiss="modal" />
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- empty -->
+                                </div>
                             </div>
-                            <div class="modal-body">
-                              <p>Which deck do you want to pick?</p>
-                              <img src="sword and shield/en-US-SWSH1-203-lapras-vmax.jpg"
-                                data-collection-id="4"
-                                data-dismiss="modal" />
-                            </div>
-                            <div class="modal-footer">
-                                <!-- empty -->
-                            </div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,6 +142,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="app.js"></script>
+    <script src="modals.js"></script>
 </body>
 
 </html>
