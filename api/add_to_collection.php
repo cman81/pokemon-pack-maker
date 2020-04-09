@@ -11,6 +11,12 @@
         exit(json_encode($out));
     }
 
+    if ($_POST['isNew']) {
+        $status = createCollection($_POST['collectionId'], $_POST['profileId'], $_POST['cardId']);
+        if ($status != true) {
+            exit(json_encode($status));
+        }
+    }
     if ($_POST['isReplace']) {
         $status = deleteCardsFromCollection($_POST['collectionId'], $db);
         if ($status != true) {

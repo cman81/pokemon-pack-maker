@@ -63,6 +63,6 @@ pokemonModal.saveNew = function($modal) {
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
             let key = $(this).index() - 1;
-            saveCollection(battleDeck, battleDeck[key].img, true);
+            saveCollection(battleDeck, battleDeck[key].img, true, true);
         });
 };

@@ -250,7 +250,7 @@ function addPackToCollection() {
     }
 
     // add this pack to the collection (server-side)
-    saveCollection(pack, profileId, false);
+    saveCollection(pack, profileId, false, false);
 
     return pack;
 }
@@ -258,14 +258,16 @@ function addPackToCollection() {
 /**
  * Save cards to a collection
  */
-function saveCollection(pack, profileId, isReplace) {
+function saveCollection(pack, collectionId, isReplace, isNew) {
     isReplace = isReplace ?? false;
 
     var apiEndpoint = apiHome + '/add_to_collection.php';
     var payload = {
-        collectionId: profileId,
+        profileId: profileId ?? 'anonymous',
+        collectionId: collectionId,
         cards: pack,
-        isReplace: isReplace
+        isReplace: isReplace,
+        isNew: isNew
     };
     $.post(apiEndpoint, payload, function (data) {
         console.log(data);
