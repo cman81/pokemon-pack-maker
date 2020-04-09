@@ -61,8 +61,7 @@
                 <div class="pack section">
                     <h2>Pack Contents</h2>
                     <div id="status-message"></div>
-                    <div id="pack">
-                    </div>
+                    <div id="pack"></div>
                 </div>
                 <div class="collection section">
                     <h2>Collection</h2>
@@ -73,50 +72,41 @@
                             <option value="sell-extras">sell extra copies (keep 4).</option>
                         </select>
                     </div>
-                    <div id="collection">
-                    </div>
+                    <div id="collection"></div>
                 </div>
                 <div class="battle-deck section">
                     <h2>Battle Deck</h2>
                     <div class="actions">
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target=".battle-deck .modal.save-load" data-operation="save">
+                            data-target="#pokemonModal" data-operation="save">
                             Save Deck
                         </button>
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target=".battle-deck .save-load" data-operation="load">
+                            data-target="#pokemonModal" data-operation="load">
                             Load Deck
                         </button>
                     </div>
                     <div class="instructions">Click on a card to remove it. (It will still be in your collection)</div>
-                    <div id="battle-deck">
-                    </div>
-
-                    <div class="modal save-load" tabindex="-1" role="dialog">
-                        <!-- this is hidden -->
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Which deck do you want to pick?</p>
-                                    <img src="sword and shield/en-US-SWSH1-203-lapras-vmax.jpg" data-collection-id="4"
-                                        data-dismiss="modal" />
-                                </div>
-                                <div class="modal-footer">
-                                    <!-- empty -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="battle-deck"></div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"><!-- dynamically generated --></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"><!-- dynamically generated --></div>
+            <div class="modal-footer"><!-- dynamically generated --></div>
+          </div>
+        </div>
+      </div>
 
     <audio id="whoosh">
         <source src="high-whoosh.mp3">
@@ -141,8 +131,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <script src="app.js"></script>
     <script src="modals.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
