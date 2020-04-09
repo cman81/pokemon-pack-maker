@@ -250,22 +250,26 @@ function addPackToCollection() {
     }
 
     // add this pack to the collection (server-side)
+    saveCollection(pack, profileId, false);
+
+    return pack;
+}
+
+/**
+ * Save cards to a collection
+ */
+function saveCollection(pack, profileId, isReplace) {
+    isReplace = isReplace ?? false;
+
     var apiEndpoint = apiHome + '/add_to_collection.php';
     var payload = {
         collectionId: profileId,
-        cards: pack
+        cards: pack,
+        isReplace: isReplace
     };
-
-    $.post(
-        apiEndpoint,
-        payload,
-        function(data) {
-            console.log(data);
-        },
-        'json'
-    );
-
-    return pack;
+    $.post(apiEndpoint, payload, function (data) {
+        console.log(data);
+    }, 'json');
 }
 
 function loadCards(expansion_set) {

@@ -1,5 +1,6 @@
 <?php
     require_once "PokemonDB.class.php";
+    include_once "helpers.php";
 
     $db = new PokemonDB();
     if(!$db) {
@@ -8,6 +9,13 @@
             'status_message' => 'cannot connect to database'
         ];
         exit(json_encode($out));
+    }
+
+    if ($_POST['isReplace']) {
+        $status = deleteCardsFromCollection($_POST['collectionId'], $db);
+        if ($status != true) {
+            exit(json_encode($status));
+        }
     }
 
     // SQL statement to update status of a task to completed
