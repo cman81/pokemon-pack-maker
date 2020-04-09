@@ -5,7 +5,7 @@ var cashAdded = 0;
 var timeoutFunctions = [];
 var apiHome = 'http://localhost:8000/api';
 var lastProfileUpdate = 0;
-var sessionCash = 500;
+var sessionCash = 5000;
 
 var collection = [];
 var battleDeck = [];
@@ -22,6 +22,8 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
   
 $(document).ready(function() {
+    loadCards('SSH');
+
     $('#open-pack').click(function() {
         activateSection('pack');
         if (wallet < 4) {
@@ -118,28 +120,46 @@ $(document).ready(function() {
         renderCards(battleDeck, 0, '#battle-deck');
     });
 
-    loadCards('SSH');
+    $('.battle-deck .modal').on('show.bs.modal', function(event) {
+        let $button = $(event.relatedTarget); // Button that triggered the modal
+        let operation = $button.data('operation'); // Extract info from data-* attributes
+        
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        let $modal = $(this);
+        $modal.find('.modal-title').text(operation);
+        //$modal.find('.modal-body input').val(recipient);
+    });
+
+    $('.battle-deck .modal').on('click', 'img', function() {
+console.log('hello, are you there?');
+        battleDeck = [{"img":"en-US-SWSH1-049-lapras-v.jpg","rarity":"rare holo","quantity":2},{"img":"en-US-SWSH1-050-lapras-vmax.jpg","rarity":"rare ultra","quantity":2},{"img":"en-US-SWSH1-063-snom.jpg","rarity":"common","quantity":2},{"img":"en-US-SWSH1-064-frosmoth.jpg","rarity":"rare holo","quantity":2},{"img":"en-US-SWSH1-141-snorlax-v.jpg","rarity":"rare holo","quantity":4},{"img":"en-US-SWSH1-142-snorlax-vmax.jpg","rarity":"rare ultra","quantity":4},{"img":"en-US-SWSH1-163-evolution-incense.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-164-great-ball.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-166-hyper-potion.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-173-poke-kid.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-174-pokegear-30.jpg","rarity":"uncommon","quantity":2},{"img":"en-US-SWSH1-175-pokemon-catcher.jpg","rarity":"uncommon","quantity":2},{"img":"en-US-SWSH1-189-lapras-v.jpg","rarity":"rare ultra","quantity":2},{"img":"en-US-SWSH1-201-professors-research.jpg","rarity":"rare ultra","quantity":3},{"img":"en-US-SWSH1-203-lapras-vmax.jpg","rarity":"rare secret","quantity":2},{"img":"en-US-SWSH1-209-professors-research.jpg","rarity":"rare secret","quantity":1},{"img":"en-US-SWSH-Energy-003-water-energy.jpg","rarity":"energy","quantity":20}];
+        renderCards(battleDeck, 50, '#battle-deck');
+    })
 });
 
 /**
- * Sell extra copies of a card. Keep 5 copies.
+ * Sell extra copies of a card. Keep 4 copies.
  */
 function sellExtras($thisImg) {
-    $thisImg.animate({ left: "300px", opacity: 0 }, 250, function () { $thisImg.removeAttr('style'); $thisImg});
+    const copiesToKeep = 4;
+    $thisImg.animate(
+        { left: "300px", opacity: 0 }, 250, function () { $thisImg.removeAttr('style'); $thisImg}
+    );
     var index = $thisImg.parent('.card-wrapper').index();
     var card = collection[index];
 
     // client-side
-    if (card.quantity <= 5) {
+    if (card.quantity <= copiesToKeep) {
         return;
     }
-    sellQty = card.quantity - 5;
-    card.quantity = 5;
+    sellQty = card.quantity - copiesToKeep;
+    card.quantity = copiesToKeep;
 
     sellValue = sellQty * card.marketValue;
     wallet += sellValue;
     updateStats();
-    $thisImg.parent('.card-wrapper').children('.quantity').html("(x5)");
+    $thisImg.parent('.card-wrapper').children('.quantity').html(`(x${copiesToKeep})`);
 
     if (!profileId) {
         return;
@@ -158,7 +178,10 @@ function sellExtras($thisImg) {
 }
 
 function addToBattleDeck($thisImg) {
-    $thisImg.animate({ left: "300px", opacity: 0 }, 250, function () { $thisImg.removeAttr('style'); $thisImg});
+    $thisImg.animate(
+        { left: "300px", opacity: 0 }, 250, function () { $thisImg.removeAttr('style'); $thisImg}
+    );
+
     var index = $thisImg.parent('.card-wrapper').index();
     battleDeck.push({
         img: collection[index].img,

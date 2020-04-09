@@ -74,3 +74,7 @@ img.uncommon {
     background-color: #1A237E;
     color: #ccc;
 }
+.battle-deck .modal-body img {
+    width: 160px;
+    margin: 13px;
+}
