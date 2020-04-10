@@ -104,6 +104,25 @@ pokemonModal.saveNew = function($modal) {
         });
 };
 
+pokemonModal.clearDeck = function($modal) {
+    $modal.find('.modal-title').html('Are you sure?');
+    $modal.find('.modal-body').html(`
+        Click 'Clear Deck' to remove all cards from your deck. They will remain in your collection.
+    `);
+    $modal.find('.modal-footer').html(`
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Clear Deck</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    `);
+
+    $('#pokemonModal')
+        .off('click', '.modal-footer .btn-danger')
+        .on('click', '.modal-footer .btn-danger', function() {
+            loadedBattleDeck = [];
+            updateDeckStats();
+            renderCards(loadedBattleDeck, 0, '#battle-deck');
+        });
+}
+
 pokemonModal.error = function(errorMessage, $modal) {
     $modal = $modal ?? $('#modal');
 
