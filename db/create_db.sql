@@ -29,4 +29,11 @@ CREATE TABLE IF NOT EXISTS "profiles" (
 	"packs_opened"	INTEGER,
 	PRIMARY KEY("profile_id")
 );
+
+DROP TABLE IF EXISTS "game_log";
+CREATE TABLE IF NOT EXISTS `game_log` ( `log_id` INTEGER PRIMARY KEY AUTOINCREMENT, `game_id` INTEGER, `timestamp` INTEGER, `message` TEXT );
+
+DROP TABLE IF EXISTS "games";
+CREATE TABLE `games` ( `game_id` INTEGER PRIMARY KEY AUTOINCREMENT, `game_name` TEXT );
+
 COMMIT;

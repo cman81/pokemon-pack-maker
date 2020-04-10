@@ -1,6 +1,18 @@
 var pokemonModal = {};
 
-pokemonModal.save = function($modal) {
+$(function() {
+    $('#pokemonModal').on('show.bs.modal', function(event) {
+        let $button = $(event.relatedTarget); // Button that triggered the modal
+        let operation = $button.data('operation'); // Extract info from data-* attributes
+        
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        let $modal = $(this);
+        pokemonModal[operation]($modal, $button.data());
+    });
+});
+
+pokemonModal.save = function($modal, buttonData) {
     $modal.find('.modal-title').html('Save Deck');
     $modal.find('.modal-body').html(`<p>Which deck do you want to save to?</p>`);
     $modal.find('.modal-footer').html(`
@@ -44,7 +56,7 @@ pokemonModal.save = function($modal) {
         });
 };
 
-pokemonModal.load = function($modal) {
+pokemonModal.load = function($modal, buttonData) {
     $modal.find('.modal-title').html('Load Deck');
     $modal.find('.modal-body').html(`<p>Which deck do you want to load?</p>`);
     $modal.find('.modal-footer').html('');
@@ -75,7 +87,7 @@ pokemonModal.load = function($modal) {
         });
 };
 
-pokemonModal.saveNew = function($modal) {
+pokemonModal.saveNew = function($modal, buttonData) {
     $modal.find('.modal-title').html('Save a new deck');
     $modal.find('.modal-body').html(`
         <div class="form-group">
@@ -104,7 +116,7 @@ pokemonModal.saveNew = function($modal) {
         });
 };
 
-pokemonModal.clearDeck = function($modal) {
+pokemonModal.clearDeck = function($modal, buttonData) {
     $modal.find('.modal-title').html('Are you sure?');
     $modal.find('.modal-body').html(`
         Click 'Clear Deck' to remove all cards from your deck. They will remain in your collection.
@@ -123,10 +135,44 @@ pokemonModal.clearDeck = function($modal) {
         });
 }
 
-pokemonModal.error = function(errorMessage, $modal) {
+pokemonModal.error = function($modal, buttonData) {
     $modal = $modal ?? $('#modal');
 
     $modal.find('.modal-title').html('Error!');
     $modal.find('.modal-body').html(errorMessage);
     $modal.find('.modal-footer').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>');
 }
+
+pokemonModal.gameLoadDeck = function($modal, buttonData) {
+    $modal.find('.modal-title').html('Load Deck');
+    $modal.find('.modal-body').html(`<p>Which deck do you want to load?</p>`);
+    $modal.find('.modal-footer').html('');
+
+    loadBattleDecks(profileId).then(function() {
+        for (let key in battleDecks) {
+            let value = battleDecks[key];
+            $modal.find('.modal-body').append(`
+                <div class="deck-item">
+                    <img src="sword and shield/${value.boxArt}" data-dismiss="modal"
+                        data-collection-id="${value.collectionId}"/><br />
+                    <span class="deck-name">${value.collectionName}</span>
+                </div>
+            `);
+        }
+    });
+
+    $('#pokemonModal')
+        .off('click', '.modal-body img')
+        .on('click', '.modal-body img', function() {
+            let key = $(this).parent().index() - 1;
+            loadCollection(battleDecks[key].collectionName).then(function() {
+                console.log(buttonData);
+                console.log(gameState[buttonData.player].deckImages);
+                
+                gameState[buttonData.player].deckImages = expandDeck(loadedBattleDeck);
+                $(`.${buttonData.player} .deck .count`).html(gameState[buttonData.player].deckImages.length);
+
+                pokemonToast('Deck loaded!', 'Your deck hass been loaded.');
+            });
+        });
+};
