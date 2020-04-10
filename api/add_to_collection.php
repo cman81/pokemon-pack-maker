@@ -12,7 +12,7 @@
     }
 
     if ($_POST['isNew']) {
-        $status = createCollection($_POST['collectionId'], $_POST['profileId'], $_POST['cardId']);
+        $status = createCollection($_POST['collectionId'], $_POST['profileId'], $_POST['boxArt']);
         if ($status != true) {
             exit(json_encode($status));
         }

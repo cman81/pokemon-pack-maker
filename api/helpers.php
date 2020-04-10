@@ -21,21 +21,22 @@ function deleteCardsFromCollection($collection_id, $db) {
     return true;
 }
 
-function createCollection($collection_id, $profile_id, $card_id) {
+function createCollection($collection_id, $profile_id, $box_art) {
     $db = $GLOBALS['db'];
 
     $sql = "
         INSERT INTO collections
-        (profile_id, collection_name, collection_type)
+        (profile_id, collection_name, collection_type, box_art)
         VALUES
-        (:profile_id, :collection_name, :collection_type)
+        (:profile_id, :collection_name, :collection_type, :box_art)
     ";
     $stmt = $db->prepare($sql);
 
     // passing values to the parameters
-    $stmt->bindValue(':profile_id', $collection_id);
-    $stmt->bindValue(':collection_name', $profile_id);
+    $stmt->bindValue(':profile_id', $profile_id);
+    $stmt->bindValue(':collection_name', $collection_id);
     $stmt->bindValue(':collection_type', 'deck');
+    $stmt->bindValue(':box_art', $box_art);
 
     // execute the update statement
     if (!$stmt->execute()) {

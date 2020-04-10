@@ -267,7 +267,8 @@ function saveCollection(pack, collectionId, isReplace, isNew) {
         collectionId: collectionId,
         cards: pack,
         isReplace: isReplace,
-        isNew: isNew
+        isNew: isNew,
+        boxArt: collectionId ?? ''
     };
     $.post(apiEndpoint, payload, function (data) {
         console.log(data);
