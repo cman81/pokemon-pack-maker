@@ -38,7 +38,9 @@ pokemonModal.save = function($modal) {
 
     $('#pokemonModal')
         .off('click', '.modal-body img')
-        .on('click', '.modal-body img', function() {    
+        .on('click', '.modal-body img', function() {
+            let key = $(this).parent().index() - 1;
+            saveCollection(loadedBattleDeck, loadedBattleDeck[key].img, true, false);
         });
 };
 

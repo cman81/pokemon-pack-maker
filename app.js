@@ -3,7 +3,7 @@ var wallet = 0;
 var packsOpened = 0;
 var cashAdded = 0;
 var timeoutFunctions = [];
-var apiHome = 'http://localhost:8000/api';
+var apiHome = 'http://localhost:9999/api';
 var lastProfileUpdate = 0;
 var sessionCash = 5000;
 

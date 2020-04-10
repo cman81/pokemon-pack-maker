@@ -1,6 +1,6 @@
 <?php
 
-function deleteCardsFromCollection($collection_id, $db) {
+function delete_cards_from_collection($collection_id, $db) {
     $sql = "
         DELETE FROM card_collection_map
         WHERE collection_id = :collection_id
@@ -21,7 +21,7 @@ function deleteCardsFromCollection($collection_id, $db) {
     return true;
 }
 
-function createCollection($collection_id, $profile_id, $box_art) {
+function create_collection($collection_id, $profile_id, $box_art) {
     $db = $GLOBALS['db'];
 
     $sql = "
@@ -47,4 +47,41 @@ function createCollection($collection_id, $profile_id, $box_art) {
     }
 
     return true;
+}
+
+function load_collection($collection_id) {
+    $collection = [];
+    $sql = "
+        SELECT ccm.collection_id, ccm.card, c.rarity, c.market_value
+        FROM card_collection_map ccm
+        INNER JOIN cards c ON c.card_id = ccm.card
+        WHERE ccm.collection_id = :collection_id
+    ";
+
+    $stmt = $db->prepare($sql);
+
+    // passing values to the parameters
+    $stmt->bindValue(':collection_id', $collection_id);
+
+    $ret = $stmt->execute();
+
+    while($row = $ret->fetchArray(SQLITE3_ASSOC) ) {
+        $key = $row['card'];
+
+        if (isset($collection[$key])) {
+            // this card is a duplicate
+            $collection[$key]['quantity']++;
+            continue;
+        }
+
+        // this card is a unique
+        $collection[$key] = [
+            'img' => $row['card'],
+            'rarity' => get_friendly_rarity_name($row['rarity']),
+            'quantity' => 1,
+            'marketValue' => $row['market_value'],
+        ];
+    }
+
+    return array_values($collection);
 }

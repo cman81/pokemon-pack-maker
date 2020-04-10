@@ -12,13 +12,13 @@
     }
 
     if ($_POST['isNew']) {
-        $status = createCollection($_POST['collectionId'], $_POST['profileId'], $_POST['boxArt']);
+        $status = create_collection($_POST['collectionId'], $_POST['profileId'], $_POST['boxArt']);
         if ($status != true) {
             exit(json_encode($status));
         }
     }
     if ($_POST['isReplace']) {
-        $status = deleteCardsFromCollection($_POST['collectionId'], $db);
+        $status = delete_cards_from_collection($_POST['collectionId'], $db);
         if ($status != true) {
             exit(json_encode($status));
         }
