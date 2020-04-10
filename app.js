@@ -131,6 +131,17 @@ $(document).ready(function() {
     });
 });
 
+function loadDecks(profileId) {
+    return [
+        {
+            collectionId: 4,
+            profileId: 'ryan',
+            collectionName: 'The Washer',
+            boxArt: 'en-US-SWSH1-203-lapras-vmax.jpg'
+        }
+    ];
+}
+
 /**
  * Sell extra copies of a card. Keep 4 copies.
  */

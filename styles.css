@@ -74,7 +74,12 @@ img.uncommon {
     background-color: #1A237E;
     color: #ccc;
 }
-.modal-body img {
+#pokemonModal img {
     width: 160px;
-    margin: 13px;
+}
+#pokemonModal .deck-item {
+    text-align: center;
+    width: 190px;
+    float: left;
+    margin-bottom: 15px;
 }

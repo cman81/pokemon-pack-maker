@@ -2,17 +2,25 @@ var pokemonModal = {};
 
 pokemonModal.save = function($modal) {
     $modal.find('.modal-title').html('Save Deck');
-    $modal.find('.modal-body').html(`
-        <p>Which deck do you want to save to?</p>
-        <img src="sword and shield/en-US-SWSH1-203-lapras-vmax.jpg" data-collection-id="4"
-            data-dismiss="modal" />
-    `);
+    $modal.find('.modal-body').html(`<p>Which deck do you want to save to?</p>`);
     $modal.find('.modal-footer').html(`
         <button type="button" class="btn btn-primary btn-sm"
             data-target="#pokemonModal" data-operation="saveNew">
             Save a new deck
         </button>
     `);
+
+    let decks = loadDecks(profileId);
+    for (let key in decks) {
+        let value = decks[key];
+        $modal.find('.modal-body').append(`
+            <div class="deck-item">
+                <img src="sword and shield/${value.boxArt}" data-dismiss="modal"
+                    data-collection-id="${value.collectionId}"/><br />
+                <span class="deck-name">${value.collectionName}</span>
+            </div>
+        `);
+    }
 
     $('#pokemonModal')
         .off('click', '.modal-footer button')
@@ -34,12 +42,20 @@ pokemonModal.save = function($modal) {
 
 pokemonModal.load = function($modal) {
     $modal.find('.modal-title').html('Load Deck');
-    $modal.find('.modal-body').html(`
-        <p>Which deck do you want to load?</p>
-        <img src="sword and shield/en-US-SWSH1-203-lapras-vmax.jpg" data-collection-id="4"
-            data-dismiss="modal" />
-    `);
+    $modal.find('.modal-body').html(`<p>Which deck do you want to load?</p>`);
     $modal.find('.modal-footer').html('');
+
+    let decks = loadDecks(profileId);
+    for (let key in decks) {
+        let value = decks[key];
+        $modal.find('.modal-body').append(`
+            <div class="deck-item">
+                <img src="sword and shield/${value.boxArt}" data-dismiss="modal"
+                    data-collection-id="${value.collectionId}"/><br />
+                <span class="deck-name">${value.collectionName}</span>
+            </div>
+        `);
+    }
 
     $('#pokemonModal')
         .off('click', '.modal-body img')
@@ -56,13 +72,17 @@ pokemonModal.saveNew = function($modal) {
 
     for (let key in battleDeck) {
         let value = battleDeck[key];
-        $modal.find('.modal-body').append(`<img src="sword and shield/${value.img}" data-dismiss="modal" />`);
+        $modal.find('.modal-body').append(`
+            <div class="deck-item">
+                <img src="sword and shield/${value.img}" data-dismiss="modal" />
+            </div>
+        `);
     }
 
     $('#pokemonModal')
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
-            let key = $(this).index() - 1;
+            let key = $(this).parent().index() - 1;
             saveCollection(battleDeck, battleDeck[key].img, true, true);
         });
 };
