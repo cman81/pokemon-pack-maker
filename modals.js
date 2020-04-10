@@ -68,6 +68,7 @@ pokemonModal.load = function($modal) {
             let key = $(this).parent().index() - 1;
             loadCollection(battleDecks[key].collectionName).then(function() {
                 loadedBattleDeck = compileCollection(loadedBattleDeck);
+                updateDeckStats();
 
                 renderCards(loadedBattleDeck, 50, '#battle-deck');
             });

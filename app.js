@@ -117,6 +117,7 @@ $(document).ready(function() {
         var index = $(this).parent('.card-wrapper').index();
         loadedBattleDeck[index].quantity--;
         loadedBattleDeck = compileCollection(loadedBattleDeck);
+        updateDeckStats();
         renderCards(loadedBattleDeck, 0, '#battle-deck');
     });
 
@@ -130,6 +131,14 @@ $(document).ready(function() {
         pokemonModal[operation]($modal);
     });
 });
+
+function updateDeckStats() {
+    let count = 0;
+    $.each(loadedBattleDeck, function(key, value) {
+        count += value.quantity;
+    });
+    $('#deck-cards').html(count);
+}
 
 /**
  * Load battle decks from the database, then return as a promise for post-processing
@@ -208,6 +217,7 @@ function addToBattleDeck($thisImg) {
         quantity: 1
     });
     loadedBattleDeck = compileCollection(loadedBattleDeck);
+    updateDeckStats();
 }
 
 /**
