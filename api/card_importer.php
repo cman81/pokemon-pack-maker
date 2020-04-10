@@ -22,7 +22,7 @@
     if(!$db) {
         $out = [
             'status' => 'error',
-            'status_message' => 'cannot connect to database'
+            'statusMessage' => 'cannot connect to database'
         ];
         exit(json_encode($out));
     }

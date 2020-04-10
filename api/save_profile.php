@@ -5,7 +5,7 @@
     if(!$db) {
         $out = [
             'status' => 'error',
-            'status_message' => 'cannot connect to database'
+            'statusMessage' => 'cannot connect to database'
         ];
         exit(json_encode($out));
     }
@@ -32,13 +32,13 @@
     if (empty($is_success)) {
         $out = [
             'status' => 'error',
-            'status_message' => 'unable to update profile'
+            'statusMessage' => 'unable to update profile'
         ];
         exit(json_encode($out));
     }
 
     $out = [
         'status' => 'success',
-        'status_message' => 'profile updated'
+        'statusMessage' => 'profile updated'
     ];
     exit(json_encode($out));

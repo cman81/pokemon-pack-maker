@@ -39,8 +39,8 @@ pokemonModal.save = function($modal) {
     $('#pokemonModal')
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
-            let key = $(this).parent().index() - 1;
-            saveCollection(loadedBattleDeck, loadedBattleDeck[key].img, true, false);
+            let deckName = $(this).parent().find('.deck-name').text();
+            saveCollection(loadedBattleDeck, deckName, true, false);
         });
 };
 
@@ -65,13 +65,25 @@ pokemonModal.load = function($modal) {
     $('#pokemonModal')
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
-            saveCollection(loadedBattleDeck, loadedBattleDeck[key].img, true, false);
+            let key = $(this).parent().index() - 1;
+            loadCollection(battleDecks[key].collectionName).then(function() {
+                loadedBattleDeck = compileCollection(loadedBattleDeck);
+
+                renderCards(loadedBattleDeck, 50, '#battle-deck');
+            });
         });
 };
 
 pokemonModal.saveNew = function($modal) {
     $modal.find('.modal-title').html('Save a new deck');
-    $modal.find('.modal-body').html(`<p>Which card do you want to use as the deckbox?</p>`);
+    $modal.find('.modal-body').html(`
+        <div class="form-group">
+            <label for="exampleInputEmail1">Deck Name</label>
+            <input type="text" class="form-control" id="new-deck-name" aria-describedby="nameHelp" placeholder="Enter Name">
+            <small id="nameHelp" class="form-text text-muted">Make it something cool!</small>
+        </div>
+        <p>Which card do you want to use as the deckbox?</p>
+    `);
     $modal.find('.modal-footer').html('');
 
     for (let key in loadedBattleDeck) {
@@ -86,7 +98,15 @@ pokemonModal.saveNew = function($modal) {
     $('#pokemonModal')
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
-            let key = $(this).parent().index() - 1;
-            saveCollection(loadedBattleDeck, loadedBattleDeck[key].img, true, true);
+            let key = $(this).parent('.deck-item').index() - 1;
+            saveCollection(loadedBattleDeck, $('#new-deck-name').val(), true, true, loadedBattleDeck[key].img);
         });
 };
+
+pokemonModal.error = function(errorMessage, $modal) {
+    $modal = $modal ?? $('#modal');
+
+    $modal.find('.modal-title').html('Error!');
+    $modal.find('.modal-body').html(errorMessage);
+    $modal.find('.modal-footer').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>');
+}

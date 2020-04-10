@@ -3,7 +3,7 @@ var wallet = 0;
 var packsOpened = 0;
 var cashAdded = 0;
 var timeoutFunctions = [];
-var apiHome = 'http://localhost:9999/api';
+var apiHome = 'http://localhost:8000/api';
 var lastProfileUpdate = 0;
 var sessionCash = 5000;
 
@@ -185,6 +185,17 @@ function sellExtras($thisImg) {
     );
 }
 
+function loadCollection(collectionId) {
+    var apiEndpoint = apiHome + '/load_collection.php';
+    return $.getJSON(
+        apiEndpoint,
+        {collectionId: collectionId},
+        function(data) {
+            loadedBattleDeck = data;
+        }
+    );
+}
+
 function addToBattleDeck($thisImg) {
     $thisImg.animate(
         { left: "300px", opacity: 0 }, 250, function () { $thisImg.removeAttr('style'); $thisImg}
@@ -273,20 +284,24 @@ function addPackToCollection() {
 /**
  * Save cards to a collection
  */
-function saveCollection(pack, collectionId, isReplace, isNew) {
+function saveCollection(pack, collectionName, isReplace, isNew, boxArt) {
     isReplace = isReplace ?? false;
+    isNew = isNew ?? false;
+    boxArt = boxArt ?? '';
 
     var apiEndpoint = apiHome + '/add_to_collection.php';
     var payload = {
         profileId: profileId ?? 'anonymous',
-        collectionId: collectionId,
+        collectionId: collectionName,
         cards: pack,
         isReplace: isReplace,
         isNew: isNew,
-        boxArt: collectionId ?? ''
+        boxArt: boxArt
     };
     $.post(apiEndpoint, payload, function (data) {
-        console.log(data);
+        if (data.status == 'error') {
+            pokemonModal.error(data.statusMessage);
+        }
     }, 'json');
 }
 

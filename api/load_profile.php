@@ -1,11 +1,12 @@
 <?php
     require_once "PokemonDB.class.php";
+    include_once "helpers.php";
 
     $db = new PokemonDB();
     if(!$db) {
         $out = [
             'status' => 'error',
-            'status_message' => 'cannot connect to database'
+            'statusMessage' => 'cannot connect to database'
         ];
         exit(json_encode($out));
     }
@@ -25,7 +26,7 @@
     if (empty($out['profileId'])) {
         $out = [
             'status' => 'error',
-            'status_message' => 'cannot find user: ' . $_GET['name']
+            'statusMessage' => 'cannot find user: ' . $_GET['name']
         ];
         exit(json_encode($out));
     }
@@ -33,7 +34,3 @@
     $out['collection'] = load_collection($_GET['name']);
 
     exit(json_encode($out));
-
-    function get_friendly_rarity_name($rarity_id) {
-        return substr($rarity_id, 3);
-    }

@@ -1,6 +1,8 @@
 <?php
 
-function delete_cards_from_collection($collection_id, $db) {
+function delete_cards_from_collection($collection_id) {
+    $db = $GLOBALS['db'];
+
     $sql = "
         DELETE FROM card_collection_map
         WHERE collection_id = :collection_id
@@ -14,7 +16,7 @@ function delete_cards_from_collection($collection_id, $db) {
     if (!$stmt->execute()) {
         return [
             'status' => 'error',
-            'status_message' => 'unable to delete cards from collection'
+            'statusMessage' => 'unable to delete cards from collection'
         ];   
     }
 
@@ -42,7 +44,7 @@ function create_collection($collection_id, $profile_id, $box_art) {
     if (!$stmt->execute()) {
         return [
             'status' => 'error',
-            'status_message' => 'unable to create collection'
+            'statusMessage' => 'unable to create collection'
         ];   
     }
 
@@ -50,6 +52,8 @@ function create_collection($collection_id, $profile_id, $box_art) {
 }
 
 function load_collection($collection_id) {
+    $db = $GLOBALS['db'];
+
     $collection = [];
     $sql = "
         SELECT ccm.collection_id, ccm.card, c.rarity, c.market_value
@@ -79,9 +83,13 @@ function load_collection($collection_id) {
             'img' => $row['card'],
             'rarity' => get_friendly_rarity_name($row['rarity']),
             'quantity' => 1,
-            'marketValue' => $row['market_value'],
+            'marketValue' => $row['market_value'] ?? 0,
         ];
     }
 
     return array_values($collection);
+}
+
+function get_friendly_rarity_name($rarity_id) {
+    return substr($rarity_id, 3);
 }

@@ -6,7 +6,7 @@
     if(!$db) {
         $out = [
             'status' => 'error',
-            'status_message' => 'cannot connect to database'
+            'statusMessage' => 'cannot connect to database'
         ];
         exit(json_encode($out));
     }
@@ -18,7 +18,7 @@
         }
     }
     if ($_POST['isReplace']) {
-        $status = delete_cards_from_collection($_POST['collectionId'], $db);
+        $status = delete_cards_from_collection($_POST['collectionId']);
         if ($status != true) {
             exit(json_encode($status));
         }
@@ -45,6 +45,6 @@
 
     $out = [
         'status' => 'success',
-        'status_message' => "{$count} cards added to the collection called: {$_POST['collectionId']}"
+        'statusMessage' => "{$count} cards added to the collection called: {$_POST['collectionId']}"
     ];
     exit(json_encode($out));
