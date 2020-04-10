@@ -8,7 +8,7 @@ var lastProfileUpdate = 0;
 var sessionCash = 5000;
 
 var collection = [];
-var battleDeck = [];
+var loadedBattleDeck = [];
 var energyCards = [];
 var commonCards = [];
 var uncommonCards = [];
@@ -55,10 +55,10 @@ $(document).ready(function() {
     });
 
     $('#main-actions').on('click', '#view-battle-deck', function() {
-        battleDeck = compileCollection(battleDeck);
+        loadedBattleDeck = compileCollection(loadedBattleDeck);
 
         activateSection('battle-deck');
-        renderCards(battleDeck, 50, '#battle-deck');
+        renderCards(loadedBattleDeck, 50, '#battle-deck');
     });
 
     $('.section').on('mouseover', '.pokemon-card', function() {
@@ -115,9 +115,9 @@ $(document).ready(function() {
 
     $('#battle-deck').on('click', '.pokemon-card', function() {
         var index = $(this).parent('.card-wrapper').index();
-        battleDeck[index].quantity--;
-        battleDeck = compileCollection(battleDeck);
-        renderCards(battleDeck, 0, '#battle-deck');
+        loadedBattleDeck[index].quantity--;
+        loadedBattleDeck = compileCollection(loadedBattleDeck);
+        renderCards(loadedBattleDeck, 0, '#battle-deck');
     });
 
     $('#pokemonModal').on('show.bs.modal', function(event) {
@@ -131,15 +131,19 @@ $(document).ready(function() {
     });
 });
 
-function loadDecks(profileId) {
-    return [
-        {
-            collectionId: 4,
-            profileId: 'ryan',
-            collectionName: 'The Washer',
-            boxArt: 'en-US-SWSH1-203-lapras-vmax.jpg'
+/**
+ * Load battle decks from the database, then return as a promise for post-processing
+ * 
+ */
+function loadBattleDecks(profileId) {
+    var apiEndpoint = apiHome + '/load_battledecks.php';
+    
+    return $.getJSON(
+        apiEndpoint,
+        function(data) {
+            battleDecks = data;
         }
-    ];
+    );
 }
 
 /**
@@ -187,12 +191,12 @@ function addToBattleDeck($thisImg) {
     );
 
     var index = $thisImg.parent('.card-wrapper').index();
-    battleDeck.push({
+    loadedBattleDeck.push({
         img: collection[index].img,
         rarity: collection[index].rarity,
         quantity: 1
     });
-    battleDeck = compileCollection(battleDeck);
+    loadedBattleDeck = compileCollection(loadedBattleDeck);
 }
 
 /**

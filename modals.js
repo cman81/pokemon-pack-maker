@@ -10,17 +10,19 @@ pokemonModal.save = function($modal) {
         </button>
     `);
 
-    let decks = loadDecks(profileId);
-    for (let key in decks) {
-        let value = decks[key];
-        $modal.find('.modal-body').append(`
-            <div class="deck-item">
-                <img src="sword and shield/${value.boxArt}" data-dismiss="modal"
-                    data-collection-id="${value.collectionId}"/><br />
-                <span class="deck-name">${value.collectionName}</span>
-            </div>
-        `);
-    }
+    loadBattleDecks(profileId).then(function() {
+        for (let key in battleDecks) {
+            let value = battleDecks[key];
+            $modal.find('.modal-body').append(`
+                <div class="deck-item">
+                    <img src="sword and shield/${value.boxArt}" data-dismiss="modal"
+                        data-collection-id="${value.collectionId}"/><br />
+                    <span class="deck-name">${value.collectionName}</span>
+                </div>
+            `);
+        }
+    });
+    
 
     $('#pokemonModal')
         .off('click', '.modal-footer button')
@@ -45,23 +47,23 @@ pokemonModal.load = function($modal) {
     $modal.find('.modal-body').html(`<p>Which deck do you want to load?</p>`);
     $modal.find('.modal-footer').html('');
 
-    let decks = loadDecks(profileId);
-    for (let key in decks) {
-        let value = decks[key];
-        $modal.find('.modal-body').append(`
-            <div class="deck-item">
-                <img src="sword and shield/${value.boxArt}" data-dismiss="modal"
-                    data-collection-id="${value.collectionId}"/><br />
-                <span class="deck-name">${value.collectionName}</span>
-            </div>
-        `);
-    }
+    loadBattleDecks(profileId).then(function() {
+        for (let key in battleDecks) {
+            let value = battleDecks[key];
+            $modal.find('.modal-body').append(`
+                <div class="deck-item">
+                    <img src="sword and shield/${value.boxArt}" data-dismiss="modal"
+                        data-collection-id="${value.collectionId}"/><br />
+                    <span class="deck-name">${value.collectionName}</span>
+                </div>
+            `);
+        }
+    });
 
     $('#pokemonModal')
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
-            battleDeck = [{"img":"en-US-SWSH1-049-lapras-v.jpg","rarity":"rare holo","quantity":2},{"img":"en-US-SWSH1-050-lapras-vmax.jpg","rarity":"rare ultra","quantity":2},{"img":"en-US-SWSH1-063-snom.jpg","rarity":"common","quantity":2},{"img":"en-US-SWSH1-064-frosmoth.jpg","rarity":"rare holo","quantity":2},{"img":"en-US-SWSH1-141-snorlax-v.jpg","rarity":"rare holo","quantity":4},{"img":"en-US-SWSH1-142-snorlax-vmax.jpg","rarity":"rare ultra","quantity":4},{"img":"en-US-SWSH1-163-evolution-incense.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-164-great-ball.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-166-hyper-potion.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-173-poke-kid.jpg","rarity":"uncommon","quantity":4},{"img":"en-US-SWSH1-174-pokegear-30.jpg","rarity":"uncommon","quantity":2},{"img":"en-US-SWSH1-175-pokemon-catcher.jpg","rarity":"uncommon","quantity":2},{"img":"en-US-SWSH1-189-lapras-v.jpg","rarity":"rare ultra","quantity":2},{"img":"en-US-SWSH1-201-professors-research.jpg","rarity":"rare ultra","quantity":3},{"img":"en-US-SWSH1-203-lapras-vmax.jpg","rarity":"rare secret","quantity":2},{"img":"en-US-SWSH1-209-professors-research.jpg","rarity":"rare secret","quantity":1},{"img":"en-US-SWSH-Energy-003-water-energy.jpg","rarity":"energy","quantity":20}];
-            renderCards(battleDeck, 50, '#battle-deck');
+            saveCollection(loadedBattleDeck, loadedBattleDeck[key].img, true, false);
         });
 };
 
@@ -70,8 +72,8 @@ pokemonModal.saveNew = function($modal) {
     $modal.find('.modal-body').html(`<p>Which card do you want to use as the deckbox?</p>`);
     $modal.find('.modal-footer').html('');
 
-    for (let key in battleDeck) {
-        let value = battleDeck[key];
+    for (let key in loadedBattleDeck) {
+        let value = loadedBattleDeck[key];
         $modal.find('.modal-body').append(`
             <div class="deck-item">
                 <img src="sword and shield/${value.img}" data-dismiss="modal" />
@@ -83,6 +85,6 @@ pokemonModal.saveNew = function($modal) {
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
             let key = $(this).parent().index() - 1;
-            saveCollection(battleDeck, battleDeck[key].img, true, true);
+            saveCollection(loadedBattleDeck, loadedBattleDeck[key].img, true, true);
         });
 };
