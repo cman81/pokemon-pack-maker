@@ -17,7 +17,25 @@
     </nav>
     <div class="top container">
         <div class="row">
-            <div class="col"></div>
+            <div class="col-auto">
+                <label for="game-id" class="col-form-label">Game ID:</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" id="game-id" placeholder="Game ID">
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" id="randomize-game-id">Randomize Game ID</button>
+            </div>
+            <div class="col-auto">
+                <label class="col-form-label" for="player-select">Select Player:</label>
+            </div>
+            <div class="col-auto">
+                <select class="custom-select mr-sm-2" id="player-select">
+                    <option selected>Choose...</option>
+                    <option value="player1">Player 1</option>
+                    <option value="player2">Player 2</option>
+                </select>
+            </div>
         </div>
     </div>
 

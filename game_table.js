@@ -1,15 +1,26 @@
 var battleDecks;
 var profileId;
 var gameState = {
+    gameId: randomizeGameId(),
     myself: {
+        id: 'player1',
         deckImages: []
     },
     opponent: {
+        id: 'player2',
         deckImages: []
     }
 };
 
 $(function() {
+    $('#game-id').val(gameState.gameId);
+
+    $('.top.container').on('click', '#randomize-game-id', function() {
+        gameState.gameId = randomizeGameId();
+        $('#game-id').val(gameState.gameId);
+
+    });
+
     renderContainers([
         'deck',
         'discard',
@@ -26,7 +37,30 @@ $(function() {
         $(this).parent().find('.collapse-control').toggle();
     });
 
-    renderMyDeckContainer();
+    renderDeckContainers();
+
+    $('.border').on('click', 'button', function() {
+        let operation = $(this).data('operation');
+        if (!operation) {
+            return;
+        }
+
+        if (operation == 'shuffle') {
+            var apiEndpoint = apiHome + '/send_game_message.php';
+            return $.getJSON(
+                apiEndpoint,
+                {
+                    gameId: gameId,
+                    from: $(this).data('player-id'),
+                    to: $(this).data('card-group'),
+                    type: 'shuffle'
+                },
+                function(data) {
+                    console.log(data);
+                }
+            );
+        }
+    });
 });
 
 function expandIcon() {
@@ -91,26 +125,31 @@ function renderContainers(labels) {
                 </div>
             `);
         }
-
     }
-
-    
-
 }
 
-function renderMyDeckContainer() {
+function renderDeckContainers() {
     let playerClass = ['myself', 'opponent'];
     for (let key in playerClass) {
         let value = playerClass[key];
         $(`.${value} .deck .body`).html(`
-            <div>
+            <div class="actions">
                 <button type="button" class="btn btn-warning" data-toggle="modal"
                     data-target="#pokemonModal" data-operation="gameLoadDeck"
-                    data-player="${value}">
+                    data-player="${getPlayerId(value)}">
                     Load Deck
+                </button>
+                <button type="button" class="btn btn-primary" data-operation="shuffle"
+                    data-player="${getPlayerId(value)}" data-card-group="deck">
+                    Shuffle
                 </button>
             </div>
             <div>Cards in deck: <span class="count">0</span></div> 
         `);
     }
+}
+
+function randomizeGameId() {
+    // generate a random number between 100000 and 999999
+    return Math.floor(Math.random() * 899999) + 100000; // roll a D144
 }
