@@ -36,4 +36,15 @@ CREATE TABLE IF NOT EXISTS `game_log` ( `log_id` INTEGER PRIMARY KEY AUTOINCREME
 DROP TABLE IF EXISTS "games";
 CREATE TABLE `games` ( `game_id` INTEGER PRIMARY KEY AUTOINCREMENT, `game_name` TEXT );
 
+DROP TABLE IF EXISTS "game_message_queue";
+CREATE TABLE "game_message_queue" (
+	"message_id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"game_id"	INTEGER,
+	"timestamp"	INTEGER,
+	"from"	TEXT,
+	"to"	TEXT,
+	"type"	TEXT,
+	"data"	TEXT
+)
+
 COMMIT;
