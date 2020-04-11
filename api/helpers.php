@@ -111,10 +111,16 @@ function initialize_game_state() {
             'deck' => [
                 'cards' => $player1_deck,
             ],
+            'hand' => [
+                'cards' => [],
+            ],
         ],
         'player2' => [
             'deck' => [
                 'cards' => $player2_deck,
+            ],
+            'hand' => [
+                'cards' => [],
             ],
         ],
     ];

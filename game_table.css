@@ -9,8 +9,7 @@ body {
     padding: 8px;
 }
 .pokemon-card {
-    width: 165px;
-    margin: 10px;
+    width: 88px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     -webkit-transition:  -webkit-transform .2s ease-out;
     -moz-transition: -moz-transform .2s ease-out;
@@ -22,10 +21,10 @@ body {
 .pokemon-card:hover {
     opacity: 1;
     z-index: 9999;
-    -webkit-transform:scale(2.25);
-    -moz-transform:scale(2.25);
-    -o-transform:scale(2.25);
-    transform:scale(2.25);
+    -webkit-transform:scale(4);
+    -moz-transform:scale(4);
+    -o-transform:scale(4);
+    transform:scale(4);
 }
 img.energy {
     opacity: 0.3;

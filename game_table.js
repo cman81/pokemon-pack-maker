@@ -81,9 +81,10 @@ $(function() {
         if (operation == 'move') {
             let moveFrom = $(this).data('from');
             let moveTo = $(this).data('to');
+            let whichPlayer = $(this).data('player');
 
             sendGameMessage(
-                getPlayerId($(this).data('player')),
+                getPlayerId(whichPlayer),
                 'judge',
                 'move',
                 {
@@ -91,8 +92,14 @@ $(function() {
                     to: moveTo
                 }
             )
-            .then(function() {
-alert(`Moved 1 card from ${moveFrom} to ${moveTo}`);
+            .then(function(cardIdx) {
+                let img = gameState[getPlayerId(whichPlayer)].deckImages[cardIdx];
+
+                $(`.${whichPlayer} .hand .cards`).append(`
+                    <div class="card-wrapper">
+                        <img src="sword and shield/${img}" class="pokemon-card front"/>
+                    </div>
+                `);
             });
         }
     });
@@ -212,6 +219,7 @@ function renderHandContainers() {
                     Move 1 from deck
                 </button>
             </div>
+            <div class="cards"></div>
         `);
     }
 }
