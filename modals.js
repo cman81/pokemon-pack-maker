@@ -166,13 +166,11 @@ pokemonModal.gameLoadDeck = function($modal, buttonData) {
         .on('click', '.modal-body img', function() {
             let key = $(this).parent().index() - 1;
             loadCollection(battleDecks[key].collectionName).then(function() {
-                console.log(buttonData);
-                console.log(gameState[buttonData.player].deckImages);
-                
-                gameState[buttonData.player].deckImages = expandDeck(loadedBattleDeck);
-                $(`.${buttonData.player} .deck .count`).html(gameState[buttonData.player].deckImages.length);
+                images = expandDeck(loadedBattleDeck);
+                gameState[getPlayerId(buttonData.player)].deckImages = images;
+                $(`.${buttonData.player} .deck .count`).html(images.length);
 
-                pokemonToast('Deck loaded!', 'Your deck hass been loaded.');
+                alert('Your deck has been loaded.');
             });
         });
 };

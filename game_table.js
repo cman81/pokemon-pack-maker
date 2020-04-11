@@ -2,66 +2,99 @@ var battleDecks;
 var profileId;
 var gameState = {
     gameId: randomizeGameId(),
-    myself: {
-        id: 'player1',
+    player1: {
         deckImages: []
     },
-    opponent: {
-        id: 'player2',
+    player2: {
         deckImages: []
     }
 };
 
 $(function() {
-    $('#game-id').val(gameState.gameId);
-
+    $('#game-id').val(randomizeGameId());
     $('.top.container').on('click', '#randomize-game-id', function() {
-        gameState.gameId = randomizeGameId();
-        $('#game-id').val(gameState.gameId);
-
+        $('#game-id').val(randomizeGameId());
     });
 
-    renderContainers([
-        'deck',
-        'discard',
-        'hand',
-        'active pokemon',
-        'benched pokemon',
-        'prize cards',
-        'stadium',
-        'lost zone',
-    ]);
+    
 
-    $('.border .action-expand').hide();
-    $('.border').on('click', '.collapse-control', function() {
-        $(this).parent().find('.collapse-control').toggle();
-    });
-
-    renderDeckContainers();
-
-    $('.border').on('click', 'button', function() {
+    $('body').on('click', 'button', function() {
         let operation = $(this).data('operation');
         if (!operation) {
             return;
         }
 
+        if (operation == 'sitAtTable') {
+            if (!getPlayerId()) {
+                return;
+            }
+
+            gameState.gameId = $('#game-id').val();
+
+            sendGameMessage(
+                getPlayerId('myself'),
+                'judge',
+                'load_game',
+                gameState.gameId
+            )
+            .then(function(data) {
+                console.log(data);
+            });
+
+            renderContainers([
+                'deck',
+                'discard',
+                'hand',
+                'active pokemon',
+                'benched pokemon',
+                'prize cards',
+                'stadium',
+                'lost zone',
+            ]);
+        
+            $('.border .action-expand').hide();
+            $('.border')
+            .off('click', '.collapse-control')
+            .on('click', '.collapse-control', function() {
+                $(this).parent().find('.collapse-control').toggle();
+            });
+        
+            renderDeckContainers();
+
+            $('.top.container').html('Have fun! Good luck!');
+
+        }
+
         if (operation == 'shuffle') {
-            var apiEndpoint = apiHome + '/send_game_message.php';
-            return $.getJSON(
-                apiEndpoint,
-                {
-                    gameId: gameId,
-                    from: $(this).data('player-id'),
-                    to: $(this).data('card-group'),
-                    type: 'shuffle'
-                },
-                function(data) {
-                    console.log(data);
-                }
-            );
+            sendGameMessage(
+                getPlayerId('myself'),
+                'judge',
+                'shuffle',
+                $(this).data('card-group')
+            )
+            .then(function() {
+                alert('Your deck has been shuffled');
+            });
         }
     });
 });
+
+function sendGameMessage(from, to, type, data) {
+    var apiEndpoint = apiHome + '/send_game_message.php';
+    return $.getJSON(
+        apiEndpoint,
+        {
+            gameId: gameState.gameId,
+            from: from,
+            to: to,
+            type: type,
+            data: data ?? ''
+        },
+        function (data) {
+            return data;
+        }
+    );
+}
 
 function expandIcon() {
     return `
@@ -136,11 +169,11 @@ function renderDeckContainers() {
             <div class="actions">
                 <button type="button" class="btn btn-warning" data-toggle="modal"
                     data-target="#pokemonModal" data-operation="gameLoadDeck"
-                    data-player="${getPlayerId(value)}">
+                    data-player="${value}">
                     Load Deck
                 </button>
                 <button type="button" class="btn btn-primary" data-operation="shuffle"
-                    data-player="${getPlayerId(value)}" data-card-group="deck">
+                    data-player="${value}" data-card-group="deck">
                     Shuffle
                 </button>
             </div>
@@ -152,4 +185,22 @@ function renderDeckContainers() {
 function randomizeGameId() {
     // generate a random number between 100000 and 999999
     return Math.floor(Math.random() * 899999) + 100000; // roll a D144
+}
+
+function getPlayerId(mode) {
+    let selectedValue = $('#player-select').val();
+    if (selectedValue.substr(0, 6) != 'player') {
+        alert('Please select a player before continuing');
+        return false;
+    }
+
+    if (mode == 'myself') {
+        return selectedValue;
+    }
+
+    if (selectedValue == 'player1') {
+        return 'player2';
+    }
+
+    return 'player1';
 }
