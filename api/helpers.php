@@ -93,3 +93,29 @@ function load_collection($collection_id) {
 function get_friendly_rarity_name($rarity_id) {
     return substr($rarity_id, 3);
 }
+
+function flip_coin() {
+    return rand(0, 1) == 1;
+}
+
+function initialize_game_state() {
+    $player1_deck = range(0, 59);
+    shuffle($player1_deck);
+
+    $player2_deck = range(0, 59);
+    shuffle($player2_deck);
+
+    return [
+        'isPlayer1sTurn' => flip_coin(),
+        'player1' => [
+            'deck' => [
+                'cards' => $player1_deck,
+            ],
+        ],
+        'player2' => [
+            'deck' => [
+                'cards' => $player2_deck,
+            ],
+        ],
+    ];
+}

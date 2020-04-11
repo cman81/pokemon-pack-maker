@@ -61,7 +61,7 @@ $(function() {
         
             renderDeckContainers();
 
-            $('.top.container').html('Have fun! Good luck!');
+            $('.top.container > .row').toggle();
 
         }
 
