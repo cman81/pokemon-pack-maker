@@ -38,7 +38,7 @@ CREATE TABLE "games" (
 	"game_id"	INTEGER PRIMARY KEY AUTOINCREMENT,
 	"game_name"	TEXT,
 	"game_state"	TEXT
-)
+);
 
 DROP TABLE IF EXISTS "game_message_queue";
 CREATE TABLE "game_message_queue" (
@@ -49,6 +49,6 @@ CREATE TABLE "game_message_queue" (
 	"to"	TEXT,
 	"type"	TEXT,
 	"data"	TEXT
-)
+);
 
 COMMIT;

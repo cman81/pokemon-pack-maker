@@ -60,6 +60,7 @@ $(function() {
             });
         
             renderDeckContainers();
+            renderHandContainers();
 
             $('.top.container > .row').toggle();
 
@@ -67,13 +68,31 @@ $(function() {
 
         if (operation == 'shuffle') {
             sendGameMessage(
-                getPlayerId('myself'),
+                getPlayerId($(this).data('player')),
                 'judge',
                 'shuffle',
                 $(this).data('card-group')
             )
             .then(function() {
                 alert('Your deck has been shuffled');
+            });
+        }
+
+        if (operation == 'move') {
+            let moveFrom = $(this).data('from');
+            let moveTo = $(this).data('to');
+
+            sendGameMessage(
+                getPlayerId($(this).data('player')),
+                'judge',
+                'move',
+                {
+                    from: moveFrom,
+                    to: moveTo
+                }
+            )
+            .then(function() {
+alert(`Moved 1 card from ${moveFrom} to ${moveTo}`);
             });
         }
     });
@@ -178,6 +197,21 @@ function renderDeckContainers() {
                 </button>
             </div>
             <div>Cards in deck: <span class="count">0</span></div> 
+        `);
+    }
+}
+
+function renderHandContainers() {
+    let playerClass = ['myself', 'opponent'];
+    for (let key in playerClass) {
+        let value = playerClass[key];
+        $(`.${value} .hand .body`).html(`
+            <div class="actions">
+                <button type="button" class="btn btn-primary" data-operation="move"
+                    data-player="${value}" data-from="deck" data-to="hand">
+                    Move 1 from deck
+                </button>
+            </div>
         `);
     }
 }
