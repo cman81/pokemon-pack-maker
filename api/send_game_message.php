@@ -3,7 +3,7 @@
     require_once "PokemonDB.class.php";
     include_once "helpers.php";
 
-    extract($_GET); // $gameId, $from, $to, $type, $data
+    extract($_POST); // $gameId, $from, $to, $type, $data
 
     switch ($type) {
         case 'load_game': exit(json_encode(load_game_state($gameId, $from, TRUE)));
@@ -11,7 +11,7 @@
         case 'moveTop': exit(json_encode(move_top_card($gameId, $from, $data)));
     }
 
-    function load_game_state($game_id, $player_id, $is_silent = false) {
+    function load_game_state($game_id, $player_id = false, $is_silent = false) {
         $db = new PokemonDB();
         $db->busyTimeout(250);
 
@@ -39,7 +39,7 @@
             ];
         }
 
-        return $result['game_state'];
+        return json_decode($result['game_state'], TRUE);
     }
 
     function create_new_game_state($game_id) {

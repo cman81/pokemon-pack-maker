@@ -95,7 +95,7 @@ $(function() {
                 }
             )
             .then(function(cardIdx) {
-                gameState[getPlayerId(whichPlayer)].hand.push(cardIdx);
+                gameState[getPlayerId(whichPlayer)].hand.cards.push(cardIdx);
                 renderHandCards(whichPlayer);
             });
         }
