@@ -217,14 +217,8 @@ pokemonModal.gameMoveSpecificCard = function($modal, buttonData) {
                     position: position,
                     to: buttonData.to
                 }
-            ).then(function(data) {
-                console.log();
-                // render both 'from' and 'to' groups
-                for (let key in data) {
-                    let cards = data[key];
-                    gameState[getPlayerId(whichPlayer)][key] = cards;
-                    renderCardGroup(whichPlayer, key);
-                }
+            ).then(function(groups) {
+                renderCardGroups(whichPlayer, groups);
             });
         });
 };

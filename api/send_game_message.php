@@ -10,6 +10,7 @@
         case 'shuffle': exit(json_encode(shuffle_card_group($gameId, $from, $data)));
         case 'moveTop': exit(json_encode(move_top_card($gameId, $from, $data)));
         case 'moveSpecific': exit(json_encode(move_specific_card($gameId, $from, $data)));
+        case 'moveAll': exit(json_encode(move_all($gameId, $from, $data)));
         case 'tuck': exit(json_encode(tuck_card($gameId, $from, $data)));
     }
 
@@ -189,6 +190,23 @@
 
         $game_state[$player_id][$to]['cards'][] = $card_pick;
 
+        save_game_state($game_id, $game_state);
+
+        return [
+            $from => $game_state[$player_id][$from],
+            $to => $game_state[$player_id][$to],
+        ];
+    }
+
+    function move_all($game_id, $player_id, $data) {
+        $game_state = load_game_state($game_id);
+        $from = $data['from'];
+        $to = $data['to'];
+
+        $cards = $game_state[$player_id][$from]['cards'];
+        $game_state[$player_id][$from]['cards'] = [];
+        $game_state[$player_id][$to]['cards'] = array_merge($game_state[$player_id][$to]['cards'], $cards);
+        
         save_game_state($game_id, $game_state);
 
         return [

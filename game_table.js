@@ -134,6 +134,25 @@ $(function() {
                 renderCardGroup(whichPlayer, cardGroup);
             });
         }
+
+        if (operation == 'moveAll') {
+            let moveFrom = $(this).data('from');
+            let moveTo = $(this).data('to');
+            let whichPlayer = $(this).data('player');
+
+            sendGameMessage(
+                getPlayerId(whichPlayer),
+                'judge',
+                operation,
+                {
+                    from: moveFrom,
+                    to: moveTo
+                }
+            )
+            .then(function(groups) {
+                renderCardGroups(whichPlayer, groups);
+            });
+        }
     });
 });
 
@@ -246,6 +265,14 @@ var buttons = {
             </button>
         `;
     },
+    moveAll: function(whichPlayer, from, to, label) {
+        return `
+            <button type="button" class="btn btn-outline-danger btn-sm" data-operation="moveAll"
+                data-player="${whichPlayer}" data-from="${from}" data-to="${to}">
+                ${label}
+            </button>
+        `;
+    },
 };
 
 function renderContainers(labels) {
@@ -332,6 +359,7 @@ function renderOtherCardGroupContainers() {
                     <div class="actions">
                         ${buttons.moveSpecificCard(whichPlayer, 'hand', group, 'Choose from hand')}
                         ${buttons.tuck(whichPlayer, group, 'Tuck')}
+                        ${buttons.moveAll(whichPlayer, group, 'discard', 'Discard all')}
                     </div>
                 `);
             }
@@ -378,5 +406,13 @@ function renderCardGroup(whichPlayer, group) {
                 <img src="sword and shield/${img}" class="pokemon-card front"/>
             </div>
         `);
+    }
+}
+
+function renderCardGroups(whichPlayer, groups) {
+    for (let groupKey in groups) {
+        let cards = groups[groupKey];
+        gameState[getPlayerId(whichPlayer)][groupKey] = cards;
+        renderCardGroup(whichPlayer, groupKey);
     }
 }
