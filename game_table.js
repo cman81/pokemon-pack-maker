@@ -30,7 +30,6 @@ for (let key in cardGroups) {
 
 $(function() {
     let initialGameId = randomizeGameId();
-initialGameId = 770006;
     $('#game-id').val(initialGameId);
     $('.top.container').on('click', '#randomize-game-id', function() {
         $('#game-id').val(initialGameId);
