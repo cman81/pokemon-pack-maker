@@ -175,5 +175,8 @@
 
         save_game_state($game_id, $game_state);
 
-        return [$from, $to];
+        return [
+            $from => $game_state[$player_id][$from],
+            $to => $game_state[$player_id][$to],
+        ];
     }
