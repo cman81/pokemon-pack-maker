@@ -185,10 +185,10 @@ var buttons = {
             </button>
         `;
     },
-    moveCard: function(operation, whichPlayer, from, to, label) {
+    moveSpecificCard: function(whichPlayer, from, to, label) {
         return `
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                data-target="#pokemonModal" data-operation="${operation}"
+                data-target="#pokemonModal" data-operation="moveSpecificCard"
                 data-which-player="${whichPlayer}" data-from="${from}" data-to="${to}">
                 ${label}
             </button>
@@ -211,6 +211,14 @@ var buttons = {
             </button>
         `;
     },
+    moveTop: function(whichPlayer, from, to, label) {
+        return `
+            <button type="button" class="btn btn-primary" data-operation="moveTop"
+                data-player="${whichPlayer}" data-from="${from}" data-to="${to}">
+                ${label}
+            </button>
+        `;
+    }
 };
 
 function renderContainers(labels) {
@@ -263,7 +271,7 @@ function renderHandContainers() {
         let whichPlayer = playerClass[key];
         $(`.${whichPlayer} .hand .body`).html(`
             <div class="actions">
-                ${buttons.moveCard('moveTop', whichPlayer, 'deck', 'hand', 'Deal from deck')}
+                ${buttons.moveTop(whichPlayer, 'deck', 'hand', 'Deal from deck')}
             </div>
             <div class="cards"></div>
         `);
@@ -295,7 +303,7 @@ function renderOtherCardGroupContainers() {
             if (whichPlayer == 'myself') {
                 $(`.${whichPlayer} .${group} .body`).append(`
                     <div class="actions">
-                        ${buttons.moveCard('gameMoveSpecificCard', whichPlayer, 'hand', group, 'Coose from hand')}
+                        ${buttons.moveSpecificCard(whichPlayer, 'hand', group, 'Choose from hand')}
                     </div>
                 `);
             }
