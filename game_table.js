@@ -55,7 +55,10 @@ $(function() {
                 gameState.gameId
             )
             .then(function(data) {
-                gameState[getPlayerId('myself')].hand = data[getPlayerId('myself')].hand;
+                for (let key in cardGroups) {
+                    let cardGroup = cardGroups[key];
+                    gameState[getPlayerId('myself')][cardGroup] = data[getPlayerId('myself')][cardGroup];
+                }
             });
 
             renderContainers([
@@ -113,6 +116,22 @@ $(function() {
             .then(function(cardIdx) {
                 gameState[getPlayerId(whichPlayer)].hand.cards.push(cardIdx);
                 renderHandCards(whichPlayer);
+            });
+        }
+
+        if (operation == 'tuck') {
+            let whichPlayer = $(this).data('player');
+            let cardGroup = $(this).data('card-group');
+
+            sendGameMessage(
+                getPlayerId(whichPlayer),
+                'judge',
+                operation,
+                cardGroup
+            )
+            .then(function(data) {
+                gameState[getPlayerId(whichPlayer)][cardGroup] = data;
+                renderCardGroup(whichPlayer, cardGroup);
             });
         }
     });
@@ -188,7 +207,7 @@ var buttons = {
     moveSpecificCard: function(whichPlayer, from, to, label) {
         return `
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                data-target="#pokemonModal" data-operation="moveSpecificCard"
+                data-target="#pokemonModal" data-operation="gameMoveSpecificCard"
                 data-which-player="${whichPlayer}" data-from="${from}" data-to="${to}">
                 ${label}
             </button>
@@ -218,7 +237,15 @@ var buttons = {
                 ${label}
             </button>
         `;
-    }
+    },
+    tuck: function (whichPlayer, group, label) {
+        return `
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-operation="tuck"
+                data-player="${whichPlayer}" data-card-group="${group}">
+                ${label}
+            </button>
+        `;
+    },
 };
 
 function renderContainers(labels) {
@@ -304,6 +331,7 @@ function renderOtherCardGroupContainers() {
                 $(`.${whichPlayer} .${group} .body`).append(`
                     <div class="actions">
                         ${buttons.moveSpecificCard(whichPlayer, 'hand', group, 'Choose from hand')}
+                        ${buttons.tuck(whichPlayer, group, 'Tuck')}
                     </div>
                 `);
             }

@@ -168,9 +168,15 @@ pokemonModal.gameLoadDeck = function($modal, buttonData) {
             loadCollection(battleDecks[key].collectionName).then(function() {
                 images = expandDeck(loadedBattleDeck);
                 gameState[getPlayerId(buttonData.player)].deckImages = images;
-                $(`.${buttonData.player} .deck .count`).html(images.length);
 
-                renderHandCards(buttonData.player);
+                let whichPlayer = buttonData.player;
+                $(`.${whichPlayer} .deck .count`).html(images.length);
+
+                for (let key in cardGroups) {
+                    let cardGroup = cardGroups[key];
+                    renderCardGroup(whichPlayer, cardGroup);
+                }
+                
                 alert('Your deck has been loaded.');
             });
         });

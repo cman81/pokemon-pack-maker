@@ -6,13 +6,14 @@
     extract($_POST); // $gameId, $from, $to, $type, $data
 
     switch ($type) {
-        case 'load_game': exit(json_encode(load_game_state($gameId, $from, TRUE)));
+        case 'load_game': exit(json_encode(load_game_state($gameId, $from)));
         case 'shuffle': exit(json_encode(shuffle_card_group($gameId, $from, $data)));
         case 'moveTop': exit(json_encode(move_top_card($gameId, $from, $data)));
         case 'moveSpecific': exit(json_encode(move_specific_card($gameId, $from, $data)));
+        case 'tuck': exit(json_encode(tuck_card($gameId, $from, $data)));
     }
 
-    function load_game_state($game_id, $player_id = false, $is_silent = false) {
+    function load_game_state($game_id, $player_id = false) {
         $db = new PokemonDB();
         $db->busyTimeout(250);
 
@@ -31,13 +32,26 @@
             $result['game_state'] = json_encode(create_new_game_state($game_id));
         }
 
-        if ($is_silent) {
+        if ($player_id) {
             $game_state = json_decode($result['game_state'], TRUE);
-            return [
-                $player_id => [
-                    'hand' => $game_state[$player_id]['hand'],
-                ],
+
+            $partial_game_state = [
+                $player_id => [],
             ];
+
+            $card_groups = [
+                'hand',
+                'discard',
+                'active-pokemon',
+                'prize-cards',
+                'stadium',
+                'lost-zone'
+            ];
+            foreach ($card_groups as $group) {
+                $partial_game_state[$player_id][$group] = $game_state[$player_id][$group];
+            }
+
+            return $partial_game_state;
         }
 
         return json_decode($result['game_state'], TRUE);
@@ -179,4 +193,13 @@
             $from => $game_state[$player_id][$from],
             $to => $game_state[$player_id][$to],
         ];
+    }
+
+    function tuck_card($game_id, $player_id, $card_group) {
+        $game_state = load_game_state($game_id);
+
+        $card_pick = array_pop($game_state[$player_id][$card_group]['cards']);
+        array_unshift($game_state[$player_id][$card_group]['cards'], $card_pick);
+
+        return $game_state[$player_id][$card_group];
     }
