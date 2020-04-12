@@ -48,7 +48,9 @@
                 'lost-zone'
             ];
             foreach ($card_groups as $group) {
-                $partial_game_state[$player_id][$group] = $game_state[$player_id][$group];
+                $partial_game_state[$player_id][$group] = $game_state[$player_id][$group] ?? [
+                    'cards' => [],
+                ];
             }
 
             return $partial_game_state;
@@ -200,6 +202,8 @@
 
         $card_pick = array_pop($game_state[$player_id][$card_group]['cards']);
         array_unshift($game_state[$player_id][$card_group]['cards'], $card_pick);
+
+        save_game_state($game_id, $game_state);
 
         return $game_state[$player_id][$card_group];
     }
