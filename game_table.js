@@ -1,25 +1,40 @@
 var battleDecks;
 var profileId;
 var gameState = {
-    gameId: randomizeGameId(),
+    gameId: 0,
     player1: {
         deckImages: [],
-        hand: [],
     },
     player2: {
         deckImages: [],
-        hand: [],
-    }
+    },
 };
 
+var cardGroups = [
+    'hand',
+    'discard',
+    'active-pokemon',
+    'prize-cards',
+    'stadium',
+    'lost-zone'
+]
+for (let key in cardGroups) {
+    let value = cardGroups[key];
+    gameState.player1[value] = {
+        cards: [],
+    }
+    gameState.player2[value] = {
+        cards: [],
+    }
+}
+
 $(function() {
-    $('#game-id').val(randomizeGameId());
+    let initialGameId = randomizeGameId();
+    $('#game-id').val(initialGameId);
     $('.top.container').on('click', '#randomize-game-id', function() {
-        $('#game-id').val(randomizeGameId());
+        $('#game-id').val(initialGameId);
     });
-
     
-
     $('body').on('click', 'button', function() {
         let operation = $(this).data('operation');
         if (!operation) {
@@ -45,8 +60,8 @@ $(function() {
 
             renderContainers([
                 'deck',
-                'discard',
                 'hand',
+                'discard',
                 'active pokemon',
                 'benched pokemon',
                 'prize cards',
@@ -63,6 +78,7 @@ $(function() {
         
             renderDeckContainers();
             renderHandContainers();
+            renderOtherCardGroupContainers();
 
             $('.top.container > .row').toggle();
 
@@ -103,16 +119,7 @@ $(function() {
 });
 
 function renderHandCards(whichPlayer) {
-    $(`.${whichPlayer} .hand .cards`).html('');
-    for (let key in gameState[getPlayerId(whichPlayer)].hand.cards) {
-        let cardIdx = gameState[getPlayerId(whichPlayer)].hand.cards[key];
-        let img = gameState[getPlayerId(whichPlayer)].deckImages[cardIdx];
-        $(`.${whichPlayer} .hand .cards`).append(`
-            <div class="card-wrapper">
-                <img src="sword and shield/${img}" class="pokemon-card front"/>
-            </div>
-        `);
-    }
+    renderCardGroup(whichPlayer, 'hand');
 }
 
 function sendGameMessage(from, to, type, data) {
@@ -220,18 +227,62 @@ function renderDeckContainers() {
 }
 
 function renderHandContainers() {
-    let playerClass = ['myself', 'opponent'];
+    let playerClass = ['myself'];
     for (let key in playerClass) {
         let value = playerClass[key];
         $(`.${value} .hand .body`).html(`
             <div class="actions">
                 <button type="button" class="btn btn-primary" data-operation="moveTop"
                     data-player="${value}" data-from="deck" data-to="hand">
-                    Move 1 from deck
+                    Deal from deck
                 </button>
             </div>
             <div class="cards"></div>
         `);
+    }
+}
+
+/**
+ * "Other" card groups include the following:
+ * - discard
+ * - active pokemon
+ * - benched pokemon
+ * - stadium
+ * - lost zone
+ */
+function renderOtherCardGroupContainers() {
+    let playerClass = ['myself', 'opponent'];
+    let otherCardGroups = [
+        'discard',
+        'active-pokemon',
+        'prize-cards',
+        'stadium',
+        'lost-zone'
+    ];
+    for (let key in playerClass) {
+        for (let k in otherCardGroups) {
+            let group = otherCardGroups[k];
+            let whichPlayer = playerClass[key];
+            
+            $(`.${whichPlayer} .${group} .body`).html('');
+            if (whichPlayer == 'myself') {
+                $(`.${whichPlayer} .${group} .body`).append(`
+                    <div class="actions">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                            data-target="#pokemonModal" data-operation="gameMoveSpecificCard"
+                            data-which-player="${whichPlayer}" data-from="hand" data-to="${group}">
+                            Choose from hand
+                        </button>
+                    </div>
+                `);
+            }
+
+            $(`.${whichPlayer} .${group} .body`).append(`
+                <div class="cards"></div>
+            `);
+        }
+
+        
     }
 }
 
@@ -256,4 +307,17 @@ function getPlayerId(mode) {
     }
 
     return 'player1';
+}
+
+function renderCardGroup(whichPlayer, group) {
+    $(`.${whichPlayer} .${group} .cards`).html('');
+    for (let key in gameState[getPlayerId(whichPlayer)][group].cards) {
+        let cardIdx = gameState[getPlayerId(whichPlayer)][group].cards[key];
+        let img = gameState[getPlayerId(whichPlayer)].deckImages[cardIdx];
+        $(`.${whichPlayer} .${group} .cards`).append(`
+            <div class="card-wrapper">
+                <img src="sword and shield/${img}" class="pokemon-card front"/>
+            </div>
+        `);
+    }
 }

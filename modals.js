@@ -175,3 +175,47 @@ pokemonModal.gameLoadDeck = function($modal, buttonData) {
             });
         });
 };
+
+pokemonModal.gameMoveSpecificCard = function($modal, buttonData) {
+    $modal.find('.modal-title').html('Move a specific card');
+    $modal.find('.modal-body').html(`<p>Which card do you want to move?</p>`);
+    $modal.find('.modal-footer').html('');
+
+    console.log(buttonData);
+
+    let whichPlayer = buttonData.whichPlayer;
+    let playerId = getPlayerId(whichPlayer);
+    let cards = gameState[playerId][buttonData.from].cards;
+    let images = gameState[playerId].deckImages;
+    for (let key in cards) {
+        let cardIdx = cards[key];
+        let value = images[cardIdx];
+        $modal.find('.modal-body').append(`
+            <div class="deck-item">
+                <img src="sword and shield/${value}" data-dismiss="modal"
+                    data-key="${key}"/>
+            </div>
+        `);
+    }
+
+    $('#pokemonModal')
+        .off('click', '.modal-body img')
+        .on('click', '.modal-body img', function() {
+            let position = $(this).parent().index() - 1;
+            sendGameMessage(
+                playerId,
+                'judge',
+                'moveSpecific',
+                {
+                    from: buttonData.from,
+                    position: position,
+                    to: buttonData.to
+                }
+            ).then(function(data) {
+                for (let key in data) {
+                    renderCardGroup(whichPlayer, data[key]);
+                }
+                // render both 'from' and 'to' groups
+            });
+        });
+};

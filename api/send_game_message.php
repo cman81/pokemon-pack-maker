@@ -9,6 +9,7 @@
         case 'load_game': exit(json_encode(load_game_state($gameId, $from, TRUE)));
         case 'shuffle': exit(json_encode(shuffle_card_group($gameId, $from, $data)));
         case 'moveTop': exit(json_encode(move_top_card($gameId, $from, $data)));
+        case 'moveSpecific': exit(json_encode(move_specific_card($gameId, $from, $data)));
     }
 
     function load_game_state($game_id, $player_id = false, $is_silent = false) {
@@ -142,7 +143,7 @@
         $to = $data['to'];
 
         $this_card = array_pop($game_state[$player_id][$from]['cards']);
-        array_push($game_state[$player_id][$to]['cards'], $this_card);
+        $game_state[$player_id][$to]['cards'][] = $this_card;
 
         game_log(
             $game_id,
@@ -158,4 +159,21 @@
         save_game_state($game_id, $game_state);
 
         return $this_card;
+    }
+
+    function move_specific_card($game_id, $player_id, $data) {
+        $game_state = load_game_state($game_id);
+        $from = $data['from'];
+        $card_position = $data['position'];
+        $to = $data['to'];
+
+        $card_pick = $game_state[$player_id][$from]['cards'][$card_position];
+        unset($game_state[$player_id][$from]['cards'][$card_position]);
+        $game_state[$player_id][$from]['cards'] = array_values($game_state[$player_id][$from]['cards']);
+
+        $game_state[$player_id][$to]['cards'][] = $card_pick;
+
+        save_game_state($game_id, $game_state);
+
+        return [$from, $to];
     }

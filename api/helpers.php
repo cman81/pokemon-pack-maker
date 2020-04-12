@@ -105,23 +105,32 @@ function initialize_game_state() {
     $player2_deck = range(0, 59);
     shuffle($player2_deck);
 
-    return [
+    $game_state = [
         'isPlayer1sTurn' => flip_coin(),
         'player1' => [
             'deck' => [
                 'cards' => $player1_deck,
-            ],
-            'hand' => [
-                'cards' => [],
             ],
         ],
         'player2' => [
             'deck' => [
                 'cards' => $player2_deck,
             ],
-            'hand' => [
-                'cards' => [],
-            ],
         ],
     ];
+
+    $cardGroups = [
+        'hand',
+        'discard',
+        'active-pokemon',
+        'prize-cards',
+        'stadium',
+        'lost-zone'
+    ];
+    foreach ($cardGroups as $value) {
+        $game_state['player1'][$value] = ['cards' => []];
+        $game_state['player2'][$value] = ['cards' => []];
+    }
+
+    return $game_state;
 }
