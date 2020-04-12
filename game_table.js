@@ -3,10 +3,12 @@ var profileId;
 var gameState = {
     gameId: randomizeGameId(),
     player1: {
-        deckImages: []
+        deckImages: [],
+        hand: [],
     },
     player2: {
-        deckImages: []
+        deckImages: [],
+        hand: [],
     }
 };
 
@@ -38,7 +40,7 @@ $(function() {
                 gameState.gameId
             )
             .then(function(data) {
-                console.log(data);
+                gameState[getPlayerId('myself')].hand = data[getPlayerId('myself')].hand;
             });
 
             renderContainers([
@@ -70,7 +72,7 @@ $(function() {
             sendGameMessage(
                 getPlayerId($(this).data('player')),
                 'judge',
-                'shuffle',
+                operation,
                 $(this).data('card-group')
             )
             .then(function() {
@@ -78,7 +80,7 @@ $(function() {
             });
         }
 
-        if (operation == 'move') {
+        if (operation == 'moveTop') {
             let moveFrom = $(this).data('from');
             let moveTo = $(this).data('to');
             let whichPlayer = $(this).data('player');
@@ -86,28 +88,36 @@ $(function() {
             sendGameMessage(
                 getPlayerId(whichPlayer),
                 'judge',
-                'move',
+                operation,
                 {
                     from: moveFrom,
                     to: moveTo
                 }
             )
             .then(function(cardIdx) {
-                let img = gameState[getPlayerId(whichPlayer)].deckImages[cardIdx];
-
-                $(`.${whichPlayer} .hand .cards`).append(`
-                    <div class="card-wrapper">
-                        <img src="sword and shield/${img}" class="pokemon-card front"/>
-                    </div>
-                `);
+                gameState[getPlayerId(whichPlayer)].hand.push(cardIdx);
+                renderHandCards(whichPlayer);
             });
         }
     });
 });
 
+function renderHandCards(whichPlayer) {
+    $(`.${whichPlayer} .hand .cards`).html('');
+    for (let key in gameState[getPlayerId(whichPlayer)].hand.cards) {
+        let cardIdx = gameState[getPlayerId(whichPlayer)].hand.cards[key];
+        let img = gameState[getPlayerId(whichPlayer)].deckImages[cardIdx];
+        $(`.${whichPlayer} .hand .cards`).append(`
+            <div class="card-wrapper">
+                <img src="sword and shield/${img}" class="pokemon-card front"/>
+            </div>
+        `);
+    }
+}
+
 function sendGameMessage(from, to, type, data) {
     var apiEndpoint = apiHome + '/send_game_message.php';
-    return $.getJSON(
+    return $.post(
         apiEndpoint,
         {
             gameId: gameState.gameId,
@@ -118,7 +128,8 @@ function sendGameMessage(from, to, type, data) {
         },
         function (data) {
             return data;
-        }
+        },
+        'json'
     );
 }
 
@@ -214,7 +225,7 @@ function renderHandContainers() {
         let value = playerClass[key];
         $(`.${value} .hand .body`).html(`
             <div class="actions">
-                <button type="button" class="btn btn-primary" data-operation="move"
+                <button type="button" class="btn btn-primary" data-operation="moveTop"
                     data-player="${value}" data-from="deck" data-to="hand">
                     Move 1 from deck
                 </button>

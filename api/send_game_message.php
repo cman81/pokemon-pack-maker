@@ -6,12 +6,12 @@
     extract($_GET); // $gameId, $from, $to, $type, $data
 
     switch ($type) {
-        case 'load_game': exit(json_encode(load_game_state($gameId, true)));
+        case 'load_game': exit(json_encode(load_game_state($gameId, $from, TRUE)));
         case 'shuffle': exit(json_encode(shuffle_card_group($gameId, $from, $data)));
-        case 'move': exit(json_encode(move_card($gameId, $from, $data)));
+        case 'moveTop': exit(json_encode(move_top_card($gameId, $from, $data)));
     }
 
-    function load_game_state($game_id, $is_silent = false) {
+    function load_game_state($game_id, $player_id, $is_silent = false) {
         $db = new PokemonDB();
         $db->busyTimeout(250);
 
@@ -27,14 +27,19 @@
         unset($db);
 
         if (empty($result)) {
-            $result['game_state'] = create_new_game_state($game_id);
+            $result['game_state'] = json_encode(create_new_game_state($game_id));
         }
 
         if ($is_silent) {
-            return $game_id;
+            $game_state = json_decode($result['game_state'], TRUE);
+            return [
+                $player_id => [
+                    'hand' => $game_state[$player_id]['hand'],
+                ],
+            ];
         }
 
-        return json_decode($result['game_state'], TRUE);
+        return $result['game_state'];
     }
 
     function create_new_game_state($game_id) {
@@ -131,7 +136,7 @@
         unset($db);
     }
 
-    function move_card($game_id, $player_id, $data) {
+    function move_top_card($game_id, $player_id, $data) {
         $game_state = load_game_state($game_id);
         $from = $data['from'];
         $to = $data['to'];

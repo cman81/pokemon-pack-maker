@@ -170,6 +170,7 @@ pokemonModal.gameLoadDeck = function($modal, buttonData) {
                 gameState[getPlayerId(buttonData.player)].deckImages = images;
                 $(`.${buttonData.player} .deck .count`).html(images.length);
 
+                renderHandCards(buttonData.player);
                 alert('Your deck has been loaded.');
             });
         });
