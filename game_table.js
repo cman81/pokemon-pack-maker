@@ -158,13 +158,67 @@ function collapseIcon() {
         </svg>
     `;
 }
+var buttons = {
+    expand: function(whichPlayer, cssClass) {
+        return `
+            <button
+                class="btn btn-secondary btn-sm float-right collapse-control action-expand"
+                type="button"
+                data-toggle="collapse"
+                data-target=".${whichPlayer} .${cssClass} .body"
+                aria-expanded="true"
+                aria-controls="collapse">
+                ${expandIcon()}
+            </button>
+        `
+    },
+    collapse: function(whichPlayer, cssClass) {
+        return `
+            <button
+                class="btn btn-secondary btn-sm float-right collapse-control action-collapse"
+                type="button"
+                data-toggle="collapse"
+                data-target=".${whichPlayer} .${cssClass} .body"
+                aria-expanded="true"
+                aria-controls="collapse">
+                ${collapseIcon()}
+            </button>
+        `;
+    },
+    moveCard: function(operation, whichPlayer, from, to, label) {
+        return `
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                data-target="#pokemonModal" data-operation="${operation}"
+                data-which-player="${whichPlayer}" data-from="${from}" data-to="${to}">
+                ${label}
+            </button>
+        `
+    },
+    loadDeck: function(whichPlayer) {
+        return `
+            <button type="button" class="btn btn-warning" data-toggle="modal"
+                data-target="#pokemonModal" data-operation="gameLoadDeck"
+                data-player="${whichPlayer}">
+                Load Deck
+            </button>
+        `;
+    },
+    shuffle: function(whichPlayer, cardGroup) {
+        return `
+            <button type="button" class="btn btn-primary" data-operation="shuffle"
+                data-player="${whichPlayer}" data-card-group="${cardGroup}">
+                Shuffle
+            </button>
+        `;
+    },
+};
 
 function renderContainers(labels) {
     let playerClass = ['myself', 'opponent'];
     let headingWeight = ['h2', 'h3'];
 
     for (let k in playerClass) {
-        let player = playerClass[k];
+        let whichPlayer = playerClass[k];
         let heading = headingWeight[k];
 
         for (let key in labels) {
@@ -173,29 +227,13 @@ function renderContainers(labels) {
             // @see https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
             let title = label.charAt(0).toUpperCase() + label.slice(1)
     
-            $(`.${player} > .container`).append(`
+            $(`.${whichPlayer} > .container`).append(`
                 <div class="row">
                     <div class="col ${cssClass} border">
                         <div class="header">
                             <span class="${heading}">${title}</span>
-                            <button
-                                class="btn btn-secondary btn-sm float-right collapse-control action-expand"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target=".${player} .${cssClass} .body"
-                                aria-expanded="true"
-                                aria-controls="collapse">
-                                ${expandIcon()}
-                            </button>
-                            <button
-                                class="btn btn-secondary btn-sm float-right collapse-control action-collapse"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target=".${player} .${cssClass} .body"
-                                aria-expanded="true"
-                                aria-controls="collapse">
-                                ${collapseIcon()}
-                            </button>
+                            ${buttons.expand(whichPlayer, cssClass)}
+                            ${buttons.collapse(whichPlayer, cssClass)}
                         </div>
                         <div class="body collapse show">Nothing to see here!</div>
                     </div>
@@ -208,18 +246,11 @@ function renderContainers(labels) {
 function renderDeckContainers() {
     let playerClass = ['myself', 'opponent'];
     for (let key in playerClass) {
-        let value = playerClass[key];
-        $(`.${value} .deck .body`).html(`
+        let whichPlayer = playerClass[key];
+        $(`.${whichPlayer} .deck .body`).html(`
             <div class="actions">
-                <button type="button" class="btn btn-warning" data-toggle="modal"
-                    data-target="#pokemonModal" data-operation="gameLoadDeck"
-                    data-player="${value}">
-                    Load Deck
-                </button>
-                <button type="button" class="btn btn-primary" data-operation="shuffle"
-                    data-player="${value}" data-card-group="deck">
-                    Shuffle
-                </button>
+                ${buttons.loadDeck(whichPlayer)}
+                ${buttons.shuffle(whichPlayer, 'deck')}
             </div>
             <div>Cards in deck: <span class="count">0</span></div> 
         `);
@@ -229,13 +260,10 @@ function renderDeckContainers() {
 function renderHandContainers() {
     let playerClass = ['myself'];
     for (let key in playerClass) {
-        let value = playerClass[key];
-        $(`.${value} .hand .body`).html(`
+        let whichPlayer = playerClass[key];
+        $(`.${whichPlayer} .hand .body`).html(`
             <div class="actions">
-                <button type="button" class="btn btn-primary" data-operation="moveTop"
-                    data-player="${value}" data-from="deck" data-to="hand">
-                    Deal from deck
-                </button>
+                ${buttons.moveCard('moveTop', whichPlayer, 'deck', 'hand', 'Deal from deck')}
             </div>
             <div class="cards"></div>
         `);
@@ -255,7 +283,6 @@ function renderOtherCardGroupContainers() {
     let otherCardGroups = [
         'discard',
         'active-pokemon',
-        'prize-cards',
         'stadium',
         'lost-zone'
     ];
@@ -268,11 +295,7 @@ function renderOtherCardGroupContainers() {
             if (whichPlayer == 'myself') {
                 $(`.${whichPlayer} .${group} .body`).append(`
                     <div class="actions">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#pokemonModal" data-operation="gameMoveSpecificCard"
-                            data-which-player="${whichPlayer}" data-from="hand" data-to="${group}">
-                            Choose from hand
-                        </button>
+                        ${buttons.moveCard('gameMoveSpecificCard', whichPlayer, 'hand', group, 'Coose from hand')}
                     </div>
                 `);
             }
