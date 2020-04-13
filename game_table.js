@@ -14,6 +14,11 @@ var cardGroups = [
     'hand',
     'discard',
     'active-pokemon',
+    'bench-pokemon-1',
+    'bench-pokemon-2',
+    'bench-pokemon-3',
+    'bench-pokemon-4',
+    'bench-pokemon-5',
     'prize-cards',
     'stadium',
     'lost-zone'
@@ -32,7 +37,7 @@ $(function() {
     let initialGameId = randomizeGameId();
     $('#game-id').val(initialGameId);
     $('.top.container').on('click', '#randomize-game-id', function() {
-        $('#game-id').val(initialGameId);
+        $('#game-id').val(randomizeGameId());
     });
     
     $('body').on('click', 'button', function() {
@@ -66,7 +71,11 @@ $(function() {
                 'hand',
                 'discard',
                 'active pokemon',
-                'benched pokemon',
+                'bench pokemon 1',
+                'bench pokemon 2',
+                'bench pokemon 3',
+                'bench pokemon 4',
+                'bench pokemon 5',
                 'prize cards',
                 'stadium',
                 'lost zone',
@@ -82,6 +91,7 @@ $(function() {
             renderDeckContainers();
             renderHandContainers();
             renderOtherCardGroupContainers();
+            renderPrizeCardContainers();
 
             $('.top.container > .row').toggle();
 
@@ -285,7 +295,7 @@ function renderContainers(labels) {
 
         for (let key in labels) {
             let label = labels[key];
-            let cssClass = label.replace(' ', '-');
+            let cssClass = label.replace(/ /g, '-');
             // @see https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
             let title = label.charAt(0).toUpperCase() + label.slice(1)
     
@@ -336,7 +346,7 @@ function renderHandContainers() {
  * "Other" card groups include the following:
  * - discard
  * - active pokemon
- * - benched pokemon
+ * - bench pokemon (multiple)
  * - stadium
  * - lost zone
  */
@@ -345,6 +355,11 @@ function renderOtherCardGroupContainers() {
     let otherCardGroups = [
         'discard',
         'active-pokemon',
+        'bench-pokemon-1',
+        'bench-pokemon-2',
+        'bench-pokemon-3',
+        'bench-pokemon-4',
+        'bench-pokemon-5',
         'stadium',
         'lost-zone'
     ];
@@ -415,4 +430,8 @@ function renderCardGroups(whichPlayer, groups) {
         gameState[getPlayerId(whichPlayer)][groupKey] = cards;
         renderCardGroup(whichPlayer, groupKey);
     }
+}
+
+function renderPrizeCardContainers() {
+
 }
