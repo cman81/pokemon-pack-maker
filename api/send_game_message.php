@@ -41,17 +41,17 @@
             ];
 
             $card_groups = [
+                'deck',
                 'hand',
                 'discard',
                 'active-pokemon',
                 'prize-cards',
                 'stadium',
-                'lost-zone'
+                'lost-zone',
             ];
             foreach ($card_groups as $group) {
-                $partial_game_state[$player_id][$group] = $game_state[$player_id][$group] ?? [
-                    'cards' => [],
-                ];
+                $partial_game_state[$player_id][$group] =
+                    render_card_group($group, $game_state[$player_id][$group]);
             }
 
             return $partial_game_state;
@@ -175,7 +175,30 @@
         
         save_game_state($game_id, $game_state);
 
-        return $this_card;
+        return [
+            $from => render_card_group($from, $game_state[$player_id][$from]),
+            $to => render_card_group($to, $game_state[$player_id][$to]),
+        ];
+    }
+
+    /**
+     * If a card group is revealed (most card groups), return an array of cards. Otherwise, return
+     * the number of cards in the group
+     */
+    function render_card_group($name, $data) {
+        if ($name == 'deck') {
+            return [
+                'count' => count($data['cards'])
+            ];
+        }
+
+        if ($name == 'prize-cards') {
+            return [
+                'count' => count($data['cards'])
+            ];
+        }
+
+        return $data;
     }
 
     function move_specific_card($game_id, $player_id, $data) {
@@ -193,8 +216,8 @@
         save_game_state($game_id, $game_state);
 
         return [
-            $from => $game_state[$player_id][$from],
-            $to => $game_state[$player_id][$to],
+            $from => render_card_group($from, $game_state[$player_id][$from]),
+            $to => render_card_group($to, $game_state[$player_id][$to]),
         ];
     }
 
@@ -210,8 +233,8 @@
         save_game_state($game_id, $game_state);
 
         return [
-            $from => $game_state[$player_id][$from],
-            $to => $game_state[$player_id][$to],
+            $from => render_card_group($from, $game_state[$player_id][$from]),
+            $to => render_card_group($to, $game_state[$player_id][$to]),
         ];
     }
 

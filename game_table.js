@@ -2,15 +2,11 @@ var battleDecks;
 var profileId;
 var gameState = {
     gameId: 0,
-    player1: {
-        deckImages: [],
-    },
-    player2: {
-        deckImages: [],
-    },
+    player1: {},
+    player2: {},
 };
-
 var cardGroups = [
+    'deck',
     'hand',
     'discard',
     'active-pokemon',
@@ -22,16 +18,9 @@ var cardGroups = [
     'prize-cards',
     'stadium',
     'lost-zone'
-]
-for (let key in cardGroups) {
-    let value = cardGroups[key];
-    gameState.player1[value] = {
-        cards: [],
-    }
-    gameState.player2[value] = {
-        cards: [],
-    }
-}
+];
+var hoverIntentDelay = 400;
+var hoverTimeout;
 
 $(function() {
     let initialGameId = randomizeGameId();
@@ -87,6 +76,7 @@ $(function() {
             .on('click', '.collapse-control', function() {
                 $(this).parent().find('.collapse-control').toggle();
             });
+            $('#this-game-id').html(gameState.gameId);
         
             renderDeckContainers();
             renderHandContainers();
@@ -123,9 +113,8 @@ $(function() {
                     to: moveTo
                 }
             )
-            .then(function(cardIdx) {
-                gameState[getPlayerId(whichPlayer)].hand.cards.push(cardIdx);
-                renderHandCards(whichPlayer);
+            .then(function(groups) {
+                renderCardGroups(whichPlayer, groups);
             });
         }
 
@@ -163,6 +152,25 @@ $(function() {
                 renderCardGroups(whichPlayer, groups);
             });
         }
+
+        if (operation == 'flipCoin') {
+            let rand = randomizeGameId();
+            let result = (rand % 2 == 1) ? 'tails' :' heads';
+            $('#coin-flip').html(`${result} (${rand})`);
+        }
+    })
+    .on('mouseenter', '.pokemon-card', function() {
+        // @see https://stackoverflow.com/a/15576031
+        // @see https://stackoverflow.com/a/20078582
+        hoverTimeout = setTimeout(() => {
+            console.log('over');
+            $(this).addClass('hover');
+        }, hoverIntentDelay);
+    })
+    .on('mouseleave', '.pokemon-card', function() {
+        console.log('out');
+        $(this).removeClass('hover');
+        clearTimeout(hoverTimeout);
     });
 });
 
@@ -261,7 +269,7 @@ var buttons = {
     },
     moveTop: function(whichPlayer, from, to, label) {
         return `
-            <button type="button" class="btn btn-primary" data-operation="moveTop"
+            <button type="button" class="btn btn-primary btn-sm" data-operation="moveTop"
                 data-player="${whichPlayer}" data-from="${from}" data-to="${to}">
                 ${label}
             </button>
@@ -329,6 +337,19 @@ function renderDeckContainers() {
     }
 }
 
+function renderPrizeCardContainers() {
+    let playerClass = ['myself', 'opponent'];
+    for (let key in playerClass) {
+        let whichPlayer = playerClass[key];
+        $(`.${whichPlayer} .prize-cards .body`).html(`
+            <div class="actions">
+            ${buttons.moveTop(whichPlayer, 'deck', 'prize-cards', 'Deal from deck')}
+            </div>
+            <div>Cards in deck: <span class="count">0</span></div> 
+        `);
+    }
+}
+
 function renderHandContainers() {
     let playerClass = ['myself'];
     for (let key in playerClass) {
@@ -336,6 +357,7 @@ function renderHandContainers() {
         $(`.${whichPlayer} .hand .body`).html(`
             <div class="actions">
                 ${buttons.moveTop(whichPlayer, 'deck', 'hand', 'Deal from deck')}
+                ${buttons.moveAll(whichPlayer, 'hand', 'deck', 'Return to deck')}
             </div>
             <div class="cards"></div>
         `);
@@ -412,9 +434,24 @@ function getPlayerId(mode) {
 }
 
 function renderCardGroup(whichPlayer, group) {
+    let groupData = gameState[getPlayerId(whichPlayer)][group] ?? {
+        cards: [],
+        count: 0
+    };
+
+    if (group == 'deck') {
+        $(`.${whichPlayer} .${group} .count`).html(groupData.count);
+        return;
+    }
+
+    if (group == 'prize-cards') {
+        $(`.${whichPlayer} .${group} .count`).html(groupData.count);
+        return;
+    }
+
     $(`.${whichPlayer} .${group} .cards`).html('');
-    for (let key in gameState[getPlayerId(whichPlayer)][group].cards) {
-        let cardIdx = gameState[getPlayerId(whichPlayer)][group].cards[key];
+    for (let key in groupData.cards) {
+        let cardIdx = groupData.cards[key];
         let img = gameState[getPlayerId(whichPlayer)].deckImages[cardIdx];
         $(`.${whichPlayer} .${group} .cards`).append(`
             <div class="card-wrapper">
@@ -426,12 +463,8 @@ function renderCardGroup(whichPlayer, group) {
 
 function renderCardGroups(whichPlayer, groups) {
     for (let groupKey in groups) {
-        let cards = groups[groupKey];
-        gameState[getPlayerId(whichPlayer)][groupKey] = cards;
+        let thisGroup = groups[groupKey];
+        gameState[getPlayerId(whichPlayer)][groupKey] = thisGroup;
         renderCardGroup(whichPlayer, groupKey);
     }
-}
-
-function renderPrizeCardContainers() {
-
 }

@@ -18,6 +18,14 @@ body {
     transition: transform .2s ease-out;
     position: relative;
 }
+.pokemon-card.hover {
+    opacity: 1;
+    z-index: 9999;
+    -webkit-transform:scale(4);
+    -moz-transform:scale(4);
+    -o-transform:scale(4);
+    transform:scale(4);
+}
 img.energy {
     opacity: 0.3;
 }

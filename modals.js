@@ -170,8 +170,6 @@ pokemonModal.gameLoadDeck = function($modal, buttonData) {
                 gameState[getPlayerId(buttonData.player)].deckImages = images;
 
                 let whichPlayer = buttonData.player;
-                $(`.${whichPlayer} .deck .count`).html(images.length);
-
                 for (let key in cardGroups) {
                     let cardGroup = cardGroups[key];
                     renderCardGroup(whichPlayer, cardGroup);
