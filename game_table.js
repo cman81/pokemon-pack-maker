@@ -1,5 +1,9 @@
 var battleDecks;
 var profileId;
+var deckImages = {
+    player1: [],
+    player2: [],
+}
 var gameState = {
     gameId: 0,
     player1: {},
@@ -49,10 +53,8 @@ $(function() {
                 gameState.gameId
             )
             .then(function(data) {
-                for (let key in cardGroups) {
-                    let cardGroup = cardGroups[key];
-                    gameState[getPlayerId('myself')][cardGroup] = data[getPlayerId('myself')][cardGroup];
-                }
+                gameState[getPlayerId('myself')] = data[getPlayerId('myself')];
+                gameState[getPlayerId('opponent')] = data[getPlayerId('opponent')];
             });
 
             renderContainers([
@@ -163,12 +165,10 @@ $(function() {
         // @see https://stackoverflow.com/a/15576031
         // @see https://stackoverflow.com/a/20078582
         hoverTimeout = setTimeout(() => {
-            console.log('over');
             $(this).addClass('hover');
         }, hoverIntentDelay);
     })
     .on('mouseleave', '.pokemon-card', function() {
-        console.log('out');
         $(this).removeClass('hover');
         clearTimeout(hoverTimeout);
     });
@@ -417,10 +417,12 @@ function renderOtherCardGroupContainers() {
 function renderPokemonStatus($groupBody, whichPlayer, group) {
     $groupBody.append(`
         <div class="pokemon-stats">
-            <label for="${whichPlayer}-${group}-damage-hp">Damage:</label>
-            <input type="text" id="${whichPlayer}-${group}-damage-hp" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            <h4>
+                <label for="${whichPlayer}-${group}-damage-hp">Damage:</label>
+                <input type="text" id="${whichPlayer}-${group}-damage-hp" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            </h4>
             <div class="slider" id="${whichPlayer}-${group}-damage-hp-range"></div>
-            Special Conditions:<br />
+            <h4>Special Conditions:</h4>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-asleep" value="asleep" />
                 <label class="form-check-label" for="${whichPlayer}-${group}-asleep">Asleep</label>
@@ -506,7 +508,7 @@ function renderCardGroup(whichPlayer, group) {
     $(`.${whichPlayer} .${group} .cards`).html('');
     for (let key in groupData.cards) {
         let cardIdx = groupData.cards[key];
-        let img = gameState[getPlayerId(whichPlayer)].deckImages[cardIdx];
+        let img = deckImages[getPlayerId(whichPlayer)][cardIdx];
         $(`.${whichPlayer} .${group} .cards`).append(`
             <div class="card-wrapper">
                 <img src="sword and shield/${img}" class="pokemon-card front"/>

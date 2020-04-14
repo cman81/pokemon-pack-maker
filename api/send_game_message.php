@@ -37,7 +37,12 @@
             $game_state = json_decode($result['game_state'], TRUE);
 
             $partial_game_state = [
-                $player_id => [],
+                'player1' => [
+                    'is_pokemon_hidden' => game_state['player1']['is_pokemon_hidden'] ?? TRUE,
+                ],
+                'player2' => [
+                    'is_pokemon_hidden' => game_state['player2']['is_pokemon_hidden'] ?? TRUE,
+                ],
             ];
 
             $card_groups = [
@@ -54,15 +59,26 @@
                 'stadium',
                 'lost-zone',
             ];
+            $opponent_id = get_opponent_player_id($player_id);
             foreach ($card_groups as $group) {
                 $partial_game_state[$player_id][$group] =
                     render_card_group($group, $game_state[$player_id][$group]);
+                $partial_game_state[$opponent_id][$group] =
+                    render_card_group($group, $game_state[$opponent_id][$group], TRUE);
             }
 
             return $partial_game_state;
         }
 
         return json_decode($result['game_state'], TRUE);
+    }
+
+    function get_opponent_player_id($my_player_id) {
+        if ($my_player_id == 'player1') {
+            return 'player2';
+        }
+
+        return 'player1';
     }
 
     function create_new_game_state($game_id) {
@@ -190,7 +206,7 @@
      * If a card group is revealed (most card groups), return an array of cards. Otherwise, return
      * the number of cards in the group
      */
-    function render_card_group($name, $data) {
+    function render_card_group($name, $data, $is_opponent = FALSE) {
         if ($name == 'deck') {
             return [
                 'count' => count($data['cards'])

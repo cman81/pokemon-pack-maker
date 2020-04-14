@@ -166,10 +166,9 @@ pokemonModal.gameLoadDeck = function($modal, buttonData) {
         .on('click', '.modal-body img', function() {
             let key = $(this).parent().index() - 1;
             loadCollection(battleDecks[key].collectionName).then(function() {
-                images = expandDeck(loadedBattleDeck);
-                gameState[getPlayerId(buttonData.player)].deckImages = images;
+                const whichPlayer = buttonData.player;
+                deckImages[getPlayerId(whichPlayer)] = expandDeck(loadedBattleDeck);
 
-                let whichPlayer = buttonData.player;
                 for (let key in cardGroups) {
                     let cardGroup = cardGroups[key];
                     renderCardGroup(whichPlayer, cardGroup);
@@ -190,7 +189,7 @@ pokemonModal.gameMoveSpecificCard = function($modal, buttonData) {
     let whichPlayer = buttonData.whichPlayer;
     let playerId = getPlayerId(whichPlayer);
     let cards = gameState[playerId][buttonData.from].cards;
-    let images = gameState[playerId].deckImages;
+    let images = deckImages[playerId];
     for (let key in cards) {
         let cardIdx = cards[key];
         let value = images[cardIdx];
