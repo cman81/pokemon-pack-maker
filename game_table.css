@@ -89,3 +89,10 @@ img.uncommon {
 .actions {
     margin-bottom: 7px;
 }
+.slider {
+    padding: 20px;
+    margin: 5px 20px 10px;
+}
+.slider.ui-slider .ui-slider-handle {
+    height: 3em;
+}

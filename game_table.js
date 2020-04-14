@@ -69,7 +69,7 @@ $(function() {
                 'stadium',
                 'lost zone',
             ]);
-        
+
             $('.border .action-expand').hide();
             $('.border')
             .off('click', '.collapse-control')
@@ -77,7 +77,7 @@ $(function() {
                 $(this).parent().find('.collapse-control').toggle();
             });
             $('#this-game-id').html(gameState.gameId);
-        
+
             renderDeckContainers();
             renderHandContainers();
             renderOtherCardGroupContainers();
@@ -345,7 +345,7 @@ function renderPrizeCardContainers() {
             <div class="actions">
             ${buttons.moveTop(whichPlayer, 'deck', 'prize-cards', 'Deal from deck')}
             </div>
-            <div>Cards in deck: <span class="count">0</span></div> 
+            <div>Prize cards remaining: <span class="count">0</span></div> 
         `);
     }
 }
@@ -359,7 +359,7 @@ function renderHandContainers() {
                 ${buttons.moveTop(whichPlayer, 'deck', 'hand', 'Deal from deck')}
                 ${buttons.moveAll(whichPlayer, 'hand', 'deck', 'Return to deck')}
             </div>
-            <div class="cards"></div>
+            <div class="cards clearfix"></div>
         `);
     }
 }
@@ -389,10 +389,12 @@ function renderOtherCardGroupContainers() {
         for (let k in otherCardGroups) {
             let group = otherCardGroups[k];
             let whichPlayer = playerClass[key];
-            
-            $(`.${whichPlayer} .${group} .body`).html('');
+            let $groupBody = $(`.${whichPlayer} .${group} .body`);
+
+            $groupBody.html('');
+
             if (whichPlayer == 'myself') {
-                $(`.${whichPlayer} .${group} .body`).append(`
+                $groupBody.append(`
                     <div class="actions">
                         ${buttons.moveSpecificCard(whichPlayer, 'hand', group, 'Choose from hand')}
                         ${buttons.tuck(whichPlayer, group, 'Tuck')}
@@ -401,13 +403,65 @@ function renderOtherCardGroupContainers() {
                 `);
             }
 
-            $(`.${whichPlayer} .${group} .body`).append(`
-                <div class="cards"></div>
-            `);
-        }
+            $groupBody.append(`<div class="cards clearfix"></div>`);
 
-        
+            if (!group.match(/pokemon/)) {
+                continue;
+            }
+
+            renderPokemonStatus($groupBody, whichPlayer, group);
+        }
     }
+}
+
+function renderPokemonStatus($groupBody, whichPlayer, group) {
+    $groupBody.append(`
+        <div class="pokemon-stats">
+            <label for="${whichPlayer}-${group}-damage-hp">Damage:</label>
+            <input type="text" id="${whichPlayer}-${group}-damage-hp" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            <div class="slider" id="${whichPlayer}-${group}-damage-hp-range"></div>
+            Special Conditions:<br />
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-asleep" value="asleep" />
+                <label class="form-check-label" for="${whichPlayer}-${group}-asleep">Asleep</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-paralyzed" value="paralyzed" />
+                <label class="form-check-label" for="${whichPlayer}-${group}-paralyzed">Paralyzed</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-confused" value="confused" />
+                <label class="form-check-label" for="${whichPlayer}-${group}-confused">Confused</label>
+            </div>
+            <br />
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-poisoned" value="poisoned" />
+                <label class="form-check-label" for="${whichPlayer}-${group}-poisoned">Poisoned</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-burned" value="burned" />
+                <label class="form-check-label" for="${whichPlayer}-${group}-burned">Burned</label>
+            </div>
+        </div>
+    `);
+
+    let $sliderDiv = $(`#${whichPlayer}-${group}-damage-hp-range`);
+    let $sliderText = $(`#${whichPlayer}-${group}-damage-hp`);
+    $sliderDiv.slider({
+        range: true,
+        min: 0,
+        max: 40,
+        values: [0, 0],
+        slide: function (event, ui) {
+            let damage = ui.values[0] * 10;
+            let total_hp = ui.values[1] * 10;
+            $sliderText.val(`${damage} / ${total_hp} HP`);
+        }
+    });
+    
+    let damage = $sliderDiv.slider("values", 0) * 10;
+    let total_hp = $sliderDiv.slider("values", 1) * 10;
+    $sliderText.val(`${damage} / ${total_hp} HP`);
 }
 
 function randomizeGameId() {
