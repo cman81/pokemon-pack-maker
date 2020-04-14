@@ -45,6 +45,11 @@
                 'hand',
                 'discard',
                 'active-pokemon',
+                'bench-pokemon-1',
+                'bench-pokemon-2',
+                'bench-pokemon-3',
+                'bench-pokemon-4',
+                'bench-pokemon-5',
                 'prize-cards',
                 'stadium',
                 'lost-zone',
@@ -198,7 +203,10 @@
             ];
         }
 
-        return $data;
+        return $data ?? [
+            'count' => 0,
+            'cards' => [],
+        ];
     }
 
     function move_specific_card($game_id, $player_id, $data) {
