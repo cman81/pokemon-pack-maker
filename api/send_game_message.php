@@ -38,10 +38,10 @@
 
             $partial_game_state = [
                 'player1' => [
-                    'is_pokemon_hidden' => $game_state['player1']['is_pokemon_hidden'] ?? TRUE,
+                    'is_pokemon_hidden' => $game_state['player1']['is_pokemon_hidden'],
                 ],
                 'player2' => [
-                    'is_pokemon_hidden' => $game_state['player2']['is_pokemon_hidden'] ?? TRUE,
+                    'is_pokemon_hidden' => $game_state['player2']['is_pokemon_hidden'],
                 ],
             ];
 
