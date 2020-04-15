@@ -40,7 +40,7 @@ $(function() {
         }
 
         if (operation == 'sitAtTable') {
-            if (!getPlayerId()) {
+            if (!getPlayerId('myself')) {
                 return;
             }
 
@@ -90,8 +90,10 @@ $(function() {
         }
 
         if (operation == 'shuffle') {
+            let whichPlayer = $(this).data('player');
+
             sendGameMessage(
-                getPlayerId($(this).data('player')),
+                getPlayerId(whichPlayer),
                 'judge',
                 operation,
                 $(this).data('card-group')
@@ -174,6 +176,10 @@ $(function() {
                 gameState[getPlayerId(whichPlayer)].is_pokemon_hidden = false;
                 alert('Your opponent can now see your Pokemon!');
             });
+        }
+
+        if (operation == 'pingServerMessages') {
+            pingServerMessages();
         }
     })
     .on('mouseenter', '.pokemon-card', function() {
@@ -560,4 +566,22 @@ function renderCardGroups(whichPlayer, groups) {
         gameState[getPlayerId(whichPlayer)][groupKey] = thisGroup;
         renderCardGroup(whichPlayer, groupKey);
     }
+}
+
+function pingServerMessages() {
+    let apiEndpoint = apiHome + '/get_game_messages.php';
+
+    return $.getJSON(
+        apiEndpoint,
+        {
+            gameId: gameState.gameId,
+            recipient: getPlayerId('myself')
+        },
+        function(data) {
+            for (let key in data) {
+                let value = data[key];
+                console.log(value);
+            }
+        }
+    );
 }

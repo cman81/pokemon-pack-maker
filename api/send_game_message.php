@@ -302,21 +302,26 @@
 
         save_game_state($game_id, $game_state);
 
-        enqueue_game_message(
-            $game_id,
-            'judge',
-            get_opponent_player_id($player_id),
-            'renderCardGroups',
-            [
-                'active-pokemon',
-                'benched-pokemon-1',
-                'benched-pokemon-2',
-                'benched-pokemon-3',
-                'benched-pokemon-4',
-                'benched-pokemon-5',
-            ]
-        );
+        foreach ($game_state[$player_id] as $group_name => $card_group) {
+            if (strpos($group_name, 'pokemon') === FALSE) {
+                continue;
+            }
 
+            if (empty($card_group['cards'])) {
+                continue;
+            }
+
+            enqueue_game_message(
+                $game_id,
+                'judge',
+                get_opponent_player_id($player_id),
+                'renderCardGroup',
+                [
+                    $group_name => $card_group
+                ]
+            );
+        }
+        
         return TRUE;
     }
 
