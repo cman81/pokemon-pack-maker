@@ -1,7 +1,6 @@
 # Kanban
 
 ## To Do
-- switch pokemon between active and bench
 - draw a specific card from the deck into our hand
 - only show the top card in each "pokemon" stack by default. clicking the top card will reveal all the other cards in the stack
 - collapse "pokemon" containers by default
@@ -12,7 +11,7 @@
 - retrieve prize cards
 
 ## Doing
-- figure out how to invoke a modal without a button click
+- switch pokemon between active and bench
 
 ## Done
 - flip a coin
@@ -21,3 +20,4 @@
 - render bench cards upon game load
 - flip bench and active pokemon before the game starts
 - do a great ball (look at top 7 cards, pick one, shuffle the other cards back into deck)
+- figure out how to invoke a modal without a button click

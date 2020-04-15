@@ -333,7 +333,16 @@ var buttons = {
                 Show Pokemon
             </button>
         `;
-    }
+    },
+    modalRevealedCard: function(buttonId, cardIdx) {
+        return `
+            <button type="button" class="d-none" data-toggle="modal"
+                data-target="#pokemonModal" data-operation="revealOpponentCard"
+                data-opponent-card="${cardIdx}" id="revealCard-${buttonId}">
+                Hidden Button
+            </button>
+        `;
+    },
 };
 
 function renderContainers(labels) {
@@ -623,8 +632,15 @@ function processServerMessage(message) {
     }
 
     if (message.type == 'revealCard') {
-console.log(message);
-alert('opponent revealed: ' + deckImages[getPlayerId('opponent')][message.data]);
+        let buttonId = randomizeGameId();
+        // create a button
+        $('body').append(buttons.modalRevealedCard(buttonId, message.data));
+
+        // click the button
+        $(`#revealCard-${buttonId}`).click();
+
+        // destroy the button
+        $(`#revealCard-${buttonId}`).remove();
         
         return;
     }

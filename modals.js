@@ -220,3 +220,21 @@ pokemonModal.gameMoveSpecificCard = function($modal, buttonData) {
             });
         });
 };
+
+pokemonModal.revealOpponentCard = function($modal, buttonData) {
+    let images = deckImages[getPlayerId('opponent')];
+    let imgSrc = images[buttonData.opponentCard]
+
+    $modal.find('.modal-title').html('Card revealed!');
+    $modal.find('.modal-body').html(`
+        <p>Your opponent revealed the following card:</p>
+        <div class="deck-item">
+            <img src="sword and shield/${imgSrc}" />
+        </div>
+    `);
+    $modal.find('.modal-footer').html(`
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+    `);
+
+
+}
