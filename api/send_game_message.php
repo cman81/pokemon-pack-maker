@@ -292,6 +292,8 @@
 
         save_game_state($game_id, $game_state);
 
+        update_opponent_card_group($game_state, $game_id, $player_id, $card_group);
+
         return $game_state[$player_id][$card_group];
     }
 
@@ -311,18 +313,20 @@
                 continue;
             }
 
-            enqueue_game_message(
-                $game_id,
-                'judge',
-                get_opponent_player_id($player_id),
-                'renderCardGroup',
-                [
-                    $group_name => $card_group
-                ]
-            );
+            update_opponent_card_group($game_state, $game_id, $my_player_id, $group_name);
         }
         
         return TRUE;
+    }
+
+    function update_opponent_card_group($game_state, $game_id, $my_player_id, $group_name) {
+        enqueue_game_message(
+            $game_id,
+            'judge',
+            get_opponent_player_id($my_player_id),
+            'renderCardGroup',
+            render_card_group($game_state, $my_player_id, $group_name, TRUE)
+        );
     }
 
     function enqueue_game_message($game_id, $from, $to, $type, $data) {
