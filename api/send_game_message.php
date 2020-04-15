@@ -38,10 +38,10 @@
 
             $partial_game_state = [
                 'player1' => [
-                    'is_pokemon_hidden' => game_state['player1']['is_pokemon_hidden'] ?? TRUE,
+                    'is_pokemon_hidden' => $game_state['player1']['is_pokemon_hidden'] ?? TRUE,
                 ],
                 'player2' => [
-                    'is_pokemon_hidden' => game_state['player2']['is_pokemon_hidden'] ?? TRUE,
+                    'is_pokemon_hidden' => $game_state['player2']['is_pokemon_hidden'] ?? TRUE,
                 ],
             ];
 
@@ -61,10 +61,15 @@
             ];
             $opponent_id = get_opponent_player_id($player_id);
             foreach ($card_groups as $group) {
-                $partial_game_state[$player_id][$group] =
-                    render_card_group($group, $game_state[$player_id][$group]);
-                $partial_game_state[$opponent_id][$group] =
-                    render_card_group($group, $game_state[$opponent_id][$group], TRUE);
+                if (!empty($game_state[$player_id][$group])) {
+                    $partial_game_state[$player_id][$group] =
+                        render_card_group($game_state, $player_id, $group);
+                }
+
+                if (!empty($game_state[$opponent_id][$group])) {
+                    $partial_game_state[$opponent_id][$group] =
+                        render_card_group($game_state, $opponent_id, $group, TRUE);
+                }
             }
 
             return $partial_game_state;
@@ -197,8 +202,8 @@
         save_game_state($game_id, $game_state);
 
         return [
-            $from => render_card_group($from, $game_state[$player_id][$from]),
-            $to => render_card_group($to, $game_state[$player_id][$to]),
+            $from => render_card_group($game_state, $player_id, $from),
+            $to => render_card_group($game_state, $player_id, $to),
         ];
     }
 
@@ -206,22 +211,38 @@
      * If a card group is revealed (most card groups), return an array of cards. Otherwise, return
      * the number of cards in the group
      */
-    function render_card_group($name, $data, $is_opponent = FALSE) {
-        if ($name == 'deck') {
-            return [
-                'count' => count($data['cards'])
-            ];
-        }
-
-        if ($name == 'prize-cards') {
-            return [
-                'count' => count($data['cards'])
-            ];
-        }
-
-        return $data ?? [
+    function render_card_group($game_state, $player_id, $group_name, $is_opponent = FALSE) {
+        $data = $game_state[$player_id][$group_name] ?? [
             'count' => 0,
             'cards' => [],
+        ];
+
+        if ($group_name == 'deck') {
+            return [
+                'count' => count($data['cards'])
+            ];
+        }
+
+        if ($group_name == 'prize-cards') {
+            return [
+                'count' => count($data['cards'])
+            ];
+        }
+
+        if (!$is_opponent) {
+            return $data;
+        }
+
+        if (empty($game_state[$player_id]['is_pokemon_hidden'])) {
+            return $data;
+        }
+
+        if (strpos($group_name, 'pokemon') === FALSE) {
+            return $data;
+        }
+
+        return [
+            'count' => count($data['cards'])
         ];
     }
 
@@ -240,8 +261,8 @@
         save_game_state($game_id, $game_state);
 
         return [
-            $from => render_card_group($from, $game_state[$player_id][$from]),
-            $to => render_card_group($to, $game_state[$player_id][$to]),
+            $from => render_card_group($game_state, $player_id, $from),
+            $to => render_card_group($game_state, $player_id, $to),
         ];
     }
 
@@ -257,8 +278,8 @@
         save_game_state($game_id, $game_state);
 
         return [
-            $from => render_card_group($from, $game_state[$player_id][$from]),
-            $to => render_card_group($to, $game_state[$player_id][$to]),
+            $from => render_card_group($game_state, $player_id, $from),
+            $to => render_card_group($game_state, $player_id, $to),
         ];
     }
 
