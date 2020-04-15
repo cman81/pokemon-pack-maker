@@ -265,6 +265,7 @@
         $from = $data['from'];
         $card_position = $data['position'];
         $to = $data['to'];
+        $reveal = $data['reveal'];
 
         $card_pick = $game_state[$player_id][$from]['cards'][$card_position];
         unset($game_state[$player_id][$from]['cards'][$card_position]);
@@ -276,11 +277,22 @@
 
         update_opponent_card_group($game_state, $game_id, $player_id, $from);
         update_opponent_card_group($game_state, $game_id, $player_id, $to);
+        reveal_card_to_opponent($game_id, $player_id, $card_pick);
 
         return [
             $from => render_card_group($game_state, $player_id, $from),
             $to => render_card_group($game_state, $player_id, $to),
         ];
+    }
+
+    function reveal_card_to_opponent($game_id, $my_player_id, $card_pick) {
+        enqueue_game_message(
+            $game_id,
+            'judge',
+            get_opponent_player_id($my_player_id),
+            'revealCard',
+            $card_pick
+        );
     }
 
     function move_all($game_id, $player_id, $data) {

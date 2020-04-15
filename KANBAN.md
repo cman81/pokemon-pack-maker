@@ -9,7 +9,7 @@
 - see the number cards in opponent's hand
 
 ## Doing
-- do a great ball (look at top 7 cards, pick one, shuffle the other cards back into deck)
+- figure out how to invoke a modal without a button click
 
 ## Done
 - flip a coin
@@ -17,3 +17,4 @@
 - track damage and special conditions
 - render bench cards upon game load
 - flip bench and active pokemon before the game starts
+- do a great ball (look at top 7 cards, pick one, shuffle the other cards back into deck)

@@ -272,11 +272,15 @@ var buttons = {
             </button>
         `;
     },
-    moveSpecificCard: function(whichPlayer, from, to, label) {
+    moveSpecificCard: function(whichPlayer, from, to, label, reveal) {
+        reveal = reveal ?? false;
+        let revealStr = (reveal) ? 'true' :'false';
+
         return `
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                 data-target="#pokemonModal" data-operation="gameMoveSpecificCard"
-                data-which-player="${whichPlayer}" data-from="${from}" data-to="${to}">
+                data-which-player="${whichPlayer}" data-from="${from}" data-to="${to}"
+                data-reveal="${revealStr}">
                 ${label}
             </button>
         `
@@ -411,6 +415,12 @@ function renderHandContainers() {
                 </div>
                 <div class="cards clearfix"></div>
             `);
+
+            if (cardGroup = 'hand-2') {
+                $(`.${whichPlayer} .${cardGroup} .body .actions`).append(`
+                    ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Reveal and Keep', true)}
+                `);
+            }
         }
     }
 }
@@ -609,6 +619,13 @@ function processServerMessage(message) {
             break; // only 1 iteration
         }
 
+        return;
+    }
+
+    if (message.type == 'revealCard') {
+console.log(message);
+alert('opponent revealed: ' + deckImages[getPlayerId('opponent')][message.data]);
+        
         return;
     }
 }
