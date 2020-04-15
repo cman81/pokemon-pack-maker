@@ -313,7 +313,7 @@
                 continue;
             }
 
-            update_opponent_card_group($game_state, $game_id, $my_player_id, $group_name);
+            update_opponent_card_group($game_state, $game_id, $player_id, $group_name);
         }
         
         return TRUE;
@@ -325,7 +325,9 @@
             'judge',
             get_opponent_player_id($my_player_id),
             'renderCardGroup',
-            render_card_group($game_state, $my_player_id, $group_name, TRUE)
+            [
+                $group_name => render_card_group($game_state, $my_player_id, $group_name, TRUE)
+            ]
         );
     }
 
