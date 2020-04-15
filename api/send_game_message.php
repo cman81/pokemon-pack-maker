@@ -50,7 +50,8 @@
 
         $card_groups = [
             'deck',
-            'hand',
+            'hand-1',
+            'hand-2',
             'discard',
             'active-pokemon',
             'bench-pokemon-1',
@@ -235,18 +236,28 @@
         if (!$is_opponent) {
             return $data;
         }
+        
+        if (strpos($group_name, 'hand') !== FALSE) {
+            // do not reveal your hand to your opponent
+            return [
+                'count' => count($data['cards'])
+            ];
+        }
 
         if (empty($game_state[$player_id]['is_pokemon_hidden'])) {
+            // show pokemon to your opponent when you are ready
             return $data;
         }
 
-        if (strpos($group_name, 'pokemon') === FALSE) {
-            return $data;
+
+        if (strpos($group_name, 'pokemon') !== FALSE) {
+            // do not show pokemon at the beginning of the game
+            return [
+                'count' => count($data['cards'])
+            ];
         }
 
-        return [
-            'count' => count($data['cards'])
-        ];
+        return $data;
     }
 
     function move_specific_card($game_id, $player_id, $data) {

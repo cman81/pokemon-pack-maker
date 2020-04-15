@@ -122,7 +122,8 @@ function initialize_game_state() {
     ];
 
     $cardGroups = [
-        'hand',
+        'hand-1',
+        'hand-2',
         'discard',
         'active-pokemon',
         'prize-cards',

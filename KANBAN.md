@@ -1,7 +1,6 @@
 # Kanban
 
 ## To Do
-- do a great ball (look at top 7 cards, pick one, shuffle the other cards back into deck)
 - switch pokemon between active and bench
 - draw a specific card from the deck into our hand
 - only show the top card in each "pokemon" stack by default. clicking the top card will reveal all the other cards in the stack
@@ -10,6 +9,7 @@
 - see the number cards in opponent's hand
 
 ## Doing
+- do a great ball (look at top 7 cards, pick one, shuffle the other cards back into deck)
 
 ## Done
 - flip a coin

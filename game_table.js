@@ -11,7 +11,8 @@ var gameState = {
 };
 var cardGroups = [
     'deck',
-    'hand',
+    'hand-1',
+    'hand-2',
     'discard',
     'active-pokemon',
     'bench-pokemon-1',
@@ -61,7 +62,8 @@ $(function() {
 
             renderContainers([
                 'deck',
-                'hand',
+                'hand-1',
+                'hand-2',
                 'discard',
                 'active pokemon',
                 'bench pokemon 1',
@@ -206,10 +208,6 @@ $(function() {
         clearTimeout(hoverTimeout);
     });
 });
-
-function renderHandCards(whichPlayer) {
-    renderCardGroup(whichPlayer, 'hand');
-}
 
 function sendGameMessage(from, to, type, data) {
     var apiEndpoint = apiHome + '/send_game_message.php';
@@ -404,13 +402,16 @@ function renderHandContainers() {
     let playerClass = ['myself'];
     for (let key in playerClass) {
         let whichPlayer = playerClass[key];
-        $(`.${whichPlayer} .hand .body`).html(`
-            <div class="actions">
-                ${buttons.moveTop(whichPlayer, 'deck', 'hand', 'Deal from deck')}
-                ${buttons.moveAll(whichPlayer, 'hand', 'deck', 'Return to deck')}
-            </div>
-            <div class="cards clearfix"></div>
-        `);
+        for (let pos = 1; pos <= 2; pos++) {
+            let cardGroup = `hand-${pos}`;
+            $(`.${whichPlayer} .${cardGroup} .body`).html(`
+                <div class="actions">
+                    ${buttons.moveTop(whichPlayer, 'deck', cardGroup, 'Deal from deck')}
+                    ${buttons.moveAll(whichPlayer, cardGroup, 'deck', 'Return to deck')}
+                </div>
+                <div class="cards clearfix"></div>
+            `);
+        }
     }
 }
 
@@ -446,7 +447,7 @@ function renderOtherCardGroupContainers() {
             if (whichPlayer == 'myself') {
                 $groupBody.append(`
                     <div class="actions">
-                        ${buttons.moveSpecificCard(whichPlayer, 'hand', group, 'Choose from hand')}
+                        ${buttons.moveSpecificCard(whichPlayer, 'hand-1', group, 'Choose from Hand 1')}
                         ${buttons.tuck(whichPlayer, group, 'Tuck')}
                         ${buttons.moveAll(whichPlayer, group, 'discard', 'Discard all')}
                     </div>
