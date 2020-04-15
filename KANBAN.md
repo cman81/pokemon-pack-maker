@@ -7,6 +7,7 @@
 - only show the top card in each "pokemon" stack by default. clicking the top card will reveal all the other cards in the stack
 - collapse "pokemon" containers by default
 - drag and drop cards!
+- see the number cards in opponent's hand
 
 ## Doing
 

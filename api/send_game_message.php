@@ -15,7 +15,7 @@
         case 'showPokemon': exit(json_encode(show_pokemon($gameId, $from)));
     }
 
-    function load_game_state($game_id, $player_id = false) {
+    function load_game_state($game_id, $player_id = FALSE) {
         $db = new PokemonDB();
         $db->busyTimeout(250);
 
@@ -34,49 +34,48 @@
             $result['game_state'] = json_encode(create_new_game_state($game_id));
         }
 
-        if ($player_id) {
-            $game_state = json_decode($result['game_state'], TRUE);
-
-            $partial_game_state = [
-                'player1' => [
-                    'is_pokemon_hidden' => $game_state['player1']['is_pokemon_hidden'],
-                ],
-                'player2' => [
-                    'is_pokemon_hidden' => $game_state['player2']['is_pokemon_hidden'],
-                ],
-            ];
-
-            $card_groups = [
-                'deck',
-                'hand',
-                'discard',
-                'active-pokemon',
-                'bench-pokemon-1',
-                'bench-pokemon-2',
-                'bench-pokemon-3',
-                'bench-pokemon-4',
-                'bench-pokemon-5',
-                'prize-cards',
-                'stadium',
-                'lost-zone',
-            ];
-            $opponent_id = get_opponent_player_id($player_id);
-            foreach ($card_groups as $group) {
-                if (!empty($game_state[$player_id][$group])) {
-                    $partial_game_state[$player_id][$group] =
-                        render_card_group($game_state, $player_id, $group);
-                }
-
-                if (!empty($game_state[$opponent_id][$group])) {
-                    $partial_game_state[$opponent_id][$group] =
-                        render_card_group($game_state, $opponent_id, $group, TRUE);
-                }
-            }
-
-            return $partial_game_state;
+        $game_state = json_decode($result['game_state'], TRUE);
+        if (!$player_id) {
+            return $game_state;
         }
 
-        return json_decode($result['game_state'], TRUE);
+        $partial_game_state = [
+            'player1' => [
+                'is_pokemon_hidden' => $game_state['player1']['is_pokemon_hidden'],
+            ],
+            'player2' => [
+                'is_pokemon_hidden' => $game_state['player2']['is_pokemon_hidden'],
+            ],
+        ];
+
+        $card_groups = [
+            'deck',
+            'hand',
+            'discard',
+            'active-pokemon',
+            'bench-pokemon-1',
+            'bench-pokemon-2',
+            'bench-pokemon-3',
+            'bench-pokemon-4',
+            'bench-pokemon-5',
+            'prize-cards',
+            'stadium',
+            'lost-zone',
+        ];
+        $opponent_id = get_opponent_player_id($player_id);
+        foreach ($card_groups as $group) {
+            if (!empty($game_state[$player_id][$group])) {
+                $partial_game_state[$player_id][$group] =
+                    render_card_group($game_state, $player_id, $group);
+            }
+
+            if (!empty($game_state[$opponent_id][$group])) {
+                $partial_game_state[$opponent_id][$group] =
+                    render_card_group($game_state, $opponent_id, $group, TRUE);
+            }
+        }
+
+        return $partial_game_state;
     }
 
     function get_opponent_player_id($my_player_id) {
@@ -202,6 +201,9 @@
         
         save_game_state($game_id, $game_state);
 
+        update_opponent_card_group($game_state, $game_id, $player_id, $from);
+        update_opponent_card_group($game_state, $game_id, $player_id, $to);
+
         return [
             $from => render_card_group($game_state, $player_id, $from),
             $to => render_card_group($game_state, $player_id, $to),
@@ -261,6 +263,9 @@
 
         save_game_state($game_id, $game_state);
 
+        update_opponent_card_group($game_state, $game_id, $player_id, $from);
+        update_opponent_card_group($game_state, $game_id, $player_id, $to);
+
         return [
             $from => render_card_group($game_state, $player_id, $from),
             $to => render_card_group($game_state, $player_id, $to),
@@ -277,6 +282,9 @@
         $game_state[$player_id][$to]['cards'] = array_merge($game_state[$player_id][$to]['cards'], $cards);
         
         save_game_state($game_id, $game_state);
+
+        update_opponent_card_group($game_state, $game_id, $player_id, $from);
+        update_opponent_card_group($game_state, $game_id, $player_id, $to);
 
         return [
             $from => render_card_group($game_state, $player_id, $from),
