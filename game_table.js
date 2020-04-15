@@ -577,11 +577,24 @@ function pingServerMessages() {
             gameId: gameState.gameId,
             recipient: getPlayerId('myself')
         },
-        function(data) {
-            for (let key in data) {
-                let value = data[key];
-                console.log(value);
+        function(messages) {
+            for (let key in messages) {
+                let message = messages[key];
+                processServerMessage(message);
             }
         }
     );
+}
+
+function processServerMessage(message) {
+    if (message.type == 'renderCardGroup') {
+        for (let cardGroup in message.data) {
+            let value = message.data[cardGroup];
+            gameState[getPlayerId('opponent')][cardGroup] = value;
+            renderCardGroup('opponent', cardGroup);
+            break; // only 1 iteration
+        }
+
+        return;
+    }
 }
