@@ -9,10 +9,10 @@
 - drag and drop cards!
 
 ## Doing
-- flip bench and active pokemon before the game starts
 
 ## Done
 - flip a coin
 - put out 6 prize cards
 - track damage and special conditions
 - render bench cards upon game load
+- flip bench and active pokemon before the game starts

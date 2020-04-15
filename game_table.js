@@ -169,7 +169,9 @@ $(function() {
                 'judge',
                 operation
             )
-            .then(function(groups) {
+            .then((groups) => {
+//                $(this).hide();
+                gameState[getPlayerId(whichPlayer)].is_pokemon_hidden = false;
                 alert('Your opponent can now see your Pokemon!');
             });
         }

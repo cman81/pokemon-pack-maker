@@ -12,7 +12,7 @@
         case 'moveSpecific': exit(json_encode(move_specific_card($gameId, $from, $data)));
         case 'moveAll': exit(json_encode(move_all($gameId, $from, $data)));
         case 'tuck': exit(json_encode(tuck_card($gameId, $from, $data)));
-        case 'showPokemon': exit(json_encode(show_pokemon($gameId, $from, $data)));
+        case 'showPokemon': exit(json_encode(show_pokemon($gameId, $from)));
     }
 
     function load_game_state($game_id, $player_id = false) {
@@ -295,6 +295,52 @@
         return $game_state[$player_id][$card_group];
     }
 
-    function show_pokemon($game_id, $player_id, $data) {
+    function show_pokemon($game_id, $player_id) {
+        $game_state = load_game_state($game_id);
 
+        $game_state[$player_id]['is_pokemon_hidden'] = FALSE;
+
+        save_game_state($game_id, $game_state);
+
+        enqueue_game_message(
+            $game_id,
+            'judge',
+            get_opponent_player_id($player_id),
+            'renderCardGroups',
+            [
+                'active-pokemon',
+                'benched-pokemon-1',
+                'benched-pokemon-2',
+                'benched-pokemon-3',
+                'benched-pokemon-4',
+                'benched-pokemon-5',
+            ]
+        );
+
+        return TRUE;
+    }
+
+    function enqueue_game_message($game_id, $from, $to, $type, $data) {
+        $db = new PokemonDB();
+        $db->busyTimeout(250);
+
+        $sql = "
+            INSERT INTO game_message_queue
+            (game_id, timestamp_value, message_from, message_to, type, data)
+            VALUES
+            (:game_id, :timestamp_value, :message_from, :message_to, :type, :data)
+        ";
+        $stmt = $db->prepare($sql);
+
+        // passing values to the parameters
+        $stmt->bindValue(':game_id', $game_id);
+        $stmt->bindValue(':timestamp_value', time());
+        $stmt->bindValue(':message_from', $from);
+        $stmt->bindValue(':message_to', $to);
+        $stmt->bindValue(':type', $type);
+        $stmt->bindValue(':data', json_encode($data));
+        
+        $stmt->execute();
+        $db->close();
+        unset($db);
     }

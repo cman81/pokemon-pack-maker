@@ -44,9 +44,9 @@ DROP TABLE IF EXISTS "game_message_queue";
 CREATE TABLE "game_message_queue" (
 	"message_id"	INTEGER PRIMARY KEY AUTOINCREMENT,
 	"game_id"	INTEGER,
-	"timestamp"	INTEGER,
-	"from"	TEXT,
-	"to"	TEXT,
+	"timestamp_value"	INTEGER,
+	"message_from"	TEXT,
+	"message_to"	TEXT,
 	"type"	TEXT,
 	"data"	TEXT
 );
