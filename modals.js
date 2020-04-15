@@ -213,7 +213,7 @@ pokemonModal.gameMoveSpecificCard = function($modal, buttonData) {
                     from: buttonData.from,
                     position: position,
                     to: buttonData.to,
-                    reveal: (buttonData.reveal == 'true')
+                    reveal: buttonData.reveal
                 }
             ).then(function(groups) {
                 renderCardGroups(whichPlayer, groups);

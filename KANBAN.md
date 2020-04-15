@@ -7,6 +7,9 @@
 - collapse "pokemon" containers by default
 - drag and drop cards!
 - see the number cards in opponent's hand
+- make a pokemon asleep, paralyzed, or burned
+- discard energy (or other cards) from a pokemon
+- retrieve prize cards
 
 ## Doing
 - figure out how to invoke a modal without a button click

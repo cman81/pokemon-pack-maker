@@ -176,7 +176,7 @@ $(function() {
                 operation
             )
             .then((groups) => {
-//                $(this).hide();
+                $(this).hide();
                 gameState[getPlayerId(whichPlayer)].is_pokemon_hidden = false;
                 alert('Your opponent can now see your Pokemon!');
             });
@@ -185,7 +185,7 @@ $(function() {
         if (operation == 'pingServerMessages') {
             if (pingTimeout) {
                 clearInterval(pingTimeout);
-                pingTimeout = {};
+                pingTimeout = false;
                 alert('Pinging is off');
                 return;
             }

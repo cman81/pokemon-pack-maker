@@ -265,7 +265,7 @@
         $from = $data['from'];
         $card_position = $data['position'];
         $to = $data['to'];
-        $reveal = $data['reveal'];
+        $reveal = ($data['reveal'] == 'true');
 
         $card_pick = $game_state[$player_id][$from]['cards'][$card_position];
         unset($game_state[$player_id][$from]['cards'][$card_position]);
@@ -277,7 +277,10 @@
 
         update_opponent_card_group($game_state, $game_id, $player_id, $from);
         update_opponent_card_group($game_state, $game_id, $player_id, $to);
-        reveal_card_to_opponent($game_id, $player_id, $card_pick);
+
+        if ($reveal) {
+            reveal_card_to_opponent($game_id, $player_id, $card_pick);
+        }
 
         return [
             $from => render_card_group($game_state, $player_id, $from),
