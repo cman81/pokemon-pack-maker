@@ -12,6 +12,7 @@
         case 'moveSpecific': exit(json_encode(move_specific_card($gameId, $from, $data)));
         case 'moveAll': exit(json_encode(move_all($gameId, $from, $data)));
         case 'tuck': exit(json_encode(tuck_card($gameId, $from, $data)));
+        case 'showPokemon': exit(json_encode(show_pokemon($gameId, $from, $data)));
     }
 
     function load_game_state($game_id, $player_id = false) {
@@ -292,4 +293,8 @@
         save_game_state($game_id, $game_state);
 
         return $game_state[$player_id][$card_group];
+    }
+
+    function show_pokemon($game_id, $player_id, $data) {
+
     }

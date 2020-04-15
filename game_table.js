@@ -85,7 +85,7 @@ $(function() {
             renderOtherCardGroupContainers();
             renderPrizeCardContainers();
 
-            $('.top.container > .row').toggle();
+            $('.top.container > .row').toggleClass('d-none');
 
         }
 
@@ -160,6 +160,19 @@ $(function() {
             let result = (rand % 2 == 1) ? 'tails' :' heads';
             $('#coin-flip').html(`${result} (${rand})`);
         }
+
+        if (operation == 'showPokemon') {
+            let whichPlayer = $(this).data('player');
+
+            sendGameMessage(
+                getPlayerId(whichPlayer),
+                'judge',
+                operation
+            )
+            .then(function(groups) {
+                alert('Your opponent can now see your Pokemon!');
+            });
+        }
     })
     .on('mouseenter', '.pokemon-card', function() {
         // @see https://stackoverflow.com/a/15576031
@@ -187,7 +200,7 @@ function sendGameMessage(from, to, type, data) {
             from: from,
             to: to,
             type: type,
-            data: data ?? ''
+            data: data ?? {}
         },
         function (data) {
             return data;
@@ -277,7 +290,7 @@ var buttons = {
     },
     tuck: function (whichPlayer, group, label) {
         return `
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-operation="tuck"
+            <button type="button" class="btn btn-secondary btn-sm" data-operation="tuck"
                 data-player="${whichPlayer}" data-card-group="${group}">
                 ${label}
             </button>
@@ -285,12 +298,20 @@ var buttons = {
     },
     moveAll: function(whichPlayer, from, to, label) {
         return `
-            <button type="button" class="btn btn-outline-danger btn-sm" data-operation="moveAll"
+            <button type="button" class="btn btn-danger btn-sm" data-operation="moveAll"
                 data-player="${whichPlayer}" data-from="${from}" data-to="${to}">
                 ${label}
             </button>
         `;
     },
+    showPokemon: function(whichPlayer) {
+        return `
+            <button type="button" class="btn btn-outline-primary btn-sm" data-operation="showPokemon"
+                data-player="${whichPlayer}">
+                Show Pokemon
+            </button>
+        `;
+    }
 };
 
 function renderContainers(labels) {
@@ -330,10 +351,13 @@ function renderDeckContainers() {
         $(`.${whichPlayer} .deck .body`).html(`
             <div class="actions">
                 ${buttons.loadDeck(whichPlayer)}
-                ${buttons.shuffle(whichPlayer, 'deck')}
             </div>
             <div>Cards in deck: <span class="count">0</span></div> 
         `);
+
+        if (whichPlayer == 'myself') {
+            $(`.${whichPlayer} .deck .body .actions`).append(`${buttons.shuffle(whichPlayer, 'deck')}`);
+        }
     }
 }
 
@@ -341,10 +365,15 @@ function renderPrizeCardContainers() {
     let playerClass = ['myself', 'opponent'];
     for (let key in playerClass) {
         let whichPlayer = playerClass[key];
-        $(`.${whichPlayer} .prize-cards .body`).html(`
-            <div class="actions">
-            ${buttons.moveTop(whichPlayer, 'deck', 'prize-cards', 'Deal from deck')}
-            </div>
+
+        if (whichPlayer == 'myself') {
+            $(`.${whichPlayer} .prize-cards .body`).append(`
+                <div class="actions">
+                    ${buttons.moveTop(whichPlayer, 'deck', 'prize-cards', 'Deal from deck')}
+                </div>
+            `);
+        }
+        $(`.${whichPlayer} .prize-cards .body`).append(`
             <div>Prize cards remaining: <span class="count">0</span></div> 
         `);
     }
@@ -407,6 +436,12 @@ function renderOtherCardGroupContainers() {
 
             if (!group.match(/pokemon/)) {
                 continue;
+            }
+
+            if (whichPlayer == 'myself' && group == 'active-pokemon') {
+                $groupBody.find('.actions').append(`
+                    ${buttons.showPokemon(whichPlayer)}
+                `);
             }
 
             renderPokemonStatus($groupBody, whichPlayer, group);
