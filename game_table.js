@@ -25,6 +25,8 @@ var cardGroups = [
 ];
 var hoverIntentDelay = 400;
 var hoverTimeout;
+var pingInterval = 2000;
+var pingTimeout;
 
 $(function() {
     let initialGameId = randomizeGameId();
@@ -179,7 +181,17 @@ $(function() {
         }
 
         if (operation == 'pingServerMessages') {
-            pingServerMessages();
+            if (pingTimeout) {
+                clearInterval(pingTimeout);
+                pingTimeout = {};
+                alert('Pinging is off');
+                return;
+            }
+
+            pingTimeout = setInterval(() => {
+                pingServerMessages();
+            }, pingInterval);
+            alert('Pinging is on');
         }
     })
     .on('mouseenter', '.pokemon-card', function() {
@@ -374,6 +386,7 @@ function renderPrizeCardContainers() {
     for (let key in playerClass) {
         let whichPlayer = playerClass[key];
 
+        $(`.${whichPlayer} .prize-cards .body`).html('');
         if (whichPlayer == 'myself') {
             $(`.${whichPlayer} .prize-cards .body`).append(`
                 <div class="actions">
