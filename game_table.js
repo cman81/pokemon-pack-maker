@@ -62,8 +62,8 @@ $(function() {
 
             renderContainers([
                 'deck',
-                'hand-1',
-                'hand-2',
+                'hand 1',
+                'hand 2',
                 'discard',
                 'active pokemon',
                 'bench pokemon 1',
@@ -429,6 +429,7 @@ function renderPrizeCardContainers() {
             $(`.${whichPlayer} .prize-cards .body`).append(`
                 <div class="actions">
                     ${buttons.moveTop(whichPlayer, 'deck', 'prize-cards', 'Deal from deck')}
+                    ${buttons.moveTop(whichPlayer, 'prize-cards', 'hand-1', 'Take a prize card')}
                 </div>
             `);
         }
@@ -619,7 +620,7 @@ function renderCardGroup(whichPlayer, group) {
         count: 0
     };
 
-    if (groupData.count) {
+    if (groupData.count || groupData.count === 0) {
         $(`.${whichPlayer} .${group} .count`).html(groupData.count);
         return;
     }

@@ -5,10 +5,10 @@
 - collapse "pokemon" containers by default
 - drag and drop cards!
 - when a pokemon becomes asleep, paralyzed, or burned - deactivate the other 2
-- discard energy (or other cards) from a pokemon
+- automatically load decks if they have already been chosen
 
 ## Doing
-- retrieve prize cards
+- discard energy (or other cards) from a pokemon
 
 ## Done
 - flip a coin
@@ -21,3 +21,4 @@
 - switch pokemon between active and bench
 - draw a specific card from the deck into our hand
 - see the number cards in opponent's hand
+- retrieve prize cards
