@@ -36,6 +36,9 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.container.footer {
+    padding: 20px;
+}
 .card-wrapper {
     float: left;
     text-align: center;

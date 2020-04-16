@@ -27,7 +27,10 @@ var cardGroups = [
 var hoverIntentDelay = 400;
 var hoverTimeout;
 var pingInterval = 2000;
-var pingTimeout;
+var pingTimeout = setInterval(
+    () => { pingServerMessages(); },
+    pingInterval
+);
 
 $(function() {
     let initialGameId = randomizeGameId();
@@ -186,14 +189,16 @@ $(function() {
             if (pingTimeout) {
                 clearInterval(pingTimeout);
                 pingTimeout = false;
-                alert('Pinging is off');
+                alert('Pinging disabled.');
+                
                 return;
             }
 
-            pingTimeout = setInterval(() => {
-                pingServerMessages();
-            }, pingInterval);
-            alert('Pinging is on');
+            pingTimeout = setInterval(
+                () => { pingServerMessages(); },
+                pingInterval
+            );
+            alert('Pinging enabled.');
         }
 
         if (operation == 'swapCardGroups') {
@@ -648,6 +653,8 @@ function renderCardGroups(whichPlayer, groups) {
 }
 
 function pingServerMessages() {
+    if (!gameState.gameId) { return; }
+
     let apiEndpoint = apiHome + '/get_game_messages.php';
 
     return $.getJSON(
