@@ -64,15 +64,15 @@ $(function() {
                 'deck',
                 'hand 1',
                 'hand 2',
-                'discard',
                 'active pokemon',
                 'bench pokemon 1',
                 'bench pokemon 2',
                 'bench pokemon 3',
                 'bench pokemon 4',
                 'bench pokemon 5',
-                'prize cards',
                 'stadium',
+                'prize cards',
+                'discard',
                 'lost zone',
             ]);
 
@@ -512,6 +512,8 @@ function renderOtherCardGroupContainers() {
                         ${buttons.moveSpecificCard(whichPlayer, 'hand-1', group, 'Choose from Hand 1')}
                         ${buttons.tuck(whichPlayer, group, 'Tuck')}
                         ${buttons.moveAll(whichPlayer, group, 'discard', 'Discard all')}
+                        ${buttons.moveSpecificCard(whichPlayer, group, 'discard', 'Discard 1')}
+                        ${buttons.moveSpecificCard(whichPlayer, group, 'lost-zone', 'Send to Lost Zone')}
                     </div>
                 `);
             }

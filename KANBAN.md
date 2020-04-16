@@ -1,14 +1,13 @@
 # Kanban
 
 ## To Do
-- only show the top card in each "pokemon" stack by default. clicking the top card will reveal all the other cards in the stack
 - collapse "pokemon" containers by default
 - drag and drop cards!
 - when a pokemon becomes asleep, paralyzed, or burned - deactivate the other 2
 - automatically load decks if they have already been chosen
 
 ## Doing
-- discard energy (or other cards) from a pokemon
+- only show the top card in each "pokemon" stack by default. clicking the top card will reveal all the other cards in the stack
 
 ## Done
 - flip a coin
@@ -22,3 +21,4 @@
 - draw a specific card from the deck into our hand
 - see the number cards in opponent's hand
 - retrieve prize cards
+- discard energy (or other cards) from a pokemon
