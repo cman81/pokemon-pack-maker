@@ -6,10 +6,9 @@
 - drag and drop cards!
 - when a pokemon becomes asleep, paralyzed, or burned - deactivate the other 2
 - discard energy (or other cards) from a pokemon
-- retrieve prize cards
 
 ## Doing
-- see the number cards in opponent's hand
+- retrieve prize cards
 
 ## Done
 - flip a coin
@@ -21,3 +20,4 @@
 - figure out how to invoke a modal without a button click
 - switch pokemon between active and bench
 - draw a specific card from the deck into our hand
+- see the number cards in opponent's hand

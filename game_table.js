@@ -439,28 +439,41 @@ function renderPrizeCardContainers() {
 }
 
 function renderHandContainers() {
-    let playerClass = ['myself'];
+    let playerClass = ['myself', 'opponent'];
     for (let key in playerClass) {
         let whichPlayer = playerClass[key];
         for (let pos = 1; pos <= 2; pos++) {
             let cardGroup = `hand-${pos}`;
-            $(`.${whichPlayer} .${cardGroup} .body`).html(`
-                <div class="actions">
-                    ${buttons.moveTop(whichPlayer, 'deck', cardGroup, 'Draw 1')}
-                    ${buttons.moveAll(whichPlayer, cardGroup, 'deck', 'Return to deck')}
-                </div>
-                <div class="cards clearfix"></div>
-            `);
-
-            if (cardGroup = 'hand-2') {
-                $(`.${whichPlayer} .${cardGroup} .body .actions`).append(`
-                    ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Reveal and Keep 1', true)}
-                    ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Keep 1')}
-                    ${buttons.moveAll(whichPlayer, 'deck', cardGroup, 'Draw All')}
-                `);
-            }
+            renderHandContainer(whichPlayer, cardGroup);
         }
     }
+}
+
+function renderHandContainer(whichPlayer, cardGroup) {
+    $(`.${whichPlayer} .${cardGroup} .body`).html('');
+    if (whichPlayer == 'opponent') {
+        $(`.${whichPlayer} .${cardGroup} .body`).append(`
+                <div>Cards in hand: <span class="count">0</span></div> 
+        `);
+        
+        return;
+    }
+    $(`.${whichPlayer} .${cardGroup} .body`).append(`
+        <div class="actions">
+            ${buttons.moveTop(whichPlayer, 'deck', cardGroup, 'Draw 1')}
+            ${buttons.moveAll(whichPlayer, cardGroup, 'deck', 'Return to deck')}
+        </div>
+        <div class="count"></div>
+        <div class="cards clearfix"></div>
+    `);
+
+    if (cardGroup == 'hand-1') { return; }
+
+    $(`.${whichPlayer} .${cardGroup} .body .actions`).append(`
+        ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Reveal and Keep 1', true)}
+        ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Keep 1')}
+        ${buttons.moveAll(whichPlayer, 'deck', cardGroup, 'Draw All')}
+    `);
 }
 
 /**
@@ -606,12 +619,7 @@ function renderCardGroup(whichPlayer, group) {
         count: 0
     };
 
-    if (group == 'deck') {
-        $(`.${whichPlayer} .${group} .count`).html(groupData.count);
-        return;
-    }
-
-    if (group == 'prize-cards') {
+    if (groupData.count) {
         $(`.${whichPlayer} .${group} .count`).html(groupData.count);
         return;
     }
