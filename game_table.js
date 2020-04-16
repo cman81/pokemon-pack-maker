@@ -636,12 +636,29 @@ function renderCardGroup(whichPlayer, group) {
     for (let key in groupData.cards) {
         let cardIdx = groupData.cards[key];
         let img = deckImages[getPlayerId(whichPlayer)][cardIdx];
+
+        if (group.match('pokemon')) {
+            return renderPokemonCard(whichPlayer, group, img);
+        }
+
         $(`.${whichPlayer} .${group} .cards`).append(`
             <div class="card-wrapper">
                 <img src="sword and shield/${img}" class="pokemon-card front"/>
             </div>
         `);
     }
+}
+
+function renderPokemonCard(whichPlayer, group, imgSrc) {
+    $(`.${whichPlayer} .${group} .cards`).append(`
+        <div class="card-wrapper">
+            <button type="button" class="pokemon" data-toggle="modal"
+                data-target="#pokemonModal" data-operation="pokemonDetails"
+                data-group="${group}" data-player="${whichPlayer}">
+                <img src="sword and shield/${imgSrc}" class="pokemon-card front"/>
+            </button>
+        </div>
+    `);
 }
 
 function renderCardGroups(whichPlayer, groups) {

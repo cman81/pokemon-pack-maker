@@ -184,8 +184,6 @@ pokemonModal.gameMoveSpecificCard = function($modal, buttonData) {
     $modal.find('.modal-body').html(`<p>Which card do you want to move?</p>`);
     $modal.find('.modal-footer').html('');
 
-    console.log(buttonData);
-
     let whichPlayer = buttonData.whichPlayer;
     let playerId = getPlayerId(whichPlayer);
     let cards = gameState[playerId][buttonData.from].cards;
@@ -235,6 +233,35 @@ pokemonModal.revealOpponentCard = function($modal, buttonData) {
     $modal.find('.modal-footer').html(`
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
     `);
+}
 
+pokemonModal.pokemonDetails = function($modal, buttonData) {
+    $('.pokemon-card, #pokemonModal .deck-item img.hover').each(function() {
+        $(this).removeClass('hover');
+        clearTimeout(hoverTimeout);
+    });
 
+    $modal.find('.modal-title').html('Pokemon Details');
+    $modal.find('.modal-body').html(`
+        <p>Details for: ${buttonData.group}</p>
+        <div class="cards"></div>
+    `);
+    $modal.find('.modal-footer').html(`
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+    `);
+
+    let whichPlayer = buttonData.player;
+    let groupData = gameState[getPlayerId(whichPlayer)][buttonData.group] ?? {
+        cards: []
+    };
+    for (let key in groupData.cards) {
+        let cardIdx = groupData.cards[key];
+        let img = deckImages[getPlayerId(whichPlayer)][cardIdx];
+
+        $modal.find('.modal-body .cards').append(`
+            <div class="deck-item">
+                <img src="sword and shield/${img}" />
+            </div>
+        `);
+    }
 }
