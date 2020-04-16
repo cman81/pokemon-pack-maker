@@ -26,27 +26,6 @@ body {
     -o-transform:scale(4);
     transform:scale(4);
 }
-img.energy {
-    opacity: 0.3;
-}
-.pokemon-card.energy:hover {
-    -webkit-transform:scale(1.2);
-    -moz-transform:scale(1.2);
-    -o-transform:scale(1.2);
-    transform:scale(1.2);
-}
-img.common {
-    opacity: 0.6;
-}
-img.uncommon {
-    opacity: 0.8;
-}
-.pokemon-card.rare:hover {
-    -webkit-transform:scale(3);
-    -moz-transform:scale(3);
-    -o-transform:scale(3);
-    transform:scale(3);
-}
 .section {
     display: none;
 }
@@ -86,6 +65,21 @@ img.uncommon {
     float: left;
     margin-bottom: 15px;
 }
+#pokemonModal .deck-item {
+    text-align: center;
+    width: 190px;
+    float: left;
+    margin-bottom: 15px;
+}
+#pokemonModal .deck-item img.hover {
+    opacity: 1;
+    z-index: 9999;
+    -webkit-transform:scale(2.3);
+    -moz-transform:scale(2.3);
+    -o-transform:scale(2.3);
+    transform:scale(2.3);
+}
+
 .actions {
     margin-bottom: 7px;
 }

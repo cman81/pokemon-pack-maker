@@ -195,15 +195,34 @@ $(function() {
             }, pingInterval);
             alert('Pinging is on');
         }
+
+        if (operation == 'swapCardGroups') {
+            let whichPlayer = $(this).data('player');
+            let groupA = $(this).data('group-a');
+            let groupB = $(this).data('group-b');
+
+            sendGameMessage(
+                getPlayerId(whichPlayer),
+                'judge',
+                operation,
+                {
+                    groupA: groupA,
+                    groupB: groupB,
+                }
+            )
+            .then(function(groups) {
+                renderCardGroups(whichPlayer, groups);
+            });
+        }
     })
-    .on('mouseenter', '.pokemon-card', function() {
+    .on('mouseenter', '.pokemon-card, #pokemonModal .deck-item img', function() {
         // @see https://stackoverflow.com/a/15576031
         // @see https://stackoverflow.com/a/20078582
         hoverTimeout = setTimeout(() => {
             $(this).addClass('hover');
         }, hoverIntentDelay);
     })
-    .on('mouseleave', '.pokemon-card', function() {
+    .on('mouseleave', '.pokemon-card, #pokemonModal .deck-item img', function() {
         $(this).removeClass('hover');
         clearTimeout(hoverTimeout);
     });
@@ -343,6 +362,14 @@ var buttons = {
             </button>
         `;
     },
+    switchWithActive: function(whichPlayer, benchGroup) {
+        return `
+            <button type="button" class="btn btn-outline-primary btn-sm" data-operation="swapCardGroups"
+                data-player="${whichPlayer}" data-group-a="${benchGroup}" data-group-b="active-pokemon">
+                Switch with Active
+            </button>
+        `;
+    }
 };
 
 function renderContainers(labels) {
@@ -475,13 +502,19 @@ function renderOtherCardGroupContainers() {
 
             $groupBody.append(`<div class="cards clearfix"></div>`);
 
-            if (!group.match(/pokemon/)) {
+            if (!group.match('pokemon')) {
                 continue;
             }
 
             if (whichPlayer == 'myself' && group == 'active-pokemon') {
                 $groupBody.find('.actions').append(`
                     ${buttons.showPokemon(whichPlayer)}
+                `);
+            }
+
+            if (whichPlayer == 'myself' && group.match('bench-pokemon')) {
+                $groupBody.find('.actions').append(`
+                    ${buttons.switchWithActive(whichPlayer, group)}
                 `);
             }
 

@@ -13,6 +13,7 @@
         case 'moveAll': exit(json_encode(move_all($gameId, $from, $data)));
         case 'tuck': exit(json_encode(tuck_card($gameId, $from, $data)));
         case 'showPokemon': exit(json_encode(show_pokemon($gameId, $from)));
+        case 'swapCardGroups': exit(json_encode(swapCardGroups($gameId, $from, $data)));
     }
 
     function load_game_state($game_id, $player_id = FALSE) {
@@ -388,4 +389,24 @@
         $stmt->execute();
         $db->close();
         unset($db);
+    }
+
+    function swapCardGroups($game_id, $player_id, $data) {
+        $game_state = load_game_state($game_id);
+        $groupA = $data['groupA'];
+        $groupB = $data['groupB'];
+
+        $temp = $game_state[$player_id][$groupA];
+        $game_state[$player_id][$groupA] = $game_state[$player_id][$groupB];
+        $game_state[$player_id][$groupB] = $temp;
+        
+        save_game_state($game_id, $game_state);
+
+        update_opponent_card_group($game_state, $game_id, $player_id, $groupA);
+        update_opponent_card_group($game_state, $game_id, $player_id, $groupB);
+
+        return [
+            $groupA => render_card_group($game_state, $player_id, $groupA),
+            $groupB => render_card_group($game_state, $player_id, $groupB),
+        ];
     }
