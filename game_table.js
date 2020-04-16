@@ -446,7 +446,7 @@ function renderHandContainers() {
             let cardGroup = `hand-${pos}`;
             $(`.${whichPlayer} .${cardGroup} .body`).html(`
                 <div class="actions">
-                    ${buttons.moveTop(whichPlayer, 'deck', cardGroup, 'Deal from deck')}
+                    ${buttons.moveTop(whichPlayer, 'deck', cardGroup, 'Draw 1')}
                     ${buttons.moveAll(whichPlayer, cardGroup, 'deck', 'Return to deck')}
                 </div>
                 <div class="cards clearfix"></div>
@@ -454,7 +454,9 @@ function renderHandContainers() {
 
             if (cardGroup = 'hand-2') {
                 $(`.${whichPlayer} .${cardGroup} .body .actions`).append(`
-                    ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Reveal and Keep', true)}
+                    ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Reveal and Keep 1', true)}
+                    ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Keep 1')}
+                    ${buttons.moveAll(whichPlayer, 'deck', cardGroup, 'Draw All')}
                 `);
             }
         }
