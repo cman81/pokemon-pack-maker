@@ -230,6 +230,32 @@ $(function() {
     .on('mouseleave', '.pokemon-card, #pokemonModal .deck-item img', function() {
         $(this).removeClass('hover');
         clearTimeout(hoverTimeout);
+    })
+    .on('change', '.pokemon-stats input:checkbox', function() {
+        // do not apply to uncheck event
+        if (!$(this).prop("checked")) { return; }
+
+        // only apply to certain special conditions
+        let concernedValues = [
+            'asleep',
+            'paralyzed',
+            'confused',
+        ]
+        let checkboxVal = $(this).val();
+        if (!concernedValues.includes(checkboxVal)) { return; }
+
+        let checkBoxId = $(this).attr('id');
+        let idParts = checkBoxId.split('-');
+        idParts.pop();
+        let idPrefix = idParts.join('-');
+
+        for (let key in concernedValues) {
+            let value = concernedValues[key];
+
+            if (checkboxVal != value) {
+                $(`#${idPrefix}-${value}`).prop('checked', false);
+            }
+        }
     });
 });
 
