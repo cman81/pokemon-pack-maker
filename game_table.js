@@ -468,6 +468,8 @@ function renderHandContainer(whichPlayer, cardGroup) {
         <div class="actions">
             ${buttons.moveTop(whichPlayer, 'deck', cardGroup, 'Draw 1')}
             ${buttons.moveAll(whichPlayer, cardGroup, 'deck', 'Return to deck')}
+            ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'discard', 'Play a card (discard)')}
+            ${buttons.moveSpecificCard(whichPlayer, 'discard', cardGroup, 'Get from discard')}
         </div>
         <div class="count"></div>
         <div class="cards clearfix"></div>
@@ -514,7 +516,8 @@ function renderOtherCardGroupContainers() {
             if (whichPlayer == 'myself') {
                 $groupBody.append(`
                     <div class="actions">
-                        ${buttons.moveSpecificCard(whichPlayer, 'hand-1', group, 'Choose from Hand 1')}
+                        ${buttons.moveSpecificCard(whichPlayer, 'hand-1', group, 'Get from Hand 1')}
+                        ${buttons.moveSpecificCard(whichPlayer, 'discard', group, 'Get from Discard')}
                         ${buttons.tuck(whichPlayer, group, 'Tuck')}
                         ${buttons.moveAll(whichPlayer, group, 'discard', 'Discard all')}
                         ${buttons.moveSpecificCard(whichPlayer, group, 'discard', 'Discard 1')}
