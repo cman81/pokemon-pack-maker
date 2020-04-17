@@ -105,3 +105,13 @@ button.pokemon {
     border: 0;
     background-color: white;
 }
+
+.pokemon-item {
+    padding: 10px;
+    text-align: center;
+}
+.active-pokemon,
+.active-pokemon button {
+    background-color: #333366;
+    color: #ccc;
+}

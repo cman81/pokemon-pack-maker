@@ -5,6 +5,7 @@
 - drag and drop cards!
 - when a pokemon becomes asleep, paralyzed, or burned - deactivate the other 2
 - automatically load decks if they have already been chosen
+- return discarded cards back to hand or deck (hand 2?)
 
 ## Doing
 - only show the top card in each "pokemon" stack by default. clicking the top card will reveal all the other cards in the stack

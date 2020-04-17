@@ -67,12 +67,7 @@ $(function() {
                 'deck',
                 'hand 1',
                 'hand 2',
-                'active pokemon',
-                'bench pokemon 1',
-                'bench pokemon 2',
-                'bench pokemon 3',
-                'bench pokemon 4',
-                'bench pokemon 5',
+                'pokemon',
                 'stadium',
                 'prize cards',
                 'discard',
@@ -89,6 +84,7 @@ $(function() {
 
             renderDeckContainers();
             renderHandContainers();
+            renderPokemonGroupContainers();
             renderOtherCardGroupContainers();
             renderPrizeCardContainers();
 
@@ -485,8 +481,6 @@ function renderHandContainer(whichPlayer, cardGroup) {
 /**
  * "Other" card groups include the following:
  * - discard
- * - active pokemon
- * - bench pokemon (multiple)
  * - stadium
  * - lost zone
  */
@@ -494,12 +488,6 @@ function renderOtherCardGroupContainers() {
     let playerClass = ['myself', 'opponent'];
     let otherCardGroups = [
         'discard',
-        'active-pokemon',
-        'bench-pokemon-1',
-        'bench-pokemon-2',
-        'bench-pokemon-3',
-        'bench-pokemon-4',
-        'bench-pokemon-5',
         'stadium',
         'lost-zone'
     ];
@@ -524,24 +512,41 @@ function renderOtherCardGroupContainers() {
             }
 
             $groupBody.append(`<div class="cards clearfix"></div>`);
+        }
+    }
+}
 
-            if (!group.match('pokemon')) {
-                continue;
-            }
+function renderPokemonGroupContainers() {
+    let playerClass = ['myself', 'opponent'];
+    let cardGroups = [
+        'active-pokemon',
+        'bench-pokemon-1',
+        'bench-pokemon-2',
+        'bench-pokemon-3',
+        'bench-pokemon-4',
+        'bench-pokemon-5',
+    ];
 
-            if (whichPlayer == 'myself' && group == 'active-pokemon') {
-                $groupBody.find('.actions').append(`
-                    ${buttons.showPokemon(whichPlayer)}
-                `);
-            }
+    for (let key in playerClass) {
+        let whichPlayer = playerClass[key];
+        let $groupBody = $(`.${whichPlayer} .pokemon .body`);
+        $groupBody.html(``);
+    
+        for (let k in cardGroups) {
+            let group = cardGroups[k];
 
-            if (whichPlayer == 'myself' && group.match('bench-pokemon')) {
-                $groupBody.find('.actions').append(`
-                    ${buttons.switchWithActive(whichPlayer, group)}
-                `);
-            }
-
-            renderPokemonStatus($groupBody, whichPlayer, group);
+            $groupBody.append(`
+                <div class="${group} pokemon-item float-left border">
+                    <div class="cards clearfix">
+                        <div class="card-wrapper">
+                            <button type="button" class="pokemon">
+                                <img src="card-back.png" class="pokemon-card back"/>
+                            </button>
+                        </div>
+                    </div>
+                    Damage: <span class="count">0</span>
+                </div>
+            `);
         }
     }
 }
@@ -650,7 +655,7 @@ function renderCardGroup(whichPlayer, group) {
 }
 
 function renderPokemonCard(whichPlayer, group, imgSrc) {
-    $(`.${whichPlayer} .${group} .cards`).append(`
+    $(`.${whichPlayer} .${group} .cards`).html(`
         <div class="card-wrapper">
             <button type="button" class="pokemon" data-toggle="modal"
                 data-target="#pokemonModal" data-operation="pokemonDetails"

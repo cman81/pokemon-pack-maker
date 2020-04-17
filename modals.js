@@ -243,8 +243,10 @@ pokemonModal.pokemonDetails = function($modal, buttonData) {
 
     $modal.find('.modal-title').html('Pokemon Details');
     $modal.find('.modal-body').html(`
-        <p>Details for: ${buttonData.group}</p>
-        <div class="cards"></div>
+        <h5>Cards</h5>
+        <div class="cards clearfix"></div>
+        <h5>Damage</h5>
+        <h2>20 / 100 HP</h2>
     `);
     $modal.find('.modal-footer').html(`
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
