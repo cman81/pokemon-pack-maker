@@ -444,14 +444,25 @@ function renderDeckContainers() {
     for (let key in playerClass) {
         let whichPlayer = playerClass[key];
         $(`.${whichPlayer} .deck .body`).html(`
-            <div class="actions">
-                ${buttons.loadDeck(whichPlayer)}
-            </div>
+            <div class="actions"></div>
             <div>Cards in deck: <span class="count">0</span></div> 
         `);
 
         if (whichPlayer == 'myself') {
-            $(`.${whichPlayer} .deck .body .actions`).append(`${buttons.shuffle(whichPlayer, 'deck')}`);
+            $(`.${whichPlayer} .deck .body .actions`).append(`
+                <p>Deal to:</p>
+                <p>
+                    ${buttons.moveTop(whichPlayer, 'deck', 'hand-1', 'Hand 1')}
+                    ${buttons.moveTop(whichPlayer, 'deck', 'hand-2', 'Hand 2')}
+                    ${buttons.moveAll(whichPlayer, 'deck', 'hand-2', 'Hand 2 (All)')}
+                    ${buttons.moveTop(whichPlayer, 'deck', 'prize-cards', 'Prize Cards')}
+                </p>
+                <p>Other actions:</p>
+                <p>
+                    ${buttons.loadDeck(whichPlayer)}
+                    ${buttons.shuffle(whichPlayer, 'deck')}
+                </p>
+            `);
         }
     }
 }
@@ -465,8 +476,12 @@ function renderPrizeCardContainers() {
         if (whichPlayer == 'myself') {
             $(`.${whichPlayer} .prize-cards .body`).append(`
                 <div class="actions">
-                    ${buttons.moveTop(whichPlayer, 'deck', 'prize-cards', 'Deal from deck')}
-                    ${buttons.moveTop(whichPlayer, 'prize-cards', 'hand-1', 'Take a prize card')}
+                    <p>Deal to:</p>
+                    <p>
+                        ${buttons.moveTop(whichPlayer, 'prize-cards', 'hand-1', 'Hand 1')}
+                        ${buttons.moveTop(whichPlayer, 'prize-cards', 'deck', 'Deck')}
+                        ${buttons.moveTop(whichPlayer, 'prize-cards', 'discard', 'Discard')}
+                    </p>
                 </div>
             `);
         }
@@ -498,10 +513,26 @@ function renderHandContainer(whichPlayer, cardGroup) {
     }
     $(`.${whichPlayer} .${cardGroup} .body`).append(`
         <div class="actions">
-            ${buttons.moveTop(whichPlayer, 'deck', cardGroup, 'Draw 1')}
-            ${buttons.moveAll(whichPlayer, cardGroup, 'deck', 'Return to deck')}
-            ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'discard', 'Play a card (discard)')}
-            ${buttons.moveSpecificCard(whichPlayer, 'discard', cardGroup, 'Get from discard')}
+            <p>Play to:</p>
+            <p>
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'active-pokemon', 'Active')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'bench-pokemon-1', 'Bench 1')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'bench-pokemon-2', 'Bench 2')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'bench-pokemon-3', 'Bench 3')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'bench-pokemon-4', 'Bench 4')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'bench-pokemon-5', 'Bench 5')}
+            </p>
+            <p>
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'discard', 'Discard')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'stadium', 'Stadium')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'lost-zone', 'Lost Zone')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'deck', 'Deck')}
+                ${buttons.moveSpecificCard(whichPlayer, cardGroup, 'prize-cards', 'Prize Cards')}
+            </p>
+            <p>Other Actions:</p>
+            <p class="other">
+                ${buttons.moveAll(whichPlayer, cardGroup, 'deck', 'Return All > Deck')}
+            </p>
         </div>
         <div class="count"></div>
         <div class="cards clearfix"></div>
@@ -509,10 +540,9 @@ function renderHandContainer(whichPlayer, cardGroup) {
 
     if (cardGroup == 'hand-1') { return; }
 
-    $(`.${whichPlayer} .${cardGroup} .body .actions`).append(`
+    $(`.${whichPlayer} .${cardGroup} .body .actions .other`).append(`
         ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Reveal and Keep 1', true)}
         ${buttons.moveSpecificCard(whichPlayer, 'hand-2', 'hand-1', 'Keep 1')}
-        ${buttons.moveAll(whichPlayer, 'deck', cardGroup, 'Draw All')}
     `);
 }
 
@@ -548,13 +578,36 @@ function renderOtherCardGroupContainers() {
             if (whichPlayer == 'myself') {
                 $groupBody.append(`
                     <div class="actions">
-                        ${buttons.moveSpecificCard(whichPlayer, 'hand-1', group, 'Get from Hand 1')}
-                        ${buttons.moveSpecificCard(whichPlayer, 'discard', group, 'Get from Discard')}
+                        <p>Move to:</p>
+                    </div>
+                `);
+
+                if (!group.match('pokemon')) {
+                    $groupBody.find('.actions').append(`
+                        <p>
+                            ${buttons.moveSpecificCard(whichPlayer, group, 'active-pokemon', 'Active')}
+                            ${buttons.moveSpecificCard(whichPlayer, group, 'bench-pokemon-1', 'Bench 1')}
+                            ${buttons.moveSpecificCard(whichPlayer, group, 'bench-pokemon-2', 'Bench 2')}
+                            ${buttons.moveSpecificCard(whichPlayer, group, 'bench-pokemon-3', 'Bench 3')}
+                            ${buttons.moveSpecificCard(whichPlayer, group, 'bench-pokemon-4', 'Bench 4')}
+                            ${buttons.moveSpecificCard(whichPlayer, group, 'bench-pokemon-5', 'Bench 5')}
+                        </p>
+                    `);
+                }
+
+                $groupBody.find('.actions').append(`
+                    <p>
+                        ${buttons.moveSpecificCard(whichPlayer, group, 'discard', 'Discard')}
+                        ${buttons.moveSpecificCard(whichPlayer, group, 'stadium', 'Stadium')}
+                        ${buttons.moveSpecificCard(whichPlayer, group, 'lost-zone', 'Lost Zone')}
+                        ${buttons.moveSpecificCard(whichPlayer, group, 'deck', 'Deck')}
+                        ${buttons.moveSpecificCard(whichPlayer, group, 'prize-cards', 'Prize Cards')}
+                    </p>
+                    <p>Other actions:</p>
+                    <p class="other">
                         ${buttons.tuck(whichPlayer, group, 'Tuck')}
                         ${buttons.moveAll(whichPlayer, group, 'discard', 'Discard all')}
-                        ${buttons.moveSpecificCard(whichPlayer, group, 'discard', 'Discard 1')}
-                        ${buttons.moveSpecificCard(whichPlayer, group, 'lost-zone', 'Send to Lost Zone')}
-                    </div>
+                    </p>
                 `);
             }
 
@@ -565,13 +618,13 @@ function renderOtherCardGroupContainers() {
             }
 
             if (whichPlayer == 'myself' && group == 'active-pokemon') {
-                $groupBody.find('.actions').append(`
+                $groupBody.find('.actions .other').append(`
                     ${buttons.showPokemon(whichPlayer)}
                 `);
             }
 
             if (whichPlayer == 'myself' && group.match('bench-pokemon')) {
-                $groupBody.find('.actions').append(`
+                $groupBody.find('.actions .other').append(`
                     ${buttons.switchWithActive(whichPlayer, group)}
                 `);
             }
@@ -625,6 +678,9 @@ function renderPokemonStatus($groupBody, whichPlayer, group) {
             let damage = ui.values[0] * 10;
             let total_hp = ui.values[1] * 10;
             $sliderText.val(`${damage} / ${total_hp} HP`);
+        },
+        change: function(event, ui) {
+
         }
     });
     

@@ -1,7 +1,6 @@
 # Kanban
 
 ## To Do
-- store pokemon status when someone changes it, i.e.: damage, conditions
 - collapse "pokemon" containers by default
 - when a player adds their first card to a pokemon stack, prompt for HP
 - add an 'Evolve' action which plays a card to a pokemon stack, then prompts for HP
@@ -10,7 +9,7 @@
 - drag and drop cards!
 
 ## Doing
-- for evolved pokemon, hide the lower levels, i.e.: basic. clicking the top card will reveal all cards in the stack
+- store pokemon status when someone changes it, i.e.: damage, conditions
 
 ## Done
 - flip a coin
@@ -28,3 +27,4 @@
 - return discarded cards back to hand or deck (hand 2?)
 - when a pokemon becomes asleep, paralyzed, or burned - deactivate the other 2
 - automatically load decks if they have already been chosen
+- for evolved pokemon, hide the lower levels, i.e.: basic. clicking the top card will reveal all cards in the stack
