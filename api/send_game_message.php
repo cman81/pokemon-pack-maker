@@ -191,6 +191,7 @@
         $to = $data['to'];
 
         $this_card = array_pop($game_state[$player_id][$from]['cards']);
+        if (!$this_card) { return FALSE; }
         $game_state[$player_id][$to]['cards'][] = $this_card;
 
         game_log(

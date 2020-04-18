@@ -131,6 +131,7 @@ $(function() {
                 }
             )
             .then(function(groups) {
+                if (!groups) { return; }
                 renderCardGroups(whichPlayer, groups);
             });
         }
