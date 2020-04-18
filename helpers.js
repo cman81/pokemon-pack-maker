@@ -1,4 +1,4 @@
-var apiHome = 'http://localhost:8000/api';
+var apiHome = 'api';
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
