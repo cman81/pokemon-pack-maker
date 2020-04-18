@@ -59,9 +59,7 @@ body {
     background-color: #1A237E;
     color: #ccc;
 }
-#pokemonModal img {
-    width: 160px;
-}
+#pokemonModal img { width: 160px; }
 #pokemonModal .deck-item {
     text-align: center;
     width: 190px;
@@ -90,18 +88,28 @@ body {
     transform:scale(2.3);
 }
 
-.actions {
-    margin-bottom: 7px;
-}
+.actions { margin-bottom: 7px; }
 .slider {
     padding: 20px;
     margin: 5px 20px 10px;
 }
-.slider.ui-slider .ui-slider-handle {
-    height: 3em;
-}
+.slider.ui-slider .ui-slider-handle { height: 3em; }
 
 button.pokemon {
     border: 0;
     background-color: white;
 }
+
+.pokemon-top { float: none; }
+.pokemon-top img.pokemon-card {
+    opacity: 1;
+    width: 160px;
+}
+.pokemon-top img.pokemon-card.hover {
+    -webkit-transform:scale(2.5);
+    -moz-transform:scale(2.5);
+    -o-transform:scale(2.5);
+    transform:scale(2.5);
+}
+.pokemon-attachment img.pokemon-card { opacity: 0.5; }
+.pokemon-attachment img.pokemon-card.hover { opacity: 1; }
