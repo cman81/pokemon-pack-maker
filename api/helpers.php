@@ -108,12 +108,14 @@ function initialize_game_state() {
     $game_state = [
         'isPlayer1sTurn' => flip_coin(),
         'player1' => [
+            'collection_name' => '',
             'is_pokemon_hidden' => TRUE,
             'deck' => [
                 'cards' => $player1_deck,
             ],
         ],
         'player2' => [
+            'collection_name' => '',
             'is_pokemon_hidden' => TRUE,
             'deck' => [
                 'cards' => $player2_deck,

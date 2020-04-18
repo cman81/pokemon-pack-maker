@@ -164,18 +164,22 @@ pokemonModal.gameLoadDeck = function($modal, buttonData) {
     $('#pokemonModal')
         .off('click', '.modal-body img')
         .on('click', '.modal-body img', function() {
-            let key = $(this).parent().index() - 1;
-            loadCollection(battleDecks[key].collectionName).then(function() {
-                const whichPlayer = buttonData.player;
-                deckImages[getPlayerId(whichPlayer)] = expandDeck(loadedBattleDeck);
-
-                for (let key in cardGroups) {
-                    let cardGroup = cardGroups[key];
-                    renderCardGroup(whichPlayer, cardGroup);
-                }
-                
-                alert('Your deck has been loaded.');
-            });
+            const key = $(this).parent().index() - 1;
+            const thisCollectionName = battleDecks[key].collectionName;
+            const whichPlayer = buttonData.player;
+            
+            sendGameMessage(
+                getPlayerId(whichPlayer),
+                'judge',
+                'useDeck',
+                { collectionName: thisCollectionName }
+            )
+                .then(function(collectionName) {
+                    return loadCollection(collectionName)
+                })
+                .then(function(compressedCardCollection) {
+                    unpackCardCollection('myself', thisCollectionName, compressedCardCollection);
+                });
         });
 };
 

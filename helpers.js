@@ -69,12 +69,14 @@ function sellExtras($thisImg) {
 }
 
 function loadCollection(collectionId) {
-    var apiEndpoint = apiHome + '/load_collection.php';
+    const apiEndpoint = apiHome + '/load_collection.php';
     return $.getJSON(
         apiEndpoint,
         {collectionId: collectionId},
         function(data) {
             loadedBattleDeck = data;
+
+            return loadedBattleDeck;
         }
     );
 }

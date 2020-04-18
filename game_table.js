@@ -52,16 +52,22 @@ $(function() {
 
             gameState.gameId = $('#game-id').val();
 
-            sendGameMessage(
-                getPlayerId('myself'),
-                'judge',
-                'load_game',
-                gameState.gameId
-            )
-            .then(function(data) {
-                gameState[getPlayerId('myself')] = data[getPlayerId('myself')];
-                gameState[getPlayerId('opponent')] = data[getPlayerId('opponent')];
-            });
+            function initializeMyCollection() {
+                const collectionName = gameState[getPlayerId('myself')]['collection_name'];
+                if (!collectionName) { return; }
+
+                loadCollection(collectionName)
+                    .then(function(compressedCardCollection) {
+                        unpackCardCollection('myself', collectionName, compressedCardCollection);
+                    });
+            };
+
+            sendGameMessage(getPlayerId('myself'), 'judge', 'load_game', gameState.gameId)
+                .then(function(data) {
+                    gameState[getPlayerId('myself')] = data[getPlayerId('myself')];
+                    gameState[getPlayerId('opponent')] = data[getPlayerId('opponent')];
+                })
+                .then(initializeMyCollection);
 
             renderContainers([
                 'deck',
@@ -743,4 +749,23 @@ function processServerMessage(message) {
         
         return;
     }
+
+    if (message.type == 'setOpponentDeck') {
+        const collectionName = message.data;
+        loadCollection(collectionName)
+            .then(function(compressedCardCollection) {
+                unpackCardCollection('opponent', collectionName, compressedCardCollection);
+            });
+    }
 }
+
+function unpackCardCollection(whichPlayer, collectionName, compressedCardCollection) {
+    deckImages[getPlayerId(whichPlayer)] = expandDeck(compressedCardCollection);
+
+    for (let key in cardGroups) {
+        const cardGroup = cardGroups[key];
+        renderCardGroup(whichPlayer, cardGroup);
+    }
+
+    alert(`The deck "${collectionName}" has been loaded for ${getPlayerId(whichPlayer)}`);
+};

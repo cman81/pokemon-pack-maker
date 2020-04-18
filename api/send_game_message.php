@@ -14,6 +14,7 @@
         case 'tuck': exit(json_encode(tuck_card($gameId, $from, $data)));
         case 'showPokemon': exit(json_encode(show_pokemon($gameId, $from)));
         case 'swapCardGroups': exit(json_encode(swapCardGroups($gameId, $from, $data)));
+        case 'useDeck': exit(json_encode(use_deck($gameId, $from, $data)));
     }
 
     function load_game_state($game_id, $player_id = FALSE) {
@@ -43,9 +44,11 @@
         $partial_game_state = [
             'player1' => [
                 'is_pokemon_hidden' => $game_state['player1']['is_pokemon_hidden'],
+                'collection_name' => $game_state['player1']['collection_name'],
             ],
             'player2' => [
                 'is_pokemon_hidden' => $game_state['player2']['is_pokemon_hidden'],
+                'collection_name' => $game_state['player2']['collection_name'],
             ],
         ];
 
@@ -409,4 +412,23 @@
             $groupA => render_card_group($game_state, $player_id, $groupA),
             $groupB => render_card_group($game_state, $player_id, $groupB),
         ];
+    }
+
+    function use_deck($game_id, $my_player_id, $data) {
+        $game_state = load_game_state($game_id);
+        $collection_name = $data['collectionName'];
+
+        $game_state[$my_player_id]['collection_name'] = $collection_name;
+
+        save_game_state($game_id, $game_state);
+
+        enqueue_game_message(
+            $game_id,
+            'judge',
+            get_opponent_player_id($my_player_id),
+            'setOpponentDeck',
+            $collection_name
+        );
+
+        return $collection_name;
     }
