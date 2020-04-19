@@ -52,14 +52,18 @@ $(function() {
 
             gameState.gameId = $('#game-id').val();
 
-            function initializeMyCollection() {
-                const collectionName = gameState[getPlayerId('myself')]['collection_name'];
-                if (!collectionName) { return; }
-
-                loadCollection(collectionName)
-                    .then(function(compressedCardCollection) {
-                        unpackCardCollection('myself', collectionName, compressedCardCollection);
-                    });
+            function initializePlayerCollections() {
+                const whichPlayers = ['myself', 'opponent'];
+                for (let key in whichPlayers) {
+                    const whichPlayer = whichPlayers[key];
+                    const collectionName = gameState[getPlayerId(whichPlayer)]['collection_name'];
+                    if (!collectionName) { return; }
+    
+                    loadCollection(collectionName)
+                        .then(function(compressedCardCollection) {
+                            unpackCardCollection(whichPlayer, collectionName, compressedCardCollection);
+                        });
+                }
             };
 
             sendGameMessage(getPlayerId('myself'), 'judge', 'load_game', gameState.gameId)
@@ -67,7 +71,7 @@ $(function() {
                     gameState[getPlayerId('myself')] = data[getPlayerId('myself')];
                     gameState[getPlayerId('opponent')] = data[getPlayerId('opponent')];
                 })
-                .then(initializeMyCollection);
+                .then(initializePlayerCollections);
 
             renderContainers([
                 'deck',
@@ -810,6 +814,8 @@ function processServerMessage(message) {
 }
 
 function unpackCardCollection(whichPlayer, collectionName, compressedCardCollection) {
+    if (deckImages[getPlayerId(whichPlayer)]) { return; }
+    
     deckImages[getPlayerId(whichPlayer)] = expandDeck(compressedCardCollection);
 
     for (let key in cardGroups) {
