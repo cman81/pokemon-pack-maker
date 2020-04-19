@@ -58,6 +58,7 @@ img.uncommon {
     float: left;
     text-align: center;
     padding-bottom: 10px;
+    line-height: 42px;
 }
 .card-wrapper.rare {
     background-color: #CFD8DC;
@@ -74,12 +75,12 @@ img.uncommon {
     background-color: #1A237E;
     color: #ccc;
 }
-#pokemonModal img {
-    width: 160px;
-}
+#pokemonModal img { width: 160px; }
 #pokemonModal .deck-item {
     text-align: center;
     width: 190px;
     float: left;
     margin-bottom: 15px;
 }
+.expansions img.selected { border: 1px solid #990000; }
+.symbol img { height: 40px; }

@@ -1,5 +1,35 @@
 var apiHome = 'api';
 
+(function(window){
+	window.htmlentities = {
+		/**
+		 * Converts a string to its html characters completely.
+         * @see https://ourcodeworld.com/articles/read/188/encode-and-decode-html-entities-using-pure-javascript
+		 *
+		 * @param {String} str String with unescaped HTML characters
+		 **/
+		encode : function(str) {
+			var buf = [];
+			
+			for (var i=str.length-1;i>=0;i--) {
+				buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
+			}
+			
+			return buf.join('');
+		},
+		/**
+		 * Converts an html characterSet into its original character.
+		 *
+		 * @param {String} str htmlSet entities
+		 **/
+		decode : function(str) {
+			return str.replace(/&#(\d+);/g, function(match, dec) {
+				return String.fromCharCode(dec);
+			});
+		}
+	};
+})(window);
+
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -188,9 +218,14 @@ function saveCollection(pack, collectionName, isReplace, isNew, boxArt) {
     }, 'json');
 }
 
-function loadCards(expansionSet, energyExpansion) {
-    energyExpansion = energyExpansion ?? 'SWSH';
+function loadCards(expansion) {
+    const expansionSet = expansions[expansion].expansionSet ?? 'SWSH1';
+    const energyExpansion = expansions[expansion].energy ?? 'SWSH';
     const apiEndpoint = apiHome + '/load_cards.php';
+
+    $('.top.container').find('.expansions img').removeClass('selected');
+    $(`#expansion-${expansionSet}`).addClass('selected');
+
     $.getJSON(
         apiEndpoint,
         {

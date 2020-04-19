@@ -12,10 +12,21 @@ var energyCards = [];
 var commonCards = [];
 var uncommonCards = [];
 var rareCards = {};
+
+var expansions = {
+    'SWSH1': {
+        name: 'Sword & Shield',
+        expansionSet: 'SWSH1',
+        energy: 'SWSH'
+    },
+    'SM12': {
+        name: 'Cosmic Eclipse',
+        expansionSet: 'SM12',
+        energy: 'SMb'
+    },
+};
   
 $(document).ready(function() {
-    loadCards('SSH');
-
     $('#open-pack').click(function() {
         activateSection('pack');
         if (wallet < 4) {
@@ -112,4 +123,22 @@ $(document).ready(function() {
         updateDeckStats();
         renderCards(loadedBattleDeck, 0, '#battle-deck');
     });
+
+    $('.expansions').on('click', 'img', function() {
+        loadCards($(this).data('expansion'));
+    });
+
+    for (let key in expansions) {
+        const value = expansions[key];
+        $('.top.container').find('.expansions').append(`
+            <img
+                src="logos/${value.expansionSet}_Symbol.png"
+                id="expansion-${value.expansionSet}"
+                title="${htmlentities.encode(value.name)}"
+                data-expansion="${value.expansionSet}"
+            />
+        `);
+    }
+
+    loadCards('SWSH1');
 });
