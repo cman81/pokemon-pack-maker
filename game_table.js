@@ -677,11 +677,12 @@ function renderPokemonStatus($groupBody, whichPlayer, group) {
     $sliderDiv.slider({
         range: true,
         min: 0,
-        max: 40,
+        max: 400,
+        step: 10,
         values: [0, 0],
         slide: function (event, ui) {
-            let damage = ui.values[0] * 10;
-            let total_hp = ui.values[1] * 10;
+            let damage = ui.values[0];
+            let total_hp = ui.values[1];
             $sliderText.val(`${damage} / ${total_hp} HP`);
         },
     });
@@ -689,8 +690,8 @@ function renderPokemonStatus($groupBody, whichPlayer, group) {
         damageSliderChangeCallback(ui, whichPlayer, group);
     });
     
-    let damage = $sliderDiv.slider("values", 0) * 10;
-    let total_hp = $sliderDiv.slider("values", 1) * 10;
+    let damage = $sliderDiv.slider("values", 0);
+    let total_hp = $sliderDiv.slider("values", 1);
     $sliderText.val(`${damage} / ${total_hp} HP`);
 }
 
@@ -702,8 +703,8 @@ function damageSliderChangeCallback(ui, whichPlayer, group) {
         {
             targetPlayerId: getPlayerId(whichPlayer),
             cardGroup: group,
-            damage: ui.values[0] * 10,
-            hp: ui.values[1] * 10,
+            damage: ui.values[0],
+            hp: ui.values[1],
         }
     )
 };
@@ -851,8 +852,8 @@ function processServerMessage(message) {
 
         const $sliderDiv = $(`#${whichPlayer}-${cardGroup}-damage-hp-range`);
         $sliderDiv.off('slidechange');
-        $sliderDiv.slider("values", 0, Math.round(damage / 10));
-        $sliderDiv.slider("values", 1, Math.round(hp / 10));
+        $sliderDiv.slider("values", 0, damage);
+        $sliderDiv.slider("values", 1, hp);
         $sliderDiv.on('slidechange', function(event, ui) {
             damageSliderChangeCallback(ui, whichPlayer, cardGroup);
         });
