@@ -10,6 +10,7 @@
 
 ## Doing
 - store pokemon status to the DB when someone changes it, i.e.: damage, conditions
+- add a new expansion/set of cards to collect!
 
 ## Done
 - flip a coin

@@ -56,7 +56,7 @@ function load_collection($collection_id) {
 
     $collection = [];
     $sql = "
-        SELECT ccm.collection_id, ccm.card, c.rarity, c.market_value
+        SELECT ccm.collection_id, ccm.card, c.rarity, c.market_value, c.expansion_set, c.img_src
         FROM card_collection_map ccm
         INNER JOIN cards c ON c.card_id = ccm.card
         WHERE ccm.collection_id = :collection_id
@@ -80,10 +80,12 @@ function load_collection($collection_id) {
 
         // this card is a unique
         $collection[$key] = [
-            'img' => $row['card'],
+            'cardId' => $row['card'],
             'rarity' => get_friendly_rarity_name($row['rarity']),
             'quantity' => 1,
             'marketValue' => $row['market_value'] ?? 0,
+            'expansionSet' => $row['expansion_set'],
+            'imgSrc' => $row['img_src'],
         ];
     }
 

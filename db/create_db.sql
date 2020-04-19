@@ -19,6 +19,11 @@ CREATE TABLE IF NOT EXISTS "cards" (
 	"rarity"	TEXT,
 	"expansion_set"	TEXT,
 	"market_value"	REAL,
+	"series"	TEXT,
+	"set_code"	TEXT,
+	"card_name"	TEXT,
+	"type"	TEXT,
+	"img_src"	TEXT,
 	PRIMARY KEY("card_id")
 );
 DROP TABLE IF EXISTS "profiles";

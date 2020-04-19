@@ -40,7 +40,7 @@
 
             // passing values to the parameters
             $stmt->bindValue(':collection_id', $_POST['collectionId']);
-            $stmt->bindValue(':card', $this_card['img']);
+            $stmt->bindValue(':card', $this_card['cardId']);
 
             // execute the update statement
             if ($stmt->execute()) {

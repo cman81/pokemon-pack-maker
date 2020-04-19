@@ -1,0 +1,497 @@
+card_id,rarity,expansion_set,market_value,series,set_code,card_name,type,img_src
+en-US-SWSH-Energy-001-grass-energy.jpg,00 energy,SWSH,,SWSH,,Grass Energy,energy,en-US-SWSH-Energy-001-grass-energy.jpg
+en-US-SWSH-Energy-002-fire-energy.jpg,00 energy,SWSH,,SWSH,,Fire Energy,energy,en-US-SWSH-Energy-002-fire-energy.jpg
+en-US-SWSH-Energy-003-water-energy.jpg,00 energy,SWSH,,SWSH,,Water Energy,energy,en-US-SWSH-Energy-003-water-energy.jpg
+en-US-SWSH-Energy-004-lightning-energy.jpg,00 energy,SWSH,,SWSH,,Lightning Energy,energy,en-US-SWSH-Energy-004-lightning-energy.jpg
+en-US-SWSH-Energy-005-psychic-energy.jpg,00 energy,SWSH,,SWSH,,Psychic Energy,energy,en-US-SWSH-Energy-005-psychic-energy.jpg
+en-US-SWSH-Energy-006-fighting-energy.jpg,00 energy,SWSH,,SWSH,,Fighting Energy,energy,en-US-SWSH-Energy-006-fighting-energy.jpg
+en-US-SWSH-Energy-007-darkness-energy.jpg,00 energy,SWSH,,SWSH,,Darkness Energy,energy,en-US-SWSH-Energy-007-darkness-energy.jpg
+en-US-SWSH-Energy-008-metal-energy.jpg,00 energy,SWSH,,SWSH,,Metal Energy,energy,en-US-SWSH-Energy-008-metal-energy.jpg
+en-US-SWSH-Energy-009-fairy-energy.jpg,00 energy,SWSH,,SWSH,,Fairy Energy,energy,en-US-SWSH-Energy-009-fairy-energy.jpg
+en-US-SWSH1-001-celebi-v.jpg,04 rare holo,SWSH1,1.65,SWSH,SSH,Celebi V,pokemon,en-US-SWSH1-001-celebi-v.jpg
+en-US-SWSH1-002-roselia.jpg,01 common,SWSH1,0.04,SWSH,SSH,Roselia,pokemon,en-US-SWSH1-002-roselia.jpg
+en-US-SWSH1-003-roselia.jpg,01 common,SWSH1,0.02,SWSH,SSH,Roselia,pokemon,en-US-SWSH1-003-roselia.jpg
+en-US-SWSH1-004-roserade.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Roserade,pokemon,en-US-SWSH1-004-roserade.jpg
+en-US-SWSH1-005-cottonee.jpg,01 common,SWSH1,0.02,SWSH,SSH,Cottonee,pokemon,en-US-SWSH1-005-cottonee.jpg
+en-US-SWSH1-006-whimsicott.jpg,03 rare,SWSH1,0.07,SWSH,SSH,Whimsicott,pokemon,en-US-SWSH1-006-whimsicott.jpg
+en-US-SWSH1-007-maractus.jpg,01 common,SWSH1,0.04,SWSH,SSH,Maractus,pokemon,en-US-SWSH1-007-maractus.jpg
+en-US-SWSH1-008-durant.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Durant,pokemon,en-US-SWSH1-008-durant.jpg
+en-US-SWSH1-009-dhelmise-v.jpg,04 rare holo,SWSH1,1.5,SWSH,SSH,Dhelmise V,pokemon,en-US-SWSH1-009-dhelmise-v.jpg
+en-US-SWSH1-010-grookey.jpg,01 common,SWSH1,0.01,SWSH,SSH,Grookey,pokemon,en-US-SWSH1-010-grookey.jpg
+en-US-SWSH1-011-grookey.jpg,01 common,SWSH1,0.03,SWSH,SSH,Grookey,pokemon,en-US-SWSH1-011-grookey.jpg
+en-US-SWSH1-012-thwackey.jpg,02 uncommon,SWSH1,0.03,SWSH,SSH,Thwackey,pokemon,en-US-SWSH1-012-thwackey.jpg
+en-US-SWSH1-013-thwackey.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Thwackey,pokemon,en-US-SWSH1-013-thwackey.jpg
+en-US-SWSH1-014-rillaboom.jpg,04 rare holo,SWSH1,0.23,SWSH,SSH,Rillaboom,pokemon,en-US-SWSH1-014-rillaboom.jpg
+en-US-SWSH1-015-rillaboom.jpg,03 rare,SWSH1,0.12,SWSH,SSH,Rillaboom,pokemon,en-US-SWSH1-015-rillaboom.jpg
+en-US-SWSH1-016-blipbug.jpg,01 common,SWSH1,0.04,SWSH,SSH,Blipbug,pokemon,en-US-SWSH1-016-blipbug.jpg
+en-US-SWSH1-017-blipbug.jpg,01 common,SWSH1,0.02,SWSH,SSH,Blipbug,pokemon,en-US-SWSH1-017-blipbug.jpg
+en-US-SWSH1-018-dottler.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Dottler,pokemon,en-US-SWSH1-018-dottler.jpg
+en-US-SWSH1-019-orbeetle.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Orbeetle,pokemon,en-US-SWSH1-019-orbeetle.jpg
+en-US-SWSH1-020-gossifleur.jpg,01 common,SWSH1,0.03,SWSH,SSH,Gossifleur,pokemon,en-US-SWSH1-020-gossifleur.jpg
+en-US-SWSH1-021-eldegoss.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Eldegoss,pokemon,en-US-SWSH1-021-eldegoss.jpg
+en-US-SWSH1-022-vulpix-1.jpg,01 common,SWSH1,0.04,SWSH,SSH,Vulpix,pokemon,en-US-SWSH1-022-vulpix-1.jpg
+en-US-SWSH1-023-ninetales.jpg,03 rare,SWSH1,0.09,SWSH,SSH,Ninetales,pokemon,en-US-SWSH1-023-ninetales.jpg
+en-US-SWSH1-024-torkoal-v.jpg,04 rare holo,SWSH1,1.69,SWSH,SSH,Torkoal V,pokemon,en-US-SWSH1-024-torkoal-v.jpg
+en-US-SWSH1-025-victini-v.jpg,04 rare holo,SWSH1,2.19,SWSH,SSH,Victini V,pokemon,en-US-SWSH1-025-victini-v.jpg
+en-US-SWSH1-026-heatmor.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Heatmor,pokemon,en-US-SWSH1-026-heatmor.jpg
+en-US-SWSH1-027-salandit.jpg,01 common,SWSH1,0.03,SWSH,SSH,Salandit,pokemon,en-US-SWSH1-027-salandit.jpg
+en-US-SWSH1-028-salazzle.jpg,02 uncommon,SWSH1,0.03,SWSH,SSH,Salazzle,pokemon,en-US-SWSH1-028-salazzle.jpg
+en-US-SWSH1-029-turtonator.jpg,03 rare,SWSH1,0.12,SWSH,SSH,Turtonator,pokemon,en-US-SWSH1-029-turtonator.jpg
+en-US-SWSH1-030-scorbunny.jpg,01 common,SWSH1,0.03,SWSH,SSH,Scorbunny,pokemon,en-US-SWSH1-030-scorbunny.jpg
+en-US-SWSH1-031-scorbunny.png,01 common,SWSH1,0.03,SWSH,SSH,Scorbunny,pokemon,en-US-SWSH1-031-scorbunny.png
+en-US-SWSH1-032-raboot.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Raboot,pokemon,en-US-SWSH1-032-raboot.jpg
+en-US-SWSH1-033-raboot.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Raboot,pokemon,en-US-SWSH1-033-raboot.jpg
+en-US-SWSH1-034-cinderace.jpg,04 rare holo,SWSH1,0.22,SWSH,SSH,Cinderace,pokemon,en-US-SWSH1-034-cinderace.jpg
+en-US-SWSH1-035-cinderace.jpg,04 rare holo,SWSH1,0.13,SWSH,SSH,Cinderace,pokemon,en-US-SWSH1-035-cinderace.jpg
+en-US-SWSH1-036-cinderace.jpg,03 rare,SWSH1,0.1,SWSH,SSH,Cinderace,pokemon,en-US-SWSH1-036-cinderace.jpg
+en-US-SWSH1-037-sizzlipede.jpg,01 common,SWSH1,0.02,SWSH,SSH,Sizzlipede,pokemon,en-US-SWSH1-037-sizzlipede.jpg
+en-US-SWSH1-038-sizzlipede.jpg,01 common,SWSH1,0.01,SWSH,SSH,Sizzlipede,pokemon,en-US-SWSH1-038-sizzlipede.jpg
+en-US-SWSH1-039-centiskorch.jpg,03 rare,SWSH1,0.1,SWSH,SSH,Centiskorch,pokemon,en-US-SWSH1-039-centiskorch.jpg
+en-US-SWSH1-040-shellder.jpg,01 common,SWSH1,0.03,SWSH,SSH,Shellder,pokemon,en-US-SWSH1-040-shellder.jpg
+en-US-SWSH1-041-cloyster.jpg,03 rare,SWSH1,0.1,SWSH,SSH,Cloyster,pokemon,en-US-SWSH1-041-cloyster.jpg
+en-US-SWSH1-042-krabby.jpg,01 common,SWSH1,0.02,SWSH,SSH,Krabby,pokemon,en-US-SWSH1-042-krabby.jpg
+en-US-SWSH1-043-krabby.jpg,01 common,SWSH1,0.04,SWSH,SSH,Krabby,pokemon,en-US-SWSH1-043-krabby.jpg
+en-US-SWSH1-044-kingler.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Kingler,pokemon,en-US-SWSH1-044-kingler.jpg
+en-US-SWSH1-045-goldeen.jpg,01 common,SWSH1,0.02,SWSH,SSH,Goldeen,pokemon,en-US-SWSH1-045-goldeen.jpg
+en-US-SWSH1-046-goldeen.jpg,01 common,SWSH1,0.04,SWSH,SSH,Goldeen,pokemon,en-US-SWSH1-046-goldeen.jpg
+en-US-SWSH1-047-seaking.jpg,02 uncommon,SWSH1,0.03,SWSH,SSH,Seaking,pokemon,en-US-SWSH1-047-seaking.jpg
+en-US-SWSH1-048-lapras.jpg,03 rare,SWSH1,0.09,SWSH,SSH,Lapras,pokemon,en-US-SWSH1-048-lapras.jpg
+en-US-SWSH1-049-lapras-v.jpg,04 rare holo,SWSH1,1.75,SWSH,SSH,Lapras V,pokemon,en-US-SWSH1-049-lapras-v.jpg
+en-US-SWSH1-050-lapras-VMAX.jpg,05 rare ultra,SWSH1,5,SWSH,SSH,Lapras VMAX,pokemon,en-US-SWSH1-050-lapras-VMAX.jpg
+en-US-SWSH1-051-qwilfish.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Qwilfish,pokemon,en-US-SWSH1-051-qwilfish.jpg
+en-US-SWSH1-052-mantine.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Mantine,pokemon,en-US-SWSH1-052-mantine.jpg
+en-US-SWSH1-053-keldeo-v.jpg,04 rare holo,SWSH1,1.5,SWSH,SSH,Keldeo V,pokemon,en-US-SWSH1-053-keldeo-v.jpg
+en-US-SWSH1-054-sobble.jpg,01 common,SWSH1,0.03,SWSH,SSH,Sobble,pokemon,en-US-SWSH1-054-sobble.jpg
+en-US-SWSH1-055-sobble.jpg,01 common,SWSH1,0.03,SWSH,SSH,Sobble,pokemon,en-US-SWSH1-055-sobble.jpg
+en-US-SWSH1-056-drizzile.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Drizzile,pokemon,en-US-SWSH1-056-drizzile.jpg
+en-US-SWSH1-057-drizzile.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Drizzile,pokemon,en-US-SWSH1-057-drizzile.jpg
+en-US-SWSH1-058-inteleon.jpg,04 rare holo,SWSH1,0.2,SWSH,SSH,Inteleon,pokemon,en-US-SWSH1-058-inteleon.jpg
+en-US-SWSH1-059-inteleon.jpg,03 rare,SWSH1,0.13,SWSH,SSH,Inteleon,pokemon,en-US-SWSH1-059-inteleon.jpg
+en-US-SWSH1-060-chewtle.jpg,01 common,SWSH1,0.03,SWSH,SSH,Chewtle,pokemon,en-US-SWSH1-060-chewtle.jpg
+en-US-SWSH1-061-drednaw.jpg,03 rare,SWSH1,0.08,SWSH,SSH,Drednaw,pokemon,en-US-SWSH1-061-drednaw.jpg
+en-US-SWSH1-062-cramorant.jpg,03 rare,SWSH1,0.06,SWSH,SSH,Cramorant,pokemon,en-US-SWSH1-062-cramorant.jpg
+en-US-SWSH1-063-snom.jpg,01 common,SWSH1,0.04,SWSH,SSH,Snom,pokemon,en-US-SWSH1-063-snom.jpg
+en-US-SWSH1-064-frosmoth.jpg,04 rare holo,SWSH1,0.7,SWSH,SSH,Frosmoth,pokemon,en-US-SWSH1-064-frosmoth.jpg
+en-US-SWSH1-065-pikachu.jpg,01 common,SWSH1,0.04,SWSH,SSH,Pikachu,pokemon,en-US-SWSH1-065-pikachu.jpg
+en-US-SWSH1-066-raichu.jpg,03 rare,SWSH1,0.1,SWSH,SSH,Raichu,pokemon,en-US-SWSH1-066-raichu.jpg
+en-US-SWSH1-067-chinchou.jpg,01 common,SWSH1,0.02,SWSH,SSH,Chinchou,pokemon,en-US-SWSH1-067-chinchou.jpg
+en-US-SWSH1-068-chinchou.jpg,01 common,SWSH1,0.02,SWSH,SSH,Chinchou,pokemon,en-US-SWSH1-068-chinchou.jpg
+en-US-SWSH1-069-lanturn.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Lanturn,pokemon,en-US-SWSH1-069-lanturn.jpg
+en-US-SWSH1-070-joltik.jpg,01 common,SWSH1,0.03,SWSH,SSH,Joltik,pokemon,en-US-SWSH1-070-joltik.jpg
+en-US-SWSH1-071-galvantula.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Galvantula,pokemon,en-US-SWSH1-071-galvantula.jpg
+en-US-SWSH1-072-tapu-koko-v.jpg,04 rare holo,SWSH1,1.99,SWSH,SSH,Tapu Koko V,pokemon,en-US-SWSH1-072-tapu-koko-v.jpg
+en-US-SWSH1-073-yamper.jpg,01 common,SWSH1,0.05,SWSH,SSH,Yamper,pokemon,en-US-SWSH1-073-yamper.jpg
+en-US-SWSH1-074-yamper.jpg,01 common,SWSH1,0.03,SWSH,SSH,Yamper,pokemon,en-US-SWSH1-074-yamper.jpg
+en-US-SWSH1-075-boltund.jpg,04 rare holo,SWSH1,0.14,SWSH,SSH,Boltund,pokemon,en-US-SWSH1-075-boltund.jpg
+en-US-SWSH1-076-boltund.jpg,04 rare holo,SWSH1,0.14,SWSH,SSH,Boltund,pokemon,en-US-SWSH1-076-boltund.jpg
+en-US-SWSH1-077-pincurchin.jpg,01 common,SWSH1,0.04,SWSH,SSH,Pincurchin,pokemon,en-US-SWSH1-077-pincurchin.jpg
+en-US-SWSH1-078-morpeko.jpg,03 rare,SWSH1,0.09,SWSH,SSH,Morpeko,pokemon,en-US-SWSH1-078-morpeko.jpg
+en-US-SWSH1-079-morpeko-v.jpg,04 rare holo,SWSH1,1.94,SWSH,SSH,Morpeko V,pokemon,en-US-SWSH1-079-morpeko-v.jpg
+en-US-SWSH1-080-morpeko-VMAX.jpg,05 rare ultra,SWSH1,2.48,SWSH,SSH,Morpeko VMAX,pokemon,en-US-SWSH1-080-morpeko-VMAX.jpg
+en-US-SWSH1-081-galarian-ponyta.jpg,01 common,SWSH1,0.04,SWSH,SSH,Galarian Ponyta,pokemon,en-US-SWSH1-081-galarian-ponyta.jpg
+en-US-SWSH1-082-galarian-rapidash.jpg,03 rare,SWSH1,0.14,SWSH,SSH,Galarian Rapidash,pokemon,en-US-SWSH1-082-galarian-rapidash.jpg
+en-US-SWSH1-083-gastly.jpg,01 common,SWSH1,0.02,SWSH,SSH,Gastly,pokemon,en-US-SWSH1-083-gastly.jpg
+en-US-SWSH1-084-haunter.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Haunter,pokemon,en-US-SWSH1-084-haunter.jpg
+en-US-SWSH1-085-gengar.jpg,04 rare holo,SWSH1,0.19,SWSH,SSH,Gengar,pokemon,en-US-SWSH1-085-gengar.jpg
+en-US-SWSH1-086-wobbuffet-v.jpg,04 rare holo,SWSH1,1.14,SWSH,SSH,Wobbuffet V,pokemon,en-US-SWSH1-086-wobbuffet-v.jpg
+en-US-SWSH1-087-munna.jpg,01 common,SWSH1,0.04,SWSH,SSH,Munna,pokemon,en-US-SWSH1-087-munna.jpg
+en-US-SWSH1-088-musharna.jpg,03 rare,SWSH1,0.07,SWSH,SSH,Musharna,pokemon,en-US-SWSH1-088-musharna.jpg
+en-US-SWSH1-089-sinistea.jpg,01 common,SWSH1,0.03,SWSH,SSH,Sinistea,pokemon,en-US-SWSH1-089-sinistea.jpg
+en-US-SWSH1-090-polteageist.jpg,03 rare,SWSH1,0.08,SWSH,SSH,Polteageist,pokemon,en-US-SWSH1-090-polteageist.jpg
+en-US-SWSH1-091-indeedee-v.jpg,04 rare holo,SWSH1,1.9,SWSH,SSH,Indeedee V,pokemon,en-US-SWSH1-091-indeedee-v.jpg
+en-US-SWSH1-092-diglett.jpg,01 common,SWSH1,0.02,SWSH,SSH,Diglett,pokemon,en-US-SWSH1-092-diglett.jpg
+en-US-SWSH1-093-dugtrio.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Dugtrio,pokemon,en-US-SWSH1-093-dugtrio.jpg
+en-US-SWSH1-094-hitmonlee.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Hitmonlee,pokemon,en-US-SWSH1-094-hitmonlee.jpg
+en-US-SWSH1-095-hitmonchan.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Hitmonchan,pokemon,en-US-SWSH1-095-hitmonchan.jpg
+en-US-SWSH1-096-rhyhorn.jpg,01 common,SWSH1,0.02,SWSH,SSH,Rhyhorn,pokemon,en-US-SWSH1-096-rhyhorn.jpg
+en-US-SWSH1-097-rhyhorn.jpg,01 common,SWSH1,0.04,SWSH,SSH,Rhyhorn,pokemon,en-US-SWSH1-097-rhyhorn.jpg
+en-US-SWSH1-098-rhydon.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Rhydon,pokemon,en-US-SWSH1-098-rhydon.jpg
+en-US-SWSH1-099-rhyperior.jpg,04 rare holo,SWSH1,0.14,SWSH,SSH,Rhyperior,pokemon,en-US-SWSH1-099-rhyperior.jpg
+en-US-SWSH1-100-sudowoodo.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Sudowoodo,pokemon,en-US-SWSH1-100-sudowoodo.jpg
+en-US-SWSH1-101-baltoy.jpg,01 common,SWSH1,0.02,SWSH,SSH,Baltoy,pokemon,en-US-SWSH1-101-baltoy.jpg
+en-US-SWSH1-102-baltoy.jpg,01 common,SWSH1,0.04,SWSH,SSH,Baltoy,pokemon,en-US-SWSH1-102-baltoy.jpg
+en-US-SWSH1-103-claydol.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Claydol,pokemon,en-US-SWSH1-103-claydol.jpg
+en-US-SWSH1-104-regirock-v.jpg,04 rare holo,SWSH1,1.5,SWSH,SSH,Regirock V,pokemon,en-US-SWSH1-104-regirock-v.jpg
+en-US-SWSH1-105-mudbray.jpg,01 common,SWSH1,0.05,SWSH,SSH,Mudbray,pokemon,en-US-SWSH1-105-mudbray.jpg
+en-US-SWSH1-106-mudsdale.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Mudsdale,pokemon,en-US-SWSH1-106-mudsdale.jpg
+en-US-SWSH1-107-silicobra.jpg,01 common,SWSH1,0.03,SWSH,SSH,Silicobra,pokemon,en-US-SWSH1-107-silicobra.jpg
+en-US-SWSH1-108-silicobra.jpg,01 common,SWSH1,0.02,SWSH,SSH,Silicobra,pokemon,en-US-SWSH1-108-silicobra.jpg
+en-US-SWSH1-109-sandaconda.jpg,03 rare,SWSH1,0.06,SWSH,SSH,Sandaconda,pokemon,en-US-SWSH1-109-sandaconda.jpg
+en-US-SWSH1-110-sandaconda.jpg,04 rare holo,SWSH1,0.15,SWSH,SSH,Sandaconda,pokemon,en-US-SWSH1-110-sandaconda.jpg
+en-US-SWSH1-111-clobbopus.jpg,01 common,SWSH1,0.01,SWSH,SSH,Clobbopus,pokemon,en-US-SWSH1-111-clobbopus.jpg
+en-US-SWSH1-112-clobbopus.jpg,01 common,SWSH1,0.03,SWSH,SSH,Clobbopus,pokemon,en-US-SWSH1-112-clobbopus.jpg
+en-US-SWSH1-113-grapploct.jpg,03 rare,SWSH1,0.1,SWSH,SSH,Grapploct,pokemon,en-US-SWSH1-113-grapploct.jpg
+en-US-SWSH1-114-stonjourner.jpg,03 rare,SWSH1,0.1,SWSH,SSH,Stonjourner,pokemon,en-US-SWSH1-114-stonjourner.jpg
+en-US-SWSH1-115-stonjourner-v.jpg,04 rare holo,SWSH1,1.73,SWSH,SSH,Stonjourner V,pokemon,en-US-SWSH1-115-stonjourner-v.jpg
+en-US-SWSH1-116-stonjourner-VMAX.jpg,05 rare ultra,SWSH1,2.99,SWSH,SSH,Stonjourner VMAX,pokemon,en-US-SWSH1-116-stonjourner-VMAX.jpg
+en-US-SWSH1-117-galarian-zigzagoon.jpg,01 common,SWSH1,0.03,SWSH,SSH,Galarian Zigzagoon,pokemon,en-US-SWSH1-117-galarian-zigzagoon.jpg
+en-US-SWSH1-118-galarian-linoone.jpg,02 uncommon,SWSH1,0.03,SWSH,SSH,Galarian Linoone,pokemon,en-US-SWSH1-118-galarian-linoone.jpg
+en-US-SWSH1-119-galarian-obstagoon.jpg,04 rare holo,SWSH1,0.26,SWSH,SSH,Galarian Obstagoon,pokemon,en-US-SWSH1-119-galarian-obstagoon.jpg
+en-US-SWSH1-120-sableye-v.jpg,04 rare holo,SWSH1,1.85,SWSH,SSH,Sableye V,pokemon,en-US-SWSH1-120-sableye-v.jpg
+en-US-SWSH1-121-skorupi.jpg,01 common,SWSH1,0.03,SWSH,SSH,Skorupi,pokemon,en-US-SWSH1-121-skorupi.jpg
+en-US-SWSH1-122-drapion.jpg,03 rare,SWSH1,0.08,SWSH,SSH,Drapion,pokemon,en-US-SWSH1-122-drapion.jpg
+en-US-SWSH1-123-croagunk.jpg,01 common,SWSH1,0.03,SWSH,SSH,Croagunk,pokemon,en-US-SWSH1-123-croagunk.jpg
+en-US-SWSH1-124-toxicroak.jpg,04 rare holo,SWSH1,0.15,SWSH,SSH,Toxicroak,pokemon,en-US-SWSH1-124-toxicroak.jpg
+en-US-SWSH1-125-nickit.jpg,01 common,SWSH1,0.04,SWSH,SSH,Nickit,pokemon,en-US-SWSH1-125-nickit.jpg
+en-US-SWSH1-126-thievul.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Thievul,pokemon,en-US-SWSH1-126-thievul.jpg
+en-US-SWSH1-127-galarian-meowth.jpg,01 common,SWSH1,0.03,SWSH,SSH,Galarian Meowth,pokemon,en-US-SWSH1-127-galarian-meowth.jpg
+en-US-SWSH1-128-galarian-perrserker.jpg,04 rare holo,SWSH1,0.2,SWSH,SSH,Galarian Perrserker,pokemon,en-US-SWSH1-128-galarian-perrserker.jpg
+en-US-SWSH1-129-mawile.jpg,01 common,SWSH1,0.03,SWSH,SSH,Mawile,pokemon,en-US-SWSH1-129-mawile.jpg
+en-US-SWSH1-130-ferroseed.jpg,01 common,SWSH1,0.03,SWSH,SSH,Ferroseed,pokemon,en-US-SWSH1-130-ferroseed.jpg
+en-US-SWSH1-131-ferrothorn.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Ferrothorn,pokemon,en-US-SWSH1-131-ferrothorn.jpg
+en-US-SWSH1-132-galarian-stunfisk.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Galarian Stunfisk,pokemon,en-US-SWSH1-132-galarian-stunfisk.jpg
+en-US-SWSH1-133-pawniard.jpg,01 common,SWSH1,0.04,SWSH,SSH,Pawniard,pokemon,en-US-SWSH1-133-pawniard.jpg
+en-US-SWSH1-134-bisharp.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Bisharp,pokemon,en-US-SWSH1-134-bisharp.jpg
+en-US-SWSH1-135-corviknight.jpg,03 rare,SWSH1,0.1,SWSH,SSH,Corviknight,pokemon,en-US-SWSH1-135-corviknight.jpg
+en-US-SWSH1-136-cufant.jpg,01 common,SWSH1,0.04,SWSH,SSH,Cufant,pokemon,en-US-SWSH1-136-cufant.jpg
+en-US-SWSH1-137-copperajah.jpg,04 rare holo,SWSH1,0.05,SWSH,SSH,Copperajah,pokemon,en-US-SWSH1-137-copperajah.jpg
+en-US-SWSH1-138-zacian-v.jpg,04 rare holo,SWSH1,13.99,SWSH,SSH,Zacian V,pokemon,en-US-SWSH1-138-zacian-v.jpg
+en-US-SWSH1-139-zamazenta-v.jpg,04 rare holo,SWSH1,1.99,SWSH,SSH,Zamazenta V,pokemon,en-US-SWSH1-139-zamazenta-v.jpg
+en-US-SWSH1-140-snorlax.jpg,03 rare,SWSH1,0.07,SWSH,SSH,Snorlax,pokemon,en-US-SWSH1-140-snorlax.jpg
+en-US-SWSH1-141-snorlax-v.jpg,04 rare holo,SWSH1,1.94,SWSH,SSH,Snorlax V,pokemon,en-US-SWSH1-141-snorlax-v.jpg
+en-US-SWSH1-142-snorlax-VMAX.jpg,05 rare ultra,SWSH1,7.92,SWSH,SSH,Snorlax VMAX,pokemon,en-US-SWSH1-142-snorlax-VMAX.jpg
+en-US-SWSH1-143-hoothoot.jpg,01 common,SWSH1,0.02,SWSH,SSH,Hoothoot,pokemon,en-US-SWSH1-143-hoothoot.jpg
+en-US-SWSH1-144-noctowl.jpg,03 rare,SWSH1,0.05,SWSH,SSH,Noctowl,pokemon,en-US-SWSH1-144-noctowl.jpg
+en-US-SWSH1-145-minccino.jpg,01 common,SWSH1,0.04,SWSH,SSH,Minccino,pokemon,en-US-SWSH1-145-minccino.jpg
+en-US-SWSH1-146-minccino.jpg,01 common,SWSH1,0.02,SWSH,SSH,Minccino,pokemon,en-US-SWSH1-146-minccino.jpg
+en-US-SWSH1-147-cinccino.jpg,03 rare,SWSH1,0.25,SWSH,SSH,Cinccino,pokemon,en-US-SWSH1-147-cinccino.jpg
+en-US-SWSH1-148-oranguru.jpg,04 rare holo,SWSH1,0.7,SWSH,SSH,Oranguru,pokemon,en-US-SWSH1-148-oranguru.jpg
+en-US-SWSH1-149-drampa.jpg,03 rare,SWSH1,0.07,SWSH,SSH,Drampa,pokemon,en-US-SWSH1-149-drampa.jpg
+en-US-SWSH1-150-rookidee.jpg,01 common,SWSH1,0.01,SWSH,SSH,Rookidee,pokemon,en-US-SWSH1-150-rookidee.jpg
+en-US-SWSH1-151-corvisquire.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Corvisquire,pokemon,en-US-SWSH1-151-corvisquire.jpg
+en-US-SWSH1-152-wooloo.jpg,01 common,SWSH1,0.03,SWSH,SSH,Wooloo,pokemon,en-US-SWSH1-152-wooloo.jpg
+en-US-SWSH1-153-wooloo.jpg,01 common,SWSH1,0.05,SWSH,SSH,Wooloo,pokemon,en-US-SWSH1-153-wooloo.jpg
+en-US-SWSH1-154-dubwool.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Dubwool,pokemon,en-US-SWSH1-154-dubwool.jpg
+en-US-SWSH1-155-cramorant-v.jpg,04 rare holo,SWSH1,1.79,SWSH,SSH,Cramorant V,pokemon,en-US-SWSH1-155-cramorant-v.jpg
+en-US-SWSH1-156-air-balloon.jpg,02 uncommon,SWSH1,0.1,SWSH,SSH,Air Balloon,trainer,en-US-SWSH1-156-air-balloon.jpg
+en-US-SWSH1-157-bede.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Bede,trainer,en-US-SWSH1-157-bede.jpg
+en-US-SWSH1-158-big-charm.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Big Charm,trainer,en-US-SWSH1-158-big-charm.jpg
+en-US-SWSH1-159-crushing-hammer.jpg,02 uncommon,SWSH1,0.03,SWSH,SSH,Crushing Hammer,trainer,en-US-SWSH1-159-crushing-hammer.jpg
+en-US-SWSH1-160-energy-retrieval.jpg,02 uncommon,SWSH1,0.03,SWSH,SSH,Energy Retrieval,trainer,en-US-SWSH1-160-energy-retrieval.jpg
+en-US-SWSH1-161-energy-search.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Energy Search,trainer,en-US-SWSH1-161-energy-search.jpg
+en-US-SWSH1-162-energy-switch.jpg,02 uncommon,SWSH1,0.01,SWSH,SSH,Energy Switch,trainer,en-US-SWSH1-162-energy-switch.jpg
+en-US-SWSH1-163-evolution-incense.jpg,02 uncommon,SWSH1,0.1,SWSH,SSH,Evolution Incense,trainer,en-US-SWSH1-163-evolution-incense.jpg
+en-US-SWSH1-164-great-ball.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Great Ball,trainer,en-US-SWSH1-164-great-ball.jpg
+en-US-SWSH1-165-hop.jpg,02 uncommon,SWSH1,0.01,SWSH,SSH,Hop,trainer,en-US-SWSH1-165-hop.jpg
+en-US-SWSH1-166-hyper-potion.jpg,02 uncommon,SWSH1,0.01,SWSH,SSH,Hyper Potion,trainer,en-US-SWSH1-166-hyper-potion.jpg
+en-US-SWSH1-167-lucky-egg.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Lucky Egg,trainer,en-US-SWSH1-167-lucky-egg.jpg
+en-US-SWSH1-168-lum-berry.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Lum Berry,trainer,en-US-SWSH1-168-lum-berry.jpg
+en-US-SWSH1-169-marnie.jpg,04 rare holo,SWSH1,2,SWSH,SSH,Marnie,trainer,en-US-SWSH1-169-marnie.jpg
+en-US-SWSH1-170-metal-saucer.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Metal Saucer,trainer,en-US-SWSH1-170-metal-saucer.jpg
+en-US-SWSH1-171-ordinary-rod.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Ordinary Rod,trainer,en-US-SWSH1-171-ordinary-rod.jpg
+en-US-SWSH1-172-pal-pad.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Pal Pad,trainer,en-US-SWSH1-172-pal-pad.jpg
+en-US-SWSH1-173-poke-kid.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Poke Kid,trainer,en-US-SWSH1-173-poke-kid.jpg
+en-US-SWSH1-174-pokegear-30.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Pokegear 3.0,trainer,en-US-SWSH1-174-pokegear-30.jpg
+en-US-SWSH1-175-pokemon-catcher.jpg,02 uncommon,SWSH1,0.01,SWSH,SSH,Pokemon Catcher,trainer,en-US-SWSH1-175-pokemon-catcher.jpg
+en-US-SWSH1-176-pokemon-center-lady.jpg,02 uncommon,SWSH1,0.03,SWSH,SSH,Pokemon Center Lady,trainer,en-US-SWSH1-176-pokemon-center-lady.jpg
+en-US-SWSH1-177-potion.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Potion,trainer,en-US-SWSH1-177-potion.jpg
+en-US-SWSH1-178-professors-research.jpg,04 rare holo,SWSH1,1.41,SWSH,SSH,Professors Research,trainer,en-US-SWSH1-178-professors-research.jpg
+en-US-SWSH1-179-quick-ball.jpg,02 uncommon,SWSH1,0.14,SWSH,SSH,Quick Ball,trainer,en-US-SWSH1-179-quick-ball.jpg
+en-US-SWSH1-180-rare-candy.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Rare Candy,trainer,en-US-SWSH1-180-rare-candy.jpg
+en-US-SWSH1-181-rotom-bike.jpg,02 uncommon,SWSH1,0.04,SWSH,SSH,Rotom Bike,trainer,en-US-SWSH1-181-rotom-bike.jpg
+en-US-SWSH1-182-sitrus-berry.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Sitrus Berry,trainer,en-US-SWSH1-182-sitrus-berry.jpg
+en-US-SWSH1-183-switch.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Switch,trainer,en-US-SWSH1-183-switch.jpg
+en-US-SWSH1-184-team-yell-grunt.jpg,02 uncommon,SWSH1,0.02,SWSH,SSH,Team Yell Grunt,trainer,en-US-SWSH1-184-team-yell-grunt.jpg
+en-US-SWSH1-185-vitality-band.jpg,02 uncommon,SWSH1,0.05,SWSH,SSH,Vitality Band,trainer,en-US-SWSH1-185-vitality-band.jpg
+en-US-SWSH1-186-aurora-energy.jpg,02 uncommon,SWSH1,0.1,SWSH,SSH,Aurora Energy,energy,en-US-SWSH1-186-aurora-energy.jpg
+en-US-SWSH1-187-dhelmise-v.jpg,05 rare ultra,SWSH1,2.5,SWSH,SSH,Dhelmise V,pokemon,en-US-SWSH1-187-dhelmise-v.jpg
+en-US-SWSH1-188-torkoal-v.jpg,05 rare ultra,SWSH1,3.18,SWSH,SSH,Torkoal V,pokemon,en-US-SWSH1-188-torkoal-v.jpg
+en-US-SWSH1-189-lapras-v.jpg,05 rare ultra,SWSH1,4.22,SWSH,SSH,Lapras V,pokemon,en-US-SWSH1-189-lapras-v.jpg
+en-US-SWSH1-190-morpeko-v.jpg,05 rare ultra,SWSH1,2.75,SWSH,SSH,Morpeko V,pokemon,en-US-SWSH1-190-morpeko-v.jpg
+en-US-SWSH1-191-wobbuffet-v.jpg,05 rare ultra,SWSH1,2.99,SWSH,SSH,Wobbuffet V,pokemon,en-US-SWSH1-191-wobbuffet-v.jpg
+en-US-SWSH1-192-indeedee-v.jpg,05 rare ultra,SWSH1,2.5,SWSH,SSH,Indeedee V,pokemon,en-US-SWSH1-192-indeedee-v.jpg
+en-US-SWSH1-193-stonjourner-v.jpg,05 rare ultra,SWSH1,2.31,SWSH,SSH,Stonjourner V,pokemon,en-US-SWSH1-193-stonjourner-v.jpg
+en-US-SWSH1-194-sableye-v.jpg,05 rare ultra,SWSH1,3.35,SWSH,SSH,Sableye V,pokemon,en-US-SWSH1-194-sableye-v.jpg
+en-US-SWSH1-195-zacian-v.jpg,05 rare ultra,SWSH1,20,SWSH,SSH,Zacian V,pokemon,en-US-SWSH1-195-zacian-v.jpg
+en-US-SWSH1-196-zamazenta-v.jpg,05 rare ultra,SWSH1,5.67,SWSH,SSH,Zamazenta V,pokemon,en-US-SWSH1-196-zamazenta-v.jpg
+en-US-SWSH1-197-snorlax-v.jpg,05 rare ultra,SWSH1,4.96,SWSH,SSH,Snorlax V,pokemon,en-US-SWSH1-197-snorlax-v.jpg
+en-US-SWSH1-198-cramorant-v.jpg,05 rare ultra,SWSH1,3.99,SWSH,SSH,Cramorant V,pokemon,en-US-SWSH1-198-cramorant-v.jpg
+en-US-SWSH1-199-bede.jpg,05 rare ultra,SWSH1,3,SWSH,SSH,Bede,trainer,en-US-SWSH1-199-bede.jpg
+en-US-SWSH1-200-marnie.jpg,05 rare ultra,SWSH1,19.48,SWSH,SSH,Marnie,trainer,en-US-SWSH1-200-marnie.jpg
+en-US-SWSH1-201-professors-research.jpg,05 rare ultra,SWSH1,12.01,SWSH,SSH,Professors Research,trainer,en-US-SWSH1-201-professors-research.jpg
+en-US-SWSH1-202-team-yell-grunt-1.jpg,05 rare ultra,SWSH1,2.43,SWSH,SSH,Team Yell Grunt,trainer,en-US-SWSH1-202-team-yell-grunt-1.jpg
+en-US-SWSH1-203-lapras-VMAX.jpg,06 rare secret,SWSH1,9.06,SWSH,SSH,Lapras VMAX,pokemon,en-US-SWSH1-203-lapras-VMAX.jpg
+en-US-SWSH1-204-morpeko-VMAX.jpg,06 rare secret,SWSH1,7.67,SWSH,SSH,Morpeko VMAX,pokemon,en-US-SWSH1-204-morpeko-VMAX.jpg
+en-US-SWSH1-205-stonjourner-VMAX.jpg,06 rare secret,SWSH1,6.13,SWSH,SSH,Stonjourner VMAX,pokemon,en-US-SWSH1-205-stonjourner-VMAX.jpg
+en-US-SWSH1-206-snorlax-VMAX.jpg,06 rare secret,SWSH1,12.17,SWSH,SSH,Snorlax VMAX,pokemon,en-US-SWSH1-206-snorlax-VMAX.jpg
+en-US-SWSH1-207-bede.jpg,06 rare secret,SWSH1,4.99,SWSH,SSH,Bede,trainer,en-US-SWSH1-207-bede.jpg
+en-US-SWSH1-208-marnie.jpg,06 rare secret,SWSH1,14.97,SWSH,SSH,Marnie,trainer,en-US-SWSH1-208-marnie.jpg
+en-US-SWSH1-209-professors-research.jpg,06 rare secret,SWSH1,10,SWSH,SSH,Professors Research,trainer,en-US-SWSH1-209-professors-research.jpg
+en-US-SWSH1-210-team-yell-grunt.jpg,06 rare secret,SWSH1,5,SWSH,SSH,Team Yell Grunt,trainer,en-US-SWSH1-210-team-yell-grunt.jpg
+en-US-SWSH1-211-zacian-v-1.jpg,06 rare secret,SWSH1,41.45,SWSH,SSH,Zacian V,pokemon,en-US-SWSH1-211-zacian-v-1.jpg
+en-US-SWSH1-212-zamazenta-v.jpg,06 rare secret,SWSH1,21.94,SWSH,SSH,Zamazenta V,pokemon,en-US-SWSH1-212-zamazenta-v.jpg
+en-US-SWSH1-213-air-balloon.jpg,06 rare secret,SWSH1,7.39,SWSH,SSH,Air Balloon,trainer,en-US-SWSH1-213-air-balloon.jpg
+en-US-SWSH1-214-metal-saucer.jpg,06 rare secret,SWSH1,9,SWSH,SSH,Metal Saucer,trainer,en-US-SWSH1-214-metal-saucer.jpg
+en-US-SWSH1-215-ordinary-rod.jpg,06 rare secret,SWSH1,7,SWSH,SSH,Ordinary Rod,trainer,en-US-SWSH1-215-ordinary-rod.jpg
+en-US-SWSH1-216-quick-ball.jpg,06 rare secret,SWSH1,28,SWSH,SSH,Quick Ball,trainer,en-US-SWSH1-216-quick-ball.jpg
+SM12-001,05 rare ultra,SM12,,SM,CEC,Venusaur Snivy GX,pokemon,en-US-SM12-001-venusaur-snivy-gx.jpg
+SM12-002,01 common,SM12,,SM,CEC,Oddish,pokemon,en-US-SM12-002-oddish.jpg
+SM12-003,02 uncommon,SM12,,SM,CEC,Gloom,pokemon,en-US-SM12-003-gloom.jpg
+SM12-004,04 rare holo,SM12,,SM,CEC,Vileplume GX,pokemon,en-US-SM12-004-vileplume-gx.jpg
+SM12-005,01 common,SM12,,SM,CEC,Tangela,pokemon,en-US-SM12-005-tangela.jpg
+SM12-006,02 uncommon,SM12,,SM,CEC,Tangrowth,pokemon,en-US-SM12-006-tangrowth.jpg
+SM12-007,01 common,SM12,,SM,CEC,Sunkern,pokemon,en-US-SM12-007-sunkern.jpg
+SM12-008,03 rare,SM12,,SM,CEC,Sunflora,pokemon,en-US-SM12-008-sunflora.jpg
+SM12-009,02 uncommon,SM12,,SM,CEC,Heracross,pokemon,en-US-SM12-009-heracross.jpg
+SM12-010,02 uncommon,SM12,,SM,CEC,Lileep,pokemon,en-US-SM12-010-lileep.jpg
+SM12-011,03 rare,SM12,,SM,CEC,Cradily,pokemon,en-US-SM12-011-cradily.jpg
+SM12-012,02 uncommon,SM12,,SM,CEC,Tropius,pokemon,en-US-SM12-012-tropius.jpg
+SM12-013,01 common,SM12,,SM,CEC,Kricketot,pokemon,en-US-SM12-013-kricketot.jpg
+SM12-014,02 uncommon,SM12,,SM,CEC,Kricketune,pokemon,en-US-SM12-014-kricketune.jpg
+SM12-015,01 common,SM12,,SM,CEC,Deerling,pokemon,en-US-SM12-015-deerling.jpg
+SM12-016,04 rare holo,SM12,,SM,CEC,Sawsbuck,pokemon,en-US-SM12-016-sawsbuck.jpg
+SM12-017,01 common,SM12,,SM,CEC,Rowlet,pokemon,en-US-SM12-017-rowlet.jpg
+SM12-018,01 common,SM12,,SM,CEC,Rowlet,pokemon,en-US-SM12-018-rowlet.jpg
+SM12-019,02 uncommon,SM12,,SM,CEC,Dartrix,pokemon,en-US-SM12-019-dartrix.jpg
+SM12-020,04 rare holo,SM12,,SM,CEC,Decidueye,pokemon,en-US-SM12-020-decidueye.jpg
+SM12-021,04 rare holo,SM12,,SM,CEC,Buzzwole,pokemon,en-US-SM12-021-buzzwole.jpg
+SM12-022,05 rare ultra,SM12,,SM,CEC,Charizard Braixen GX,pokemon,en-US-SM12-022-charizard-braixen-gx.jpg
+SM12-023,01 common,SM12,,SM,CEC,Ponyta,pokemon,en-US-SM12-023-ponyta.jpg
+SM12-024,02 uncommon,SM12,,SM,CEC,Rapidash,pokemon,en-US-SM12-024-rapidash.jpg
+SM12-025,02 uncommon,SM12,,SM,CEC,Flareon,pokemon,en-US-SM12-025-flareon.jpg
+SM12-026,01 common,SM12,,SM,CEC,Slugma,pokemon,en-US-SM12-026-slugma.jpg
+SM12-027,03 rare,SM12,,SM,CEC,Magcargo,pokemon,en-US-SM12-027-magcargo.jpg
+SM12-028,03 rare,SM12,,SM,CEC,Entei,pokemon,en-US-SM12-028-entei.jpg
+SM12-029,02 uncommon,SM12,,SM,CEC,Torkoal,pokemon,en-US-SM12-029-torkoal.jpg
+SM12-030,04 rare holo,SM12,,SM,CEC,Victini,pokemon,en-US-SM12-030-victini.jpg
+SM12-031,01 common,SM12,,SM,CEC,Tepig,pokemon,en-US-SM12-031-tepig.jpg
+SM12-032,02 uncommon,SM12,,SM,CEC,Pignite,pokemon,en-US-SM12-032-pignite.jpg
+SM12-033,03 rare,SM12,,SM,CEC,Emboar,pokemon,en-US-SM12-033-emboar.jpg
+SM12-034,02 uncommon,SM12,,SM,CEC,Larvesta,pokemon,en-US-SM12-034-larvesta.jpg
+SM12-035,04 rare holo,SM12,,SM,CEC,Volcarona GX,pokemon,en-US-SM12-035-volcarona-gx.jpg
+SM12-036,01 common,SM12,,SM,CEC,Litleo,pokemon,en-US-SM12-036-litleo.jpg
+SM12-037,02 uncommon,SM12,,SM,CEC,Pyroar,pokemon,en-US-SM12-037-pyroar.jpg
+SM12-038,05 rare ultra,SM12,,SM,CEC,Blastoise Piplup GX,pokemon,en-US-SM12-038-blastoise-piplup-gx.jpg
+SM12-039,01 common,SM12,,SM,CEC,Alolan Vulpix,pokemon,en-US-SM12-039-alolan-vulpix.jpg
+SM12-040,01 common,SM12,,SM,CEC,Psyduck,pokemon,en-US-SM12-040-psyduck.jpg
+SM12-041,02 uncommon,SM12,,SM,CEC,Golduck,pokemon,en-US-SM12-041-golduck.jpg
+SM12-042,02 uncommon,SM12,,SM,CEC,Vaporeon,pokemon,en-US-SM12-042-vaporeon.jpg
+SM12-043,01 common,SM12,,SM,CEC,Sneasel,pokemon,en-US-SM12-043-sneasel.jpg
+SM12-044,03 rare,SM12,,SM,CEC,Weavile,pokemon,en-US-SM12-044-weavile.jpg
+SM12-045,01 common,SM12,,SM,CEC,Wailmer,pokemon,en-US-SM12-045-wailmer.jpg
+SM12-046,03 rare,SM12,,SM,CEC,Wailord,pokemon,en-US-SM12-046-wailord.jpg
+SM12-047,01 common,SM12,,SM,CEC,Snorunt,pokemon,en-US-SM12-047-snorunt.jpg
+SM12-048,03 rare,SM12,,SM,CEC,Glalie,pokemon,en-US-SM12-048-glalie.jpg
+SM12-049,01 common,SM12,,SM,CEC,Spheal,pokemon,en-US-SM12-049-spheal.jpg
+SM12-050,01 common,SM12,,SM,CEC,Spheal,pokemon,en-US-SM12-050-spheal.jpg
+SM12-051,02 uncommon,SM12,,SM,CEC,Sealeo,pokemon,en-US-SM12-051-sealeo.jpg
+SM12-052,03 rare,SM12,,SM,CEC,Walrein,pokemon,en-US-SM12-052-walrein.jpg
+SM12-053,03 rare,SM12,,SM,CEC,Kyogre,pokemon,en-US-SM12-053-kyogre.jpg
+SM12-054,01 common,SM12,,SM,CEC,Piplup,pokemon,en-US-SM12-054-piplup.jpg
+SM12-055,02 uncommon,SM12,,SM,CEC,Prinplup,pokemon,en-US-SM12-055-prinplup.jpg
+SM12-056,03 rare,SM12,,SM,CEC,Empoleon,pokemon,en-US-SM12-056-empoleon.jpg
+SM12-057,03 rare,SM12,,SM,CEC,Phione,pokemon,en-US-SM12-057-phione.jpg
+SM12-058,01 common,SM12,,SM,CEC,Tympole,pokemon,en-US-SM12-058-tympole.jpg
+SM12-059,01 common,SM12,,SM,CEC,Ducklett,pokemon,en-US-SM12-059-ducklett.jpg
+SM12-060,03 rare,SM12,,SM,CEC,Swanna,pokemon,en-US-SM12-060-swanna.jpg
+SM12-061,04 rare holo,SM12,,SM,CEC,Black Kyurem,pokemon,en-US-SM12-061-black-kyurem.jpg
+SM12-062,04 rare holo,SM12,,SM,CEC,Wishiwashi,pokemon,en-US-SM12-062-wishiwashi.jpg
+SM12-063,04 rare holo,SM12,,SM,CEC,Wishiwashi GX,pokemon,en-US-SM12-063-wishiwashi-gx.jpg
+SM12-064,01 common,SM12,,SM,CEC,Dewpider,pokemon,en-US-SM12-064-dewpider.jpg
+SM12-065,02 uncommon,SM12,,SM,CEC,Araquanid,pokemon,en-US-SM12-065-araquanid.jpg
+SM12-066,01 common,SM12,,SM,CEC,Pikachu,pokemon,en-US-SM12-066-pikachu.jpg
+SM12-067,03 rare,SM12,,SM,CEC,Raichu,pokemon,en-US-SM12-067-raichu.jpg
+SM12-068,01 common,SM12,,SM,CEC,Magnemite,pokemon,en-US-SM12-068-magnemite.jpg
+SM12-069,04 rare holo,SM12,,SM,CEC,Magneton,pokemon,en-US-SM12-069-magneton.jpg
+SM12-070,02 uncommon,SM12,,SM,CEC,Jolteon,pokemon,en-US-SM12-070-jolteon.jpg
+SM12-071,01 common,SM12,,SM,CEC,Chinchou,pokemon,en-US-SM12-071-chinchou.jpg
+SM12-072,03 rare,SM12,,SM,CEC,Lanturn,pokemon,en-US-SM12-072-lanturn.jpg
+SM12-073,02 uncommon,SM12,,SM,CEC,Togedemaru,pokemon,en-US-SM12-073-togedemaru.jpg
+SM12-074,01 common,SM12,,SM,CEC,Togedemaru,pokemon,en-US-SM12-074-togedemaru.jpg
+SM12-075,05 rare ultra,SM12,,SM,CEC,Solgaleo Lunala GX,pokemon,en-US-SM12-075-solgaleo-lunala-gx.jpg
+SM12-076,01 common,SM12,,SM,CEC,Koffing,pokemon,en-US-SM12-076-koffing.jpg
+SM12-077,03 rare,SM12,,SM,CEC,Weezing,pokemon,en-US-SM12-077-weezing.jpg
+SM12-078,01 common,SM12,,SM,CEC,Natu,pokemon,en-US-SM12-078-natu.jpg
+SM12-079,03 rare,SM12,,SM,CEC,Xatu,pokemon,en-US-SM12-079-xatu.jpg
+SM12-080,01 common,SM12,,SM,CEC,Ralts,pokemon,en-US-SM12-080-ralts.jpg
+SM12-081,02 uncommon,SM12,,SM,CEC,Kirlia,pokemon,en-US-SM12-081-kirlia.jpg
+SM12-082,04 rare holo,SM12,,SM,CEC,Gallade,pokemon,en-US-SM12-082-gallade.jpg
+SM12-083,01 common,SM12,,SM,CEC,Duskull,pokemon,en-US-SM12-083-duskull.jpg
+SM12-084,02 uncommon,SM12,,SM,CEC,Dusclops,pokemon,en-US-SM12-084-dusclops.jpg
+SM12-085,04 rare holo,SM12,,SM,CEC,Dusknoir,pokemon,en-US-SM12-085-dusknoir.jpg
+SM12-086,02 uncommon,SM12,,SM,CEC,Rotom,pokemon,en-US-SM12-086-rotom.jpg
+SM12-087,01 common,SM12,,SM,CEC,Woobat,pokemon,en-US-SM12-087-woobat.jpg
+SM12-088,03 rare,SM12,,SM,CEC,Swoobat,pokemon,en-US-SM12-088-swoobat.jpg
+SM12-089,01 common,SM12,,SM,CEC,Golett,pokemon,en-US-SM12-089-golett.jpg
+SM12-090,03 rare,SM12,,SM,CEC,Golurk,pokemon,en-US-SM12-090-golurk.jpg
+SM12-091,01 common,SM12,,SM,CEC,Skrelp,pokemon,en-US-SM12-091-skrelp.jpg
+SM12-092,03 rare,SM12,,SM,CEC,Dragalge,pokemon,en-US-SM12-092-dragalge.jpg
+SM12-093,01 common,SM12,,SM,CEC,Phantump,pokemon,en-US-SM12-093-phantump.jpg
+SM12-094,03 rare,SM12,,SM,CEC,Trevenant,pokemon,en-US-SM12-094-trevenant.jpg
+SM12-095,04 rare holo,SM12,,SM,CEC,Oricorio GX,pokemon,en-US-SM12-095-oricorio-gx.jpg
+SM12-096,02 uncommon,SM12,,SM,CEC,Mimikyu,pokemon,en-US-SM12-096-mimikyu.jpg
+SM12-097,03 rare,SM12,,SM,CEC,Mimikyu,pokemon,en-US-SM12-097-mimikyu.jpg
+SM12-098,02 uncommon,SM12,,SM,CEC,Dhelmise,pokemon,en-US-SM12-098-dhelmise.jpg
+SM12-099,01 common,SM12,,SM,CEC,Cosmog,pokemon,en-US-SM12-099-cosmog.jpg
+SM12-100,01 common,SM12,,SM,CEC,Cosmog,pokemon,en-US-SM12-100-cosmog.jpg
+SM12-101,02 uncommon,SM12,,SM,CEC,Cosmoem,pokemon,en-US-SM12-101-cosmoem.jpg
+SM12-102,04 rare holo,SM12,,SM,CEC,Lunala,pokemon,en-US-SM12-102-lunala.jpg
+SM12-103,03 rare,SM12,,SM,CEC,Marshadow,pokemon,en-US-SM12-103-marshadow.jpg
+SM12-104,04 rare holo,SM12,,SM,CEC,Blacephalon,pokemon,en-US-SM12-104-blacephalon.jpg
+SM12-105,01 common,SM12,,SM,CEC,Onix,pokemon,en-US-SM12-105-onix.jpg
+SM12-106,01 common,SM12,,SM,CEC,Nosepass,pokemon,en-US-SM12-106-nosepass.jpg
+SM12-107,01 common,SM12,,SM,CEC,Trapinch,pokemon,en-US-SM12-107-trapinch.jpg
+SM12-108,01 common,SM12,,SM,CEC,Trapinch,pokemon,en-US-SM12-108-trapinch.jpg
+SM12-109,02 uncommon,SM12,,SM,CEC,Vibrava,pokemon,en-US-SM12-109-vibrava.jpg
+SM12-110,04 rare holo,SM12,,SM,CEC,Flygon GX,pokemon,en-US-SM12-110-flygon-gx.jpg
+SM12-111,02 uncommon,SM12,,SM,CEC,Anorith,pokemon,en-US-SM12-111-anorith.jpg
+SM12-112,03 rare,SM12,,SM,CEC,Armaldo,pokemon,en-US-SM12-112-armaldo.jpg
+SM12-113,03 rare,SM12,,SM,CEC,Groudon,pokemon,en-US-SM12-113-groudon.jpg
+SM12-114,01 common,SM12,,SM,CEC,Drilbur,pokemon,en-US-SM12-114-drilbur.jpg
+SM12-115,04 rare holo,SM12,,SM,CEC,Excadrill,pokemon,en-US-SM12-115-excadrill.jpg
+SM12-116,01 common,SM12,,SM,CEC,Palpitoad,pokemon,en-US-SM12-116-palpitoad.jpg
+SM12-117,03 rare,SM12,,SM,CEC,Seismitoad,pokemon,en-US-SM12-117-seismitoad.jpg
+SM12-118,02 uncommon,SM12,,SM,CEC,Throh,pokemon,en-US-SM12-118-throh.jpg
+SM12-119,01 common,SM12,,SM,CEC,Pancham,pokemon,en-US-SM12-119-pancham.jpg
+SM12-120,02 uncommon,SM12,,SM,CEC,Pangoro,pokemon,en-US-SM12-120-pangoro.jpg
+SM12-121,01 common,SM12,,SM,CEC,Crabrawler,pokemon,en-US-SM12-121-crabrawler.jpg
+SM12-122,03 rare,SM12,,SM,CEC,Crabominable,pokemon,en-US-SM12-122-crabominable.jpg
+SM12-123,01 common,SM12,,SM,CEC,Rockruff,pokemon,en-US-SM12-123-rockruff.jpg
+SM12-124,04 rare holo,SM12,,SM,CEC,Lycanroc,pokemon,en-US-SM12-124-lycanroc.jpg
+SM12-125,01 common,SM12,,SM,CEC,Passimian,pokemon,en-US-SM12-125-passimian.jpg
+SM12-126,01 common,SM12,,SM,CEC,Sandygast,pokemon,en-US-SM12-126-sandygast.jpg
+SM12-127,03 rare,SM12,,SM,CEC,Palossand,pokemon,en-US-SM12-127-palossand.jpg
+SM12-128,01 common,SM12,,SM,CEC,Alolan Meowth,pokemon,en-US-SM12-128-alolan-meowth.jpg
+SM12-129,04 rare holo,SM12,,SM,CEC,Alolan Persian GX,pokemon,en-US-SM12-129-alolan-persian-gx.jpg
+SM12-130,01 common,SM12,,SM,CEC,Alolan Grimer,pokemon,en-US-SM12-130-alolan-grimer.jpg
+SM12-131,03 rare,SM12,,SM,CEC,Alolan Muk,pokemon,en-US-SM12-131-alolan-muk.jpg
+SM12-132,01 common,SM12,,SM,CEC,Carvanha,pokemon,en-US-SM12-132-carvanha.jpg
+SM12-133,02 uncommon,SM12,,SM,CEC,Absol,pokemon,en-US-SM12-133-absol.jpg
+SM12-134,01 common,SM12,,SM,CEC,Pawniard,pokemon,en-US-SM12-134-pawniard.jpg
+SM12-135,02 uncommon,SM12,,SM,CEC,Bisharp,pokemon,en-US-SM12-135-bisharp.jpg
+SM12-136,04 rare holo,SM12,,SM,CEC,Guzzlord,pokemon,en-US-SM12-136-guzzlord.jpg
+SM12-137,01 common,SM12,,SM,CEC,Alolan Sandshrew,pokemon,en-US-SM12-137-alolan-sandshrew.jpg
+SM12-138,03 rare,SM12,,SM,CEC,Alolan Sandslash,pokemon,en-US-SM12-138-alolan-sandslash.jpg
+SM12-139,04 rare holo,SM12,,SM,CEC,Steelix,pokemon,en-US-SM12-139-steelix.jpg
+SM12-140,02 uncommon,SM12,,SM,CEC,Mawile,pokemon,en-US-SM12-140-mawile.jpg
+SM12-141,02 uncommon,SM12,,SM,CEC,Probopass,pokemon,en-US-SM12-141-probopass.jpg
+SM12-142,04 rare holo,SM12,,SM,CEC,Solgaleo,pokemon,en-US-SM12-142-solgaleo.jpg
+SM12-143,05 rare ultra,SM12,,SM,CEC,Togepi Cleffa Igglybuff GX,pokemon,en-US-SM12-143-togepi-cleffa-igglybuff-gx.jpg
+SM12-144,02 uncommon,SM12,,SM,CEC,Clefairy,pokemon,en-US-SM12-144-clefairy.jpg
+SM12-145,04 rare holo,SM12,,SM,CEC,Alolan Ninetales,pokemon,en-US-SM12-145-alolan-ninetales.jpg
+SM12-146,01 common,SM12,,SM,CEC,Azurill,pokemon,en-US-SM12-146-azurill.jpg
+SM12-147,01 common,SM12,,SM,CEC,Cottonee,pokemon,en-US-SM12-147-cottonee.jpg
+SM12-148,03 rare,SM12,,SM,CEC,Whimsicott,pokemon,en-US-SM12-148-whimsicott.jpg
+SM12-149,01 common,SM12,,SM,CEC,Flabebe,pokemon,en-US-SM12-149-flabebe.jpg
+SM12-150,01 common,SM12,,SM,CEC,Flabebe,pokemon,en-US-SM12-150-flabebe.jpg
+SM12-151,02 uncommon,SM12,,SM,CEC,Floette,pokemon,en-US-SM12-151-floette.jpg
+SM12-152,04 rare holo,SM12,,SM,CEC,Florges,pokemon,en-US-SM12-152-florges.jpg
+SM12-153,01 common,SM12,,SM,CEC,Swirlix,pokemon,en-US-SM12-153-swirlix.jpg
+SM12-154,03 rare,SM12,,SM,CEC,Slurpuff,pokemon,en-US-SM12-154-slurpuff.jpg
+SM12-155,03 rare,SM12,,SM,CEC,Sylveon,pokemon,en-US-SM12-155-sylveon.jpg
+SM12-156,05 rare ultra,SM12,,SM,CEC,Arceus Dialga Palkia GX,pokemon,en-US-SM12-156-arceus-dialga-palkia-gx.jpg
+SM12-157,05 rare ultra,SM12,,SM,CEC,Reshiram Zekrom GX,pokemon,en-US-SM12-157-reshiram-zekrom-gx.jpg
+SM12-158,05 rare ultra,SM12,,SM,CEC,Naganadel Guzzlord GX,pokemon,en-US-SM12-158-naganadel-guzzlord-gx.jpg
+SM12-159,03 rare,SM12,,SM,CEC,Drampa,pokemon,en-US-SM12-159-drampa.jpg
+SM12-160,01 common,SM12,,SM,CEC,Jangmo O,pokemon,en-US-SM12-160-jangmo-o.jpg
+SM12-161,01 common,SM12,,SM,CEC,Jangmo O,pokemon,en-US-SM12-161-jangmo-o.jpg
+SM12-162,02 uncommon,SM12,,SM,CEC,Hakamo O,pokemon,en-US-SM12-162-hakamo-o.jpg
+SM12-163,04 rare holo,SM12,,SM,CEC,Kommo O,pokemon,en-US-SM12-163-kommo-o.jpg
+SM12-164,04 rare holo,SM12,,SM,CEC,Ultra Necrozma,pokemon,en-US-SM12-164-ultra-necrozma.jpg
+SM12-165,05 rare ultra,SM12,,SM,CEC,Mega Lopunny Jigglypuff GX,pokemon,en-US-SM12-165-mega-lopunny-jigglypuff-gx.jpg
+SM12-166,01 common,SM12,,SM,CEC,Eevee,pokemon,en-US-SM12-166-eevee.jpg
+SM12-167,01 common,SM12,,SM,CEC,Eevee,pokemon,en-US-SM12-167-eevee.jpg
+SM12-168,02 uncommon,SM12,,SM,CEC,Igglybuff,pokemon,en-US-SM12-168-igglybuff.jpg
+SM12-169,01 common,SM12,,SM,CEC,Aipom,pokemon,en-US-SM12-169-aipom.jpg
+SM12-170,02 uncommon,SM12,,SM,CEC,Ambipom,pokemon,en-US-SM12-170-ambipom.jpg
+SM12-171,01 common,SM12,,SM,CEC,Teddiursa,pokemon,en-US-SM12-171-teddiursa.jpg
+SM12-172,03 rare,SM12,,SM,CEC,Ursaring,pokemon,en-US-SM12-172-ursaring.jpg
+SM12-173,02 uncommon,SM12,,SM,CEC,Zangoose,pokemon,en-US-SM12-173-zangoose.jpg
+SM12-174,01 common,SM12,,SM,CEC,Lillipup,pokemon,en-US-SM12-174-lillipup.jpg
+SM12-175,02 uncommon,SM12,,SM,CEC,Herdier,pokemon,en-US-SM12-175-herdier.jpg
+SM12-176,04 rare holo,SM12,,SM,CEC,Stoutland,pokemon,en-US-SM12-176-stoutland.jpg
+SM12-177,01 common,SM12,,SM,CEC,Rufflet,pokemon,en-US-SM12-177-rufflet.jpg
+SM12-178,03 rare,SM12,,SM,CEC,Braviary,pokemon,en-US-SM12-178-braviary.jpg
+SM12-179,01 common,SM12,,SM,CEC,Helioptile,pokemon,en-US-SM12-179-helioptile.jpg
+SM12-180,03 rare,SM12,,SM,CEC,Heliolisk,pokemon,en-US-SM12-180-heliolisk.jpg
+SM12-181,01 common,SM12,,SM,CEC,Stufful,pokemon,en-US-SM12-181-stufful.jpg
+SM12-182,03 rare,SM12,,SM,CEC,Bewear,pokemon,en-US-SM12-182-bewear.jpg
+SM12-183,02 uncommon,SM12,,SM,CEC,Type Null,pokemon,en-US-SM12-183-type-null.jpg
+SM12-184,04 rare holo,SM12,,SM,CEC,Silvally GX,pokemon,en-US-SM12-184-silvally-gx.jpg
+SM12-185,02 uncommon,SM12,,SM,CEC,Beastite,trainer,en-US-SM12-185-beastite.jpg
+SM12-186,02 uncommon,SM12,,SM,CEC,Bellelba Brycen Man,trainer,en-US-SM12-186-bellelba-brycen-man.jpg
+SM12-187,02 uncommon,SM12,,SM,CEC,Chaotic Swell,trainer,en-US-SM12-187-chaotic-swell.jpg
+SM12-188,02 uncommon,SM12,,SM,CEC,Clay,trainer,en-US-SM12-188-clay.jpg
+SM12-189,02 uncommon,SM12,,SM,CEC,Cynthia Caitlin,trainer,en-US-SM12-189-cynthia-caitlin.jpg
+SM12-190,02 uncommon,SM12,,SM,CEC,Dragonium Z Dragon Claw,trainer,en-US-SM12-190-dragonium-z-dragon-claw.jpg
+SM12-191,02 uncommon,SM12,,SM,CEC,Erika,trainer,en-US-SM12-191-erika.jpg
+SM12-192,02 uncommon,SM12,,SM,CEC,Great Catcher,trainer,en-US-SM12-192-great-catcher.jpg
+SM12-193,02 uncommon,SM12,,SM,CEC,Guzma Hala,trainer,en-US-SM12-193-guzma-hala.jpg
+SM12-194,02 uncommon,SM12,,SM,CEC,Island Challenge Amulet,trainer,en-US-SM12-194-island-challenge-amulet.jpg
+SM12-195,02 uncommon,SM12,,SM,CEC,Lanas Fishing Rod,trainer,en-US-SM12-195-lanas-fishing-rod.jpg
+SM12-196,02 uncommon,SM12,,SM,CEC,Lillies Full Force,trainer,en-US-SM12-196-lillies-full-force.jpg
+SM12-197,02 uncommon,SM12,,SM,CEC,Lillies Poke Doll,trainer,en-US-SM12-197-lillies-poke-doll.jpg
+SM12-198,02 uncommon,SM12,,SM,CEC,Mallow Lana,trainer,en-US-SM12-198-mallow-lana.jpg
+SM12-199,02 uncommon,SM12,,SM,CEC,Misty Lorelei,trainer,en-US-SM12-199-misty-lorelei.jpg
+SM12-200,02 uncommon,SM12,,SM,CEC,Ns Resolve,trainer,en-US-SM12-200-ns-resolve.jpg
+SM12-201,02 uncommon,SM12,,SM,CEC,Professor Oaks Setup,trainer,en-US-SM12-201-professor-oaks-setup.jpg
+SM12-202,02 uncommon,SM12,,SM,CEC,Red Blue,trainer,en-US-SM12-202-red-blue.jpg
+SM12-203,02 uncommon,SM12,,SM,CEC,Roller Skater,trainer,en-US-SM12-203-roller-skater.jpg
+SM12-204,04 rare holo,SM12,,SM,CEC,Rosa,trainer,en-US-SM12-204-rosa.jpg
+SM12-205,02 uncommon,SM12,,SM,CEC,Roxie,trainer,en-US-SM12-205-roxie.jpg
+SM12-206,02 uncommon,SM12,,SM,CEC,Tag Call,trainer,en-US-SM12-206-tag-call.jpg
+SM12-207,02 uncommon,SM12,,SM,CEC,Unidentified Fossil,trainer,en-US-SM12-207-unidentified-fossil.jpg
+SM12-208,02 uncommon,SM12,,SM,CEC,Will,trainer,en-US-SM12-208-will.jpg
+SM12-209,02 uncommon,SM12,,SM,CEC,Draw Energy,energy,en-US-SM12-209-draw-energy.jpg
+SM12-210,05 rare ultra,SM12,,SM,CEC,Venusaur Snivy GX,pokemon,en-US-SM12-210-venusaur-snivy-gx.jpg
+SM12-211,05 rare ultra,SM12,,SM,CEC,Vileplume GX,pokemon,en-US-SM12-211-vileplume-gx.jpg
+SM12-212,05 rare ultra,SM12,,SM,CEC,Charizard Braixen GX,pokemon,en-US-SM12-212-charizard-braixen-gx.jpg
+SM12-213,05 rare ultra,SM12,,SM,CEC,Volcarona GX,pokemon,en-US-SM12-213-volcarona-gx.jpg
+SM12-214,05 rare ultra,SM12,,SM,CEC,Blastoise Piplup GX,pokemon,en-US-SM12-214-blastoise-piplup-gx.jpg
+SM12-215,05 rare ultra,SM12,,SM,CEC,Blastoise Piplup GX,pokemon,en-US-SM12-215-blastoise-piplup-gx.jpg
+SM12-216,05 rare ultra,SM12,,SM,CEC,Solgaleo Lunala GX,pokemon,en-US-SM12-216-solgaleo-lunala-gx.jpg
+SM12-217,05 rare ultra,SM12,,SM,CEC,Oricorio GX,pokemon,en-US-SM12-217-oricorio-gx.jpg
+SM12-218,05 rare ultra,SM12,,SM,CEC,Flygon GX,pokemon,en-US-SM12-218-flygon-gx.jpg
+SM12-219,05 rare ultra,SM12,,SM,CEC,Alolan Persian GX,pokemon,en-US-SM12-219-alolan-persian-gx.jpg
+SM12-220,05 rare ultra,SM12,,SM,CEC,Arceus Dialga Palkia GX,pokemon,en-US-SM12-220-arceus-dialga-palkia-gx.jpg
+SM12-221,05 rare ultra,SM12,,SM,CEC,Arceus Dialga Palkia GX,pokemon,en-US-SM12-221-arceus-dialga-palkia-gx.jpg
+SM12-222,05 rare ultra,SM12,,SM,CEC,Reshiram Zekrom GX,pokemon,en-US-SM12-222-reshiram-zekrom-gx.jpg
+SM12-223,05 rare ultra,SM12,,SM,CEC,Naganadel Guzzlord GX,pokemon,en-US-SM12-223-naganadel-guzzlord-gx.jpg
+SM12-224,05 rare ultra,SM12,,SM,CEC,Naganadel Guzzlord GX,pokemon,en-US-SM12-224-naganadel-guzzlord-gx.jpg
+SM12-225,05 rare ultra,SM12,,SM,CEC,Mega Lopunny Jigglypuff GX,pokemon,en-US-SM12-225-mega-lopunny-jigglypuff-gx.jpg
+SM12-226,05 rare ultra,SM12,,SM,CEC,Mega Lopunny Jigglypuff GX,pokemon,en-US-SM12-226-mega-lopunny-jigglypuff-gx.jpg
+SM12-227,05 rare ultra,SM12,,SM,CEC,Silvally GX,pokemon,en-US-SM12-227-silvally-gx.jpg
+SM12-228,05 rare ultra,SM12,,SM,CEC,Cynthia Caitlin,trainer,en-US-SM12-228-cynthia-caitlin.jpg
+SM12-229,05 rare ultra,SM12,,SM,CEC,Guzma Hala,trainer,en-US-SM12-229-guzma-hala.jpg
+SM12-230,05 rare ultra,SM12,,SM,CEC,Lillies Full Force,trainer,en-US-SM12-230-lillies-full-force.jpg
+SM12-231,05 rare ultra,SM12,,SM,CEC,Mallow Lana,trainer,en-US-SM12-231-mallow-lana.jpg
+SM12-232,05 rare ultra,SM12,,SM,CEC,Ns Resolve,trainer,en-US-SM12-232-ns-resolve.jpg
+SM12-233,05 rare ultra,SM12,,SM,CEC,Professor Oaks Setup,trainer,en-US-SM12-233-professor-oaks-setup.jpg
+SM12-234,05 rare ultra,SM12,,SM,CEC,Red Blue,trainer,en-US-SM12-234-red-blue.jpg
+SM12-235,05 rare ultra,SM12,,SM,CEC,Roller Skater,trainer,en-US-SM12-235-roller-skater.jpg
+SM12-236,05 rare ultra,SM12,,SM,CEC,Rosa,trainer,en-US-SM12-236-rosa.jpg
+SM12-237,06 rare secret,SM12,,SM,CEC,Torkoal,pokemon,en-US-SM12-237-torkoal.jpg
+SM12-238,06 rare secret,SM12,,SM,CEC,Weavile,pokemon,en-US-SM12-238-weavile.jpg
+SM12-239,06 rare secret,SM12,,SM,CEC,Piplup,pokemon,en-US-SM12-239-piplup.jpg
+SM12-240,06 rare secret,SM12,,SM,CEC,Wishiwashi,pokemon,en-US-SM12-240-wishiwashi.jpg
+SM12-241,06 rare secret,SM12,,SM,CEC,Pikachu,pokemon,en-US-SM12-241-pikachu.jpg
+SM12-242,06 rare secret,SM12,,SM,CEC,Magnemite,pokemon,en-US-SM12-242-magnemite.jpg
+SM12-243,06 rare secret,SM12,,SM,CEC,Koffing,pokemon,en-US-SM12-243-koffing.jpg
+SM12-244,06 rare secret,SM12,,SM,CEC,Gallade,pokemon,en-US-SM12-244-gallade.jpg
+SM12-245,06 rare secret,SM12,,SM,CEC,Mimikyu,pokemon,en-US-SM12-245-mimikyu.jpg
+SM12-246,06 rare secret,SM12,,SM,CEC,Excadrill,pokemon,en-US-SM12-246-excadrill.jpg
+SM12-247,06 rare secret,SM12,,SM,CEC,Steelix,pokemon,en-US-SM12-247-steelix.jpg
+SM12-248,06 rare secret,SM12,,SM,CEC,Stoutland,pokemon,en-US-SM12-248-stoutland.jpg
+SM12-249,06 rare secret,SM12,,SM,CEC,Venusaur Snivy GX,pokemon,en-US-SM12-249-venusaur-snivy-gx.jpg
+SM12-250,06 rare secret,SM12,,SM,CEC,Vileplume GX,pokemon,en-US-SM12-250-vileplume-gx.jpg
+SM12-251,06 rare secret,SM12,,SM,CEC,Charizard Braixen GX,pokemon,en-US-SM12-251-charizard-braixen-gx.jpg
+SM12-252,06 rare secret,SM12,,SM,CEC,Volcarona GX,pokemon,en-US-SM12-252-volcarona-gx.jpg
+SM12-253,06 rare secret,SM12,,SM,CEC,Blastoise Piplup GX,pokemon,en-US-SM12-253-blastoise-piplup-gx.jpg
+SM12-254,06 rare secret,SM12,,SM,CEC,Solgaleo Lunala GX,pokemon,en-US-SM12-254-solgaleo-lunala-gx.jpg
+SM12-255,06 rare secret,SM12,,SM,CEC,Oricorio GX,pokemon,en-US-SM12-255-oricorio-gx.jpg
+SM12-256,06 rare secret,SM12,,SM,CEC,Flygon GX,pokemon,en-US-SM12-256-flygon-gx.jpg
+SM12-257,06 rare secret,SM12,,SM,CEC,Alolan Persian GX,pokemon,en-US-SM12-257-alolan-persian-gx.jpg
+SM12-258,06 rare secret,SM12,,SM,CEC,Arceus Dialga Palkia GX,pokemon,en-US-SM12-258-arceus-dialga-palkia-gx.jpg
+SM12-259,06 rare secret,SM12,,SM,CEC,Reshiram Zekrom GX,pokemon,en-US-SM12-259-reshiram-zekrom-gx.jpg
+SM12-260,06 rare secret,SM12,,SM,CEC,Naganadel Guzzlord GX,pokemon,en-US-SM12-260-naganadel-guzzlord-gx.jpg
+SM12-261,06 rare secret,SM12,,SM,CEC,Mega Lopunny Jigglypuff GX,pokemon,en-US-SM12-261-mega-lopunny-jigglypuff-gx.jpg
+SM12-262,06 rare secret,SM12,,SM,CEC,Silvally GX,pokemon,en-US-SM12-262-silvally-gx.jpg
+SM12-263,06 rare secret,SM12,,SM,CEC,Giant Hearth,trainer,en-US-SM12-263-giant-hearth.jpg
+SM12-264,06 rare secret,SM12,,SM,CEC,Great Catcher,trainer,en-US-SM12-264-great-catcher.jpg
+SM12-265,06 rare secret,SM12,,SM,CEC,Island Challenge Amulet,trainer,en-US-SM12-265-island-challenge-amulet.jpg
+SM12-266,06 rare secret,SM12,,SM,CEC,Lanas Fishing Rod,trainer,en-US-SM12-266-lanas-fishing-rod.jpg
+SM12-267,06 rare secret,SM12,,SM,CEC,Lillies Poke Doll,trainer,en-US-SM12-267-lillies-poke-doll.jpg
+SM12-268,06 rare secret,SM12,,SM,CEC,Martial Arts Dojo,trainer,en-US-SM12-268-martial-arts-dojo.jpg
+SM12-269,06 rare secret,SM12,,SM,CEC,Power Plant,trainer,en-US-SM12-269-power-plant.jpg
+SM12-270,06 rare secret,SM12,,SM,CEC,Tag Call,trainer,en-US-SM12-270-tag-call.jpg
+SM12-271,06 rare secret,SM12,,SM,CEC,Draw Energy,energy,en-US-SM12-271-draw-energy.jpg

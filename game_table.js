@@ -747,7 +747,7 @@ function getWhichPlayer(playerId) {
 }
 
 function renderCardGroup(whichPlayer, group) {
-    let groupData = gameState[getPlayerId(whichPlayer)][group] ?? {
+    const groupData = gameState[getPlayerId(whichPlayer)][group] ?? {
         cards: [],
         count: 0
     };
@@ -760,7 +760,7 @@ function renderCardGroup(whichPlayer, group) {
     $(`.${whichPlayer} .${group} .cards`).html('');
     for (let key in groupData.cards) {
         const cardIdx = groupData.cards[key];
-        const img = deckImages[getPlayerId(whichPlayer)][cardIdx];
+        const imgSrc = deckImages[getPlayerId(whichPlayer)][cardIdx];
 
         let cssClass = 'card-wrapper';
         if (group.match('pokemon')) {
@@ -773,7 +773,7 @@ function renderCardGroup(whichPlayer, group) {
 
         $(`.${whichPlayer} .${group} .cards`).append(`
             <div class="${cssClass}">
-                <img src="sword and shield/${img}" class="pokemon-card front"/>
+                <img src="${imgSrc}" class="pokemon-card front"/>
             </div>
         `);
     }

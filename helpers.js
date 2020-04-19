@@ -37,8 +37,8 @@ function sellExtras($thisImg) {
     $thisImg.animate(
         { left: "300px", opacity: 0 }, 250, function () { $thisImg.removeAttr('style'); $thisImg}
     );
-    var index = $thisImg.parent('.card-wrapper').index();
-    var card = collection[index];
+    const index = $thisImg.parent('.card-wrapper').index();
+    let card = collection[index];
 
     // client-side
     if (card.quantity <= copiesToKeep) {
@@ -62,7 +62,7 @@ function sellExtras($thisImg) {
         apiEndpoint,
         {
             name: profileId,
-            cardId: collection[index].img,
+            cardId: collection[index].cardId,
             sellQty: sellQty
         }
     );
@@ -86,11 +86,10 @@ function addToBattleDeck($thisImg) {
         { left: "300px", opacity: 0 }, 250, function () { $thisImg.removeAttr('style'); $thisImg}
     );
 
-    var index = $thisImg.parent('.card-wrapper').index();
+    const index = $thisImg.parent('.card-wrapper').index();
     loadedBattleDeck.push({
-        img: collection[index].img,
-        rarity: collection[index].rarity,
-        quantity: 1
+        ...collection[index],
+        quantity: 1,
     });
     loadedBattleDeck = compileCollection(loadedBattleDeck);
     updateDeckStats();
@@ -105,8 +104,8 @@ function addToBattleDeck($thisImg) {
 function compileCollection(collection) {
     var collectionClone = [...collection];
     collectionClone.sort(function(a, b) {
-        var firstIdx = parseInt(a.img.match(/\d{3}/), 10);
-        var secondIdx = parseInt(b.img.match(/\d{3}/), 10);
+        const firstIdx = parseInt(a.cardId.match(/\d{3}/), 10);
+        const secondIdx = parseInt(b.cardId.match(/\d{3}/), 10);
 
         if (a.rarity == 'energy' && b.rarity == 'energy') {
             return firstIdx - secondIdx;
@@ -133,7 +132,7 @@ function compileCollection(collection) {
             continue;
         }
 
-        if (collectionClone[i].img != collectionClone[i - 1].img) {
+        if (collectionClone[i].cardId != collectionClone[i - 1].cardId) {
             consolidatedCollection.push(collectionClone[i]);
             continue;
         }
@@ -145,15 +144,13 @@ function compileCollection(collection) {
 }
 
 function addPackToCollection() {
-    var pack = generatePack();
+    const pack = generatePack();
 
     // add this pack to the collection (client-side)
-    $.each(pack, function (index, value) {
-        collection.push({
-            ...value,
-            'quantity': 1
-        });
-    });
+    for (let key in pack) {
+        const card = pack[key];
+        collection.push(card);
+    }
 
     collection = compileCollection(collection);
 
@@ -191,11 +188,15 @@ function saveCollection(pack, collectionName, isReplace, isNew, boxArt) {
     }, 'json');
 }
 
-function loadCards(expansion_set) {
-    var apiEndpoint = apiHome + '/load_cards.php';
+function loadCards(expansionSet, energyExpansion) {
+    energyExpansion = energyExpansion ?? 'SWSH';
+    const apiEndpoint = apiHome + '/load_cards.php';
     $.getJSON(
         apiEndpoint,
-        {expansion_set: expansion_set},
+        {
+            expansionSet: expansionSet,
+            energyExpansion: energyExpansion
+        },
         function(data) {
             energyCards = data.energyCards ?? [];
             commonCards = data.commonCards ?? [];
@@ -248,19 +249,24 @@ function playSound(cssId) {
 function renderCards(pack, timeInterval, cssId) {
     $(cssId + ' .card-wrapper').remove();
 
-    var time = timeInterval;
+    let time = timeInterval;
     $.each(pack, function (index, value) {
         timeoutFunctions.push(setTimeout(function () {
-            var quantitySpan = '';
+            let quantitySpan = '';
             if (value.quantity > 1) {
                 quantitySpan = `<span class="quantity">(x${value.quantity})</span>`;
+            }
+            let symbolSpan = '';
+            if (value.rarity != 'energy') {
+                symbolSpan = `<span class="symbol"><img src="logos/${value.expansionSet}_Symbol.png" /></span>`;
             }
 
             $(cssId).append(`
                 <div class="card-wrapper ${value.rarity}">
-                    <img src="sword and shield/${value.img}"
+                    <img src="cards/${value.expansionSet}/${value.imgSrc}"
                         class="${value.rarity} pokemon-card front" />
                     <br />
+                    ${symbolSpan}
                     <span class="rarity">${value.rarity}</span>
                     ${quantitySpan}
                 </div>
@@ -272,7 +278,7 @@ function renderCards(pack, timeInterval, cssId) {
 
 function generatePack() {
     let thisCard;
-    var pack = [];
+    let pack = [];
 
     // 1 random energy card
     const energyCardsClone = [...energyCards];
@@ -280,7 +286,7 @@ function generatePack() {
     addCardToPack(pack, thisCard, 'energy');
 
     // 6 random common cards
-    var commonCardsClone = [...commonCards];
+    let commonCardsClone = [...commonCards];
     commonCardsClone = shuffle(commonCardsClone);
     for (let i = 0; i < 6; i++) {
         thisCard = commonCardsClone.pop();
@@ -288,7 +294,7 @@ function generatePack() {
     }
 
     // 3 random uncommon cards
-    var uncommonCardsClone = [...uncommonCards];
+    let uncommonCardsClone = [...uncommonCards];
     uncommonCardsClone = shuffle(uncommonCardsClone);
     for (let i = 0; i < 3; i++) {
         thisCard = uncommonCardsClone.pop();
@@ -296,9 +302,9 @@ function generatePack() {
     }
 
     // 1 random rare card of varying rarity
-    var rareCardsClone = {};
+    let rareCardsClone = {};
     Object.assign(rareCardsClone, rareCards);
-    var rarityKey = determineRarity();
+    const rarityKey = determineRarity();
     $('#status-message').html(`You got a ${rarityKey.substring(3)} card!`);
     console.log(`Your rare card was a: ${rarityKey}!`);
     rareCardsClone = rareCardsClone[rarityKey];
@@ -310,9 +316,12 @@ function generatePack() {
 
 function addCardToPack(pack, thisCard, rarity) {
     pack.push({
-        img: thisCard.cardId,
+        cardId: thisCard.cardId,
         rarity: rarity,
-        marketValue: thisCard.marketValue ?? 0
+        marketValue: thisCard.marketValue ?? 0,
+        imgSrc: thisCard.imgSrc,
+        expansionSet: thisCard.expansionSet,
+        quantity: 1,
     });
 }
 
@@ -371,9 +380,9 @@ function updateStats() {
     $('#wallet').html(formatter.format(wallet));
     $('#packs-opened').html(packsOpened);
     
-    var uniqueCardCount = collection.reduce(function (values, v) {
-        if (!values.set[v.img]) {
-            values.set[v.img] = 1;
+    const uniqueCardCount = collection.reduce(function (values, v) {
+        if (!values.set[v.cardId]) {
+            values.set[v.cardId] = 1;
             values.count++;
         }
         return values;
@@ -389,14 +398,16 @@ function updateStats() {
 
 /**
  * A collection of cards is usually stored this way:
- * - {img: "en-US-SWSH1-049-lapras-v.jpg", rarity: "rare holo", quantity: 2, marketValue: 1.75}
- * - {img: "en-US-SWSH1-050-lapras-vmax.jpg", rarity: "rare ultra", quantity: 3, marketValue: 5}
+ * [
+ *  {cardId: "SWSH1-049", ..., quantity: 2},
+ *  {cardId: "SWSH1-050", ..., quantity: 3},
+ * ]
  * This function serves to create a list this way:
- * - en-US-SWSH1-049-lapras-v.jpg
- * - en-US-SWSH1-049-lapras-v.jpg
- * - en-US-SWSH1-050-lapras-vmax.jpg
- * - en-US-SWSH1-050-lapras-vmax.jpg
- * - en-US-SWSH1-050-lapras-vmax.jpg
+ * - SWSH1-049
+ * - SWSH1-049
+ * - SWSH1-050
+ * - SWSH1-050
+ * - SWSH1-050
  */
 function expandDeck(deck) {
     let cards = [];
@@ -404,7 +415,7 @@ function expandDeck(deck) {
     for (let cardKey in deck) {
         let cardValue = deck[cardKey];
         for (let count = 0; count < cardValue.quantity; count++) {
-            cards.push(cardValue.img);
+            cards.push(cardValue.imgSrc);
         }
     }
 
