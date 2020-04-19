@@ -814,8 +814,8 @@ function processServerMessage(message) {
 }
 
 function unpackCardCollection(whichPlayer, collectionName, compressedCardCollection) {
-    if (deckImages[getPlayerId(whichPlayer)]) { return; }
-    
+    if (deckImages[getPlayerId(whichPlayer)].length) { return; }
+
     deckImages[getPlayerId(whichPlayer)] = expandDeck(compressedCardCollection);
 
     for (let key in cardGroups) {
