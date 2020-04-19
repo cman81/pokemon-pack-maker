@@ -9,7 +9,7 @@
 - drag and drop cards!
 
 ## Doing
-- store pokemon status when someone changes it, i.e.: damage, conditions
+- store pokemon status to the DB when someone changes it, i.e.: damage, conditions
 
 ## Done
 - flip a coin

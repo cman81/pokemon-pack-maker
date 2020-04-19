@@ -128,6 +128,11 @@ function initialize_game_state() {
         'hand-2',
         'discard',
         'active-pokemon',
+        'bench-pokemon-1',
+        'bench-pokemon-2',
+        'bench-pokemon-3',
+        'bench-pokemon-4',
+        'bench-pokemon-5',
         'prize-cards',
         'stadium',
         'lost-zone'
@@ -135,6 +140,11 @@ function initialize_game_state() {
     foreach ($cardGroups as $value) {
         $game_state['player1'][$value] = ['cards' => []];
         $game_state['player2'][$value] = ['cards' => []];
+
+        if (strpos($value, 'pokemon') !== FALSE) {
+            $game_state['player1'][$value]['status'] = [];
+            $game_state['player2'][$value]['status'] = [];
+        }
     }
 
     return $game_state;

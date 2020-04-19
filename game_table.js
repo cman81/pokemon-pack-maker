@@ -40,7 +40,7 @@ $(function() {
     });
     
     $('body').on('click', 'button', function() {
-        let operation = $(this).data('operation');
+        const operation = $(this).data('operation');
         if (!operation) {
             return;
         }
@@ -57,7 +57,7 @@ $(function() {
                 for (let key in whichPlayers) {
                     const whichPlayer = whichPlayers[key];
                     const collectionName = gameState[getPlayerId(whichPlayer)]['collection_name'];
-                    if (!collectionName) { return; }
+                    if (!collectionName) { continue; }
     
                     loadCollection(collectionName)
                         .then(function(compressedCardCollection) {
@@ -107,7 +107,7 @@ $(function() {
         }
 
         if (operation == 'shuffle') {
-            let whichPlayer = $(this).data('player');
+            const whichPlayer = $(this).data('player');
 
             sendGameMessage(
                 getPlayerId(whichPlayer),
@@ -121,9 +121,9 @@ $(function() {
         }
 
         if (operation == 'moveTop') {
-            let moveFrom = $(this).data('from');
-            let moveTo = $(this).data('to');
-            let whichPlayer = $(this).data('player');
+            const moveFrom = $(this).data('from');
+            const moveTo = $(this).data('to');
+            const whichPlayer = $(this).data('player');
 
             sendGameMessage(
                 getPlayerId(whichPlayer),
@@ -141,8 +141,8 @@ $(function() {
         }
 
         if (operation == 'tuck') {
-            let whichPlayer = $(this).data('player');
-            let cardGroup = $(this).data('card-group');
+            const whichPlayer = $(this).data('player');
+            const cardGroup = $(this).data('card-group');
 
             sendGameMessage(
                 getPlayerId(whichPlayer),
@@ -157,9 +157,9 @@ $(function() {
         }
 
         if (operation == 'moveAll') {
-            let moveFrom = $(this).data('from');
-            let moveTo = $(this).data('to');
-            let whichPlayer = $(this).data('player');
+            const moveFrom = $(this).data('from');
+            const moveTo = $(this).data('to');
+            const whichPlayer = $(this).data('player');
 
             sendGameMessage(
                 getPlayerId(whichPlayer),
@@ -176,13 +176,13 @@ $(function() {
         }
 
         if (operation == 'flipCoin') {
-            let rand = randomizeGameId();
-            let result = (rand % 2 == 1) ? 'tails' :' heads';
+            const rand = randomizeGameId();
+            const result = (rand % 2 == 1) ? 'tails' :' heads';
             $('#coin-flip').html(`${result} (${rand})`);
         }
 
         if (operation == 'showPokemon') {
-            let whichPlayer = $(this).data('player');
+            const whichPlayer = $(this).data('player');
 
             sendGameMessage(
                 getPlayerId(whichPlayer),
@@ -213,9 +213,9 @@ $(function() {
         }
 
         if (operation == 'swapCardGroups') {
-            let whichPlayer = $(this).data('player');
-            let groupA = $(this).data('group-a');
-            let groupB = $(this).data('group-b');
+            const whichPlayer = $(this).data('player');
+            const groupA = $(this).data('group-a');
+            const groupB = $(this).data('group-b');
 
             sendGameMessage(
                 getPlayerId(whichPlayer),
@@ -684,9 +684,9 @@ function renderPokemonStatus($groupBody, whichPlayer, group) {
             let total_hp = ui.values[1] * 10;
             $sliderText.val(`${damage} / ${total_hp} HP`);
         },
-        change: function(event, ui) {
-
-        }
+    });
+    $sliderDiv.on('slidechange', function(event, ui) {
+        damageSliderChangeCallback(ui, whichPlayer, group);
     });
     
     let damage = $sliderDiv.slider("values", 0) * 10;
@@ -694,19 +694,36 @@ function renderPokemonStatus($groupBody, whichPlayer, group) {
     $sliderText.val(`${damage} / ${total_hp} HP`);
 }
 
+function damageSliderChangeCallback(ui, whichPlayer, group) {
+    sendGameMessage(
+        getPlayerId('myself'),
+        'judge',
+        'setDamageHP',
+        {
+            targetPlayerId: getPlayerId(whichPlayer),
+            cardGroup: group,
+            damage: ui.values[0] * 10,
+            hp: ui.values[1] * 10,
+        }
+    )
+};
+
 function randomizeGameId() {
     // generate a random number between 100000 and 999999
     return Math.floor(Math.random() * 899999) + 100000; // roll a D144
 }
 
-function getPlayerId(mode) {
-    let selectedValue = $('#player-select').val();
+/**
+ * Returns 'player1' or 'player2'
+ */
+function getPlayerId(whichPlayer) {
+    const selectedValue = $('#player-select').val();
     if (selectedValue.substr(0, 6) != 'player') {
         alert('Please select a player before continuing');
         return false;
     }
 
-    if (mode == 'myself') {
+    if (whichPlayer == 'myself') {
         return selectedValue;
     }
 
@@ -715,6 +732,17 @@ function getPlayerId(mode) {
     }
 
     return 'player1';
+}
+
+/**
+ * Returns 'myself' or 'opponent'
+ */
+function getWhichPlayer(playerId) {
+    if (playerId == getPlayerId('myself')) {
+        return 'myself';
+    }
+
+    return 'opponent';
 }
 
 function renderCardGroup(whichPlayer, group) {
@@ -781,7 +809,7 @@ function pingServerMessages() {
 function processServerMessage(message) {
     if (message.type == 'renderCardGroup') {
         for (let cardGroup in message.data) {
-            let value = message.data[cardGroup];
+            const value = message.data[cardGroup];
             gameState[getPlayerId('opponent')][cardGroup] = value;
             renderCardGroup('opponent', cardGroup);
             break; // only 1 iteration
@@ -791,7 +819,7 @@ function processServerMessage(message) {
     }
 
     if (message.type == 'revealCard') {
-        let buttonId = randomizeGameId();
+        const buttonId = randomizeGameId();
         // create a button
         $('body').append(buttons.modalRevealedCard(buttonId, message.data));
 
@@ -810,6 +838,27 @@ function processServerMessage(message) {
             .then(function(compressedCardCollection) {
                 unpackCardCollection('opponent', collectionName, compressedCardCollection);
             });
+    }
+
+    if (message.type == 'setDamageHP') {
+        const whichPlayer = getWhichPlayer(message.data.targetPlayerId);
+        const cardGroup = message.data.cardGroup;
+        const damage = message.data.damage;
+        const hp = message.data.hp;
+
+        gameState[getPlayerId(whichPlayer)][cardGroup].status.damage = damage;
+        gameState[getPlayerId(whichPlayer)][cardGroup].status.hp = hp;
+
+        const $sliderDiv = $(`#${whichPlayer}-${cardGroup}-damage-hp-range`);
+        $sliderDiv.off('slidechange');
+        $sliderDiv.slider("values", 0, Math.round(damage / 10));
+        $sliderDiv.slider("values", 1, Math.round(hp / 10));
+        $sliderDiv.on('slidechange', function(event, ui) {
+            damageSliderChangeCallback(ui, whichPlayer, cardGroup);
+        });
+        
+        const $sliderText = $(`#${whichPlayer}-${cardGroup}-damage-hp`);
+        $sliderText.val(`${damage} / ${hp} HP`);
     }
 }
 

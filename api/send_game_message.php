@@ -15,6 +15,7 @@
         case 'showPokemon': exit(json_encode(show_pokemon($gameId, $from)));
         case 'swapCardGroups': exit(json_encode(swapCardGroups($gameId, $from, $data)));
         case 'useDeck': exit(json_encode(use_deck($gameId, $from, $data)));
+        case 'setDamageHP': exit(json_encode(set_damage_hp($gameId, $from, $data)));
     }
 
     function load_game_state($game_id, $player_id = FALSE) {
@@ -432,4 +433,27 @@
         );
 
         return $collection_name;
+    }
+
+    function set_damage_hp($game_id, $my_player_id, $data) {
+        $game_state = load_game_state($game_id);
+        $target_player_id = $data['targetPlayerId'];
+        $card_group = $data['cardGroup'];
+        $damage = $data['damage'];
+        $hp = $data['hp'];
+
+        $game_state[$target_player_id][$card_group]['status']['damage'] = $damage;
+        $game_state[$target_player_id][$card_group]['status']['hp'] = $hp;
+        
+        save_game_state($game_id, $game_state);
+
+        enqueue_game_message(
+            $game_id,
+            'judge',
+            get_opponent_player_id($my_player_id),
+            'setDamageHP',
+            $data
+        );
+
+        return TRUE;
     }
