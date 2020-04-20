@@ -1,6 +1,8 @@
 # Kanban
 
 ## To Do
+- show letters in CAPS instead of lower-case
+- change to another random card in the typing game
 - organize collection by rarity
 - organize collection by type: pokemon, trainer, energy
 - collapse "pokemon" containers by default
