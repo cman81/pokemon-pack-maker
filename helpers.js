@@ -275,6 +275,9 @@ function playSound(cssId) {
         return;
     }
 
+    if ($('#typewriter-key')[0]) {
+        $('#typewriter-key')[0].pause();
+    }
     $('#whoosh')[0].pause();
     $('#bigwhoosh')[0].pause();
     sound.currentTime = 0;

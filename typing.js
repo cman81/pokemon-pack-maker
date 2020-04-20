@@ -43,6 +43,7 @@ function updateInput(charCode) {
         // handle backspace key
         if (!currentInput.length) { return; }
 
+        playSound('#zoop');
         if (isLastCharacterCorrect()) {
             charsCorrect--;
             $('.correct').html(charsCorrect);
@@ -63,9 +64,11 @@ function updateInput(charCode) {
     currentInput += char;
 
     if (isLastCharacterCorrect()) {
+        playSound('#typewriter-key');
         charsCorrect++;
         $('.correct').html(charsCorrect);
-
+    } else {
+        playSound('#clang');
     }
 
     $('.main.container .col .keyboard-input .letters').html(currentInput.toUpperCase());
@@ -103,6 +106,9 @@ function endGame() {
         let value = intervalFunctions[key];
         clearInterval(value);
     }
+
+    $('.blinker').hide();
+    playSound('#win-sound');
 };
 
 function loadTypingCards() {
