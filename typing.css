@@ -14,11 +14,11 @@ body {
     transition: transform .2s ease-out;
     position: relative;
 }
-.main.container { min-height: 900px; }
+.main.container { padding-bottom: 20px; }
 .top.container { padding-top: 10px; }
 .main.container div { text-align: center; }
 .letters {
-    font-size: 4rem;
+    font-size: 3.5rem;
     letter-spacing: 10px;
     text-align: left;
 }
