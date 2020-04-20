@@ -24,6 +24,16 @@ var expansions = {
         expansionSet: 'SM12',
         energy: 'SMb'
     },
+    'SM11': {
+        name: 'Unified Minds',
+        expansionSet: 'SM11',
+        energy: 'SMb'
+    },
+    'SM10': {
+        name: 'Unbroken Bonds',
+        expansionSet: 'SM10',
+        energy: 'SMb'
+    },
 };
   
 $(document).ready(function() {
