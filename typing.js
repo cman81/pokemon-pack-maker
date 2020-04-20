@@ -5,25 +5,105 @@ var cards = [];
 var charsCorrect = 0;
 var charsCompleted = 0;
 var cardsCompleted = 0;
+var currentWord = '';
+var currentInput = '';
+var timeLimit = 30;
 
 $(function () {
     loadTypingCards();
 
     $(document).on('keypress', function(event) {
-        beginGame();
-    })
+        if (!isGameStarted) { beginGame(); }
+        if (currentWord.length != currentInput.length) {
+            updateInput(event.which);
+
+            return;
+        }
+
+        // word has been completed and a new one has been requested
+        currentInput = currentWord = '';
+        if (cards.length == 0) { return endGame(); }
+
+        $('.cards-remaining').html(cards.length);
+        renderTypingCard(cards.pop());
+    });
+    $(document).on('keydown', function(event) {
+        // @see https://stackoverflow.com/a/4843502
+        if (event.which == 8) {
+            // backspace
+            updateInput(8);
+        }
+    });
+
+    $('.main.container .col .timer').html(`${timeLimit}`);
 });
 
-function beginGame() {
-    if (!isGameStarted) {
-        isGameStarted = true;
-        startTime = Date.now();
-        intervalFunctions.push(setInterval(() => {
-            const timer = Date.now() - startTime;
-            $('.main.container .col .timer').html(`${Math.round(timer / 1000)}`);
-        }, 1000));
+function updateInput(charCode) {
+    if (charCode == 8) {
+        // handle backspace key
+        if (!currentInput.length) { return; }
+
+        if (isLastCharacterCorrect()) {
+            charsCorrect--;
+            $('.correct').html(charsCorrect);
+        }
+
+        charsCompleted--;
+        $('.total').html(charsCompleted);
+
+        currentInput = currentInput.substr(0, currentInput.length - 1);
+        $('.main.container .col .keyboard-input .letters').html(currentInput.toUpperCase());
+        return;
     }
+
+    charsCompleted++;
+    $('.total').html(charsCompleted);
+
+    let char = String.fromCharCode(charCode)
+    currentInput += char;
+
+    if (isLastCharacterCorrect()) {
+        charsCorrect++;
+        $('.correct').html(charsCorrect);
+
+    }
+
+    $('.main.container .col .keyboard-input .letters').html(currentInput.toUpperCase());
 }
+
+function isLastCharacterCorrect() {
+    let inputLength = currentInput.length;
+    let inputChar = currentInput.charAt(inputLength - 1);
+    let correctChar = currentWord.charAt(inputLength - 1);
+
+    if (inputChar.toUpperCase() == correctChar.toUpperCase()) { return true; }
+    return false;
+};
+
+function beginGame() {
+    isGameStarted = true;
+    startTime = Date.now();
+    intervalFunctions.push(setInterval(() => {
+        const timer = Date.now() - startTime;
+        const secondsRemaining = timeLimit - Math.round(timer / 1000);
+        $('.main.container .col .timer').html(`${secondsRemaining}`);
+
+        if (secondsRemaining == 0) {
+            endGame();
+        }
+    }, 1000));
+}
+
+function endGame() {
+    $(document)
+        .off('keypress')
+        .off('keydown');
+
+    for (let key in intervalFunctions) {
+        let value = intervalFunctions[key];
+        clearInterval(value);
+    }
+};
 
 function loadTypingCards() {
     const apiEndpoint = apiHome + '/load_typing_cards.php';
@@ -38,10 +118,11 @@ function loadTypingCards() {
 }
 
 function renderTypingCard(card) {
+    currentWord = card.cardName;
     $('.main.container .col .card-item').html(`
         <img src="cards/${card.expansionSet}/${card.imgSrc}" class="pokemon-card" />
     `);
-    $('.main.container .col .target .letters').html(card.cardName.toLowerCase());
+    $('.main.container .col .target .letters').html(currentWord.toUpperCase());
     $('.main.container .col .keyboard-input .letters').html('');
     $('.main.container .col .keyboard-input').width(
         $('.main.container .col .target .letters').width()

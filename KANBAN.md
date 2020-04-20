@@ -1,7 +1,6 @@
 # Kanban
 
 ## To Do
-- show letters in CAPS instead of lower-case
 - change to another random card in the typing game
 - organize collection by rarity
 - organize collection by type: pokemon, trainer, energy
@@ -13,7 +12,6 @@
 - drag and drop cards!
 
 ## Doing
-- create a tying minigame for Samantha
 - store pokemon status to the DB when someone changes it, i.e.: damage, conditions
 
 ## Done
@@ -34,3 +32,5 @@
 - automatically load decks if they have already been chosen
 - for evolved pokemon, hide the lower levels, i.e.: basic. clicking the top card will reveal all cards in the stack
 - add a new expansion/set of cards to collect!
+- show letters in CAPS instead of lower-case
+- create a tying minigame for Samantha
