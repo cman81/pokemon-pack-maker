@@ -84,3 +84,4 @@ img.uncommon {
 }
 .expansions img.selected { border: 1px solid #990000; }
 .symbol img { height: 40px; }
+li.nav-item { margin: 0 5px; }
