@@ -252,30 +252,38 @@ $(function() {
 function initializePokemonStatus(whichPlayer) {
     for (let key in cardGroups) {
         const group = cardGroups[key];
-        if (!group.match('pokemon')) {
-            continue;
-        }
+        updatePokemonStatus(whichPlayer, group);
+    }
+}
 
-        // damage / hp
-        let $sliderDiv = $(`#${whichPlayer}-${group}-damage-hp-range`);
+function updatePokemonStatus(whichPlayer, group) {
+    if (gameState[whichPlayer].is_pokemon_hidden) {
+        return;
+    }
 
-        const damage = gameState[getPlayerId(whichPlayer)][group].status.damage;
-        $sliderDiv.slider("values", 0, damage);
+    if (!group.match('pokemon')) {
+        return;
+    }
 
-        const hp = gameState[getPlayerId(whichPlayer)][group].status.hp;
-        $sliderDiv.slider("values", 1, hp);
+    // damage / hp
+    let $sliderDiv = $(`#${whichPlayer}-${group}-damage-hp-range`);
 
-        let $sliderText = $(`#${whichPlayer}-${group}-damage-hp`);
-        $sliderText.val(`${damage} / ${hp} HP`);
-        
-        // special conditions: asleep, poisoned, etc.
-        const conditions = {
-            ...gameState[getPlayerId(whichPlayer)][group].status.conditions
-        };
-        for (let conditionName in conditions) {
-            const hasCondition = conditions[conditionName];
-            $(`#${whichPlayer}-${group}-${conditionName}`).prop('checked', hasCondition);
-        }
+    const damage = gameState[getPlayerId(whichPlayer)][group].status.damage ?? 0;
+    $sliderDiv.slider("values", 0, damage);
+
+    const hp = gameState[getPlayerId(whichPlayer)][group].status.hp ?? 0;
+    $sliderDiv.slider("values", 1, hp);
+
+    let $sliderText = $(`#${whichPlayer}-${group}-damage-hp`);
+    $sliderText.val(`${damage} / ${hp} HP`);
+
+    // special conditions: asleep, poisoned, etc.
+    const conditions = {
+        ...gameState[getPlayerId(whichPlayer)][group].status.conditions
+    };
+    for (let conditionName in conditions) {
+        const hasCondition = conditions[conditionName];
+        $(`#${whichPlayer}-${group}-${conditionName}`).prop('checked', hasCondition);
     }
 }
 
@@ -843,6 +851,8 @@ function renderCardGroup(whichPlayer, group) {
             </div>
         `);
     }
+
+    updatePokemonStatus(whichPlayer, group);
 }
 
 function renderCardGroups(whichPlayer, groups) {
@@ -911,8 +921,8 @@ function processServerMessage(message) {
         const targetPlayerId = message.data.targetPlayerId;
         const whichPlayer = getWhichPlayer(targetPlayerId);
         const cardGroup = message.data.cardGroup;
-        const damage = message.data.damage;
-        const hp = message.data.hp;
+        const damage = message.data.damage ?? 0;
+        const hp = message.data.hp ?? 0;
 
         gameState[targetPlayerId][cardGroup].status.damage = damage;
         gameState[targetPlayerId][cardGroup].status.hp = hp;
