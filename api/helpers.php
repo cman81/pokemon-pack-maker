@@ -144,10 +144,67 @@ function initialize_game_state() {
         $game_state['player2'][$value] = ['cards' => []];
 
         if (strpos($value, 'pokemon') !== FALSE) {
-            $game_state['player1'][$value]['status'] = [];
-            $game_state['player2'][$value]['status'] = [];
+            $game_state['player1'][$value]['status'] = [
+                'conditions' => [],
+            ];
+            $game_state['player2'][$value]['status'] = [
+                'conditions' => [],
+            ];
         }
     }
 
     return $game_state;
+}
+
+function get_game_messages($game_id, $recipient) {
+    $out = [];
+
+    $db = new PokemonDB();
+    $db->busyTimeout(250);
+
+    $sql = "
+        SELECT message_from, type, data
+        FROM game_message_queue
+        WHERE message_to = :message_to
+        AND game_id = :game_id
+        ORDER BY timestamp_value ASC
+    ";    
+    $stmt = $db->prepare($sql);
+
+    // passing values to the parameters
+    $stmt->bindValue(':message_to', $recipient);
+    $stmt->bindValue(':game_id', $game_id);
+
+    $ret = $stmt->execute();
+    while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
+        $out[] = [
+            'message_from' => $row['message_from'],
+            'type' => $row['type'],
+            'data' => json_decode($row['data'], TRUE),
+        ];
+    }
+
+    clear_game_messages($game_id, $recipient, $db);
+
+    return $out;
+}
+
+function clear_game_messages($game_id, $recipient, $db = FALSE) {
+    if (empty($db)) {
+        $db = new PokemonDB();
+        $db->busyTimeout(250);    
+    }
+
+    $sql = "
+        DELETE FROM game_message_queue
+        WHERE message_to = :message_to
+        AND game_id = :game_id
+    ";    
+    $stmt = $db->prepare($sql);
+
+    // passing values to the parameters
+    $stmt->bindValue(':message_to', $recipient);
+    $stmt->bindValue(':game_id', $game_id);
+
+    $stmt->execute();   
 }

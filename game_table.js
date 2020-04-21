@@ -243,32 +243,66 @@ $(function() {
         clearTimeout(hoverTimeout);
     })
     .on('change', '.pokemon-stats input:checkbox', function() {
-        // do not apply to uncheck event
-        if (!$(this).prop("checked")) { return; }
-
-        // only apply to certain special conditions
-        let concernedValues = [
-            'asleep',
-            'paralyzed',
-            'confused',
-        ]
-        let checkboxVal = $(this).val();
-        if (!concernedValues.includes(checkboxVal)) { return; }
-
-        let checkBoxId = $(this).attr('id');
-        let idParts = checkBoxId.split('-');
-        idParts.pop();
-        let idPrefix = idParts.join('-');
-
-        for (let key in concernedValues) {
-            let value = concernedValues[key];
-
-            if (checkboxVal != value) {
-                $(`#${idPrefix}-${value}`).prop('checked', false);
-            }
-        }
+        statusChangeCallback($(this));
     });
 });
+
+function statusChangeCallback($checkbox) {
+    // do not apply to uncheck event
+    if (!$checkbox.prop("checked")) { return setSpecialConditions($checkbox); }
+    
+    // only apply to certain special conditions
+    let concernedValues = [
+        'asleep',
+        'paralyzed',
+        'confused',
+    ];
+    let checkboxVal = $checkbox.val();
+    if (!concernedValues.includes(checkboxVal)) { return setSpecialConditions($checkbox); }
+    
+    let checkBoxId = $checkbox.attr('id');
+    let idParts = checkBoxId.split('-');
+    idParts.pop();
+    
+    let idPrefix = idParts.join('-');
+    for (let key in concernedValues) {
+        let value = concernedValues[key];
+        if (checkboxVal != value) {
+            $(`#${idPrefix}-${value}`).prop('checked', false);
+        }
+    }
+
+    return setSpecialConditions($checkbox);
+}
+
+function setSpecialConditions($checkbox) {
+    let idParts = $checkbox.attr('id').split('-');
+    const whichPlayer = idParts[0];
+    const targetPlayerId = getPlayerId(whichPlayer);
+
+    idParts.pop();
+    const idPrefix = idParts.join('-');
+
+    let cardGroup = idParts;
+    cardGroup.shift();
+    cardGroup = cardGroup.join('-');
+
+    gameState[targetPlayerId][cardGroup].status.conditions = {
+        'asleep': $(`#${idPrefix}-asleep`).prop('checked'),
+        'paralyzed': $(`#${idPrefix}-paralyzed`).prop('checked'),
+        'confused': $(`#${idPrefix}-confused`).prop('checked'),
+        'poisoned': $(`#${idPrefix}-poisoned`).prop('checked'),
+        'burned': $(`#${idPrefix}-burned`).prop('checked'),
+    }
+
+    let specialConditions = {
+        ...gameState[targetPlayerId][cardGroup].status.conditions,
+        'playerId': targetPlayerId,
+        'cardGroup': cardGroup,
+    };
+
+    sendGameMessage(getPlayerId('myself'), 'judge', 'setSpecialConditions', specialConditions);
+}
 
 function sendGameMessage(from, to, type, data) {
     var apiEndpoint = apiHome + '/send_game_message.php';
@@ -842,13 +876,14 @@ function processServerMessage(message) {
     }
 
     if (message.type == 'setDamageHP') {
-        const whichPlayer = getWhichPlayer(message.data.targetPlayerId);
+        const targetPlayerId = message.data.targetPlayerId;
+        const whichPlayer = getWhichPlayer(targetPlayerId);
         const cardGroup = message.data.cardGroup;
         const damage = message.data.damage;
         const hp = message.data.hp;
 
-        gameState[getPlayerId(whichPlayer)][cardGroup].status.damage = damage;
-        gameState[getPlayerId(whichPlayer)][cardGroup].status.hp = hp;
+        gameState[targetPlayerId][cardGroup].status.damage = damage;
+        gameState[targetPlayerId][cardGroup].status.hp = hp;
 
         const $sliderDiv = $(`#${whichPlayer}-${cardGroup}-damage-hp-range`);
         $sliderDiv.off('slidechange');
@@ -860,6 +895,32 @@ function processServerMessage(message) {
         
         const $sliderText = $(`#${whichPlayer}-${cardGroup}-damage-hp`);
         $sliderText.val(`${damage} / ${hp} HP`);
+    }
+
+    if (message.type == 'setSpecialConditions') {
+        const targetPlayerId = message.data.playerId;
+        const cardGroup = message.data.cardGroup;
+        const conditions = {
+            'asleep': message.data.asleep == 'true',
+            'paralyzed': message.data.paralyzed == 'true',
+            'confused': message.data.confused == 'true',
+            'poisoned': message.data.poisoned == 'true',
+            'burned': message.data.burned == 'true',
+        };
+
+        gameState[targetPlayerId][cardGroup].status.conditions = conditions;
+
+        $('body').off('change', '.pokemon-stats input:checkbox');
+
+        const whichPlayer = getWhichPlayer(targetPlayerId);
+        for (let conditionName in conditions) {
+            const conditionState = conditions[conditionName];
+            $(`#${whichPlayer}-${cardGroup}-${conditionName}`).prop('checked', conditionState);
+        }
+
+        $('body').on('change', '.pokemon-stats input:checkbox', function() {
+            statusChangeCallback($(this));
+        })
     }
 }
 

@@ -16,6 +16,7 @@
         case 'swapCardGroups': exit(json_encode(swapCardGroups($gameId, $from, $data)));
         case 'useDeck': exit(json_encode(use_deck($gameId, $from, $data)));
         case 'setDamageHP': exit(json_encode(set_damage_hp($gameId, $from, $data)));
+        case 'setSpecialConditions': exit(json_encode(set_special_conditions($gameId, $from, $data)));
     }
 
     function load_game_state($game_id, $player_id = FALSE) {
@@ -41,6 +42,8 @@
         if (!$player_id) {
             return $game_state;
         }
+
+        clear_game_messages($game_id, $player_id, $db);
 
         $partial_game_state = [
             'player1' => [
@@ -452,6 +455,32 @@
             'judge',
             get_opponent_player_id($my_player_id),
             'setDamageHP',
+            $data
+        );
+
+        return TRUE;
+    }
+
+    function set_special_conditions($game_id, $my_player_id, $data) {
+        $game_state = load_game_state($game_id);
+        $target_player_id = $data['playerId'];
+        $card_group = $data['cardGroup'];
+
+        $game_state[$target_player_id][$card_group]['status']['conditions'] = [
+            'asleep' => $data['asleep'],
+            'paralyzed' => $data['paralyzed'],
+            'confused' => $data['confused'],
+            'poisoned' => $data['poisoned'],
+            'burned' => $data['burned'],
+        ];
+
+        save_game_state($game_id, $game_state);
+
+        enqueue_game_message(
+            $game_id,
+            'judge',
+            get_opponent_player_id($my_player_id),
+            'setSpecialConditions',
             $data
         );
 
