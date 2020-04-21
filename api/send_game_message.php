@@ -208,6 +208,8 @@
                 {$to}
             "
         );
+
+        $game_state = process_empty_pokemon_stack($game_state, $player_id, $from);
         
         save_game_state($game_id, $game_state);
 
@@ -282,6 +284,8 @@
 
         $game_state[$player_id][$to]['cards'][] = $card_pick;
 
+        $game_state = process_empty_pokemon_stack($game_state, $player_id, $from);
+
         save_game_state($game_id, $game_state);
 
         update_opponent_card_group($game_state, $game_id, $player_id, $from);
@@ -315,6 +319,8 @@
         $cards = $game_state[$player_id][$from]['cards'];
         $game_state[$player_id][$from]['cards'] = [];
         $game_state[$player_id][$to]['cards'] = array_merge($game_state[$player_id][$to]['cards'], $cards);
+
+        $game_state = process_empty_pokemon_stack($game_state, $player_id, $from);
         
         save_game_state($game_id, $game_state);
 
@@ -325,6 +331,26 @@
             $from => render_card_group($game_state, $player_id, $from),
             $to => render_card_group($game_state, $player_id, $to),
         ];
+    }
+
+    /**
+     * When a player discards all cards from a pokemon stack, reset status, i.e.: damage, conditions
+     */
+    function process_empty_pokemon_stack($game_state, $player_id, $group) {
+        if (strpos($group, 'pokemon') === FALSE) { return $game_state; }
+        if (!empty($game_state[$player_id][$group]['cards'])) { return $game_state; }
+
+        $game_state[$player_id][$group]['status'] = [
+            'conditions' => [
+                'asleep' => false,
+                'paralyzed' => false,
+                'confused' => false,
+                'poisoned' => false,
+                'burned' => false,
+            ],
+        ];
+
+        return $game_state;
     }
 
     function tuck_card($game_id, $player_id, $card_group) {

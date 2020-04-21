@@ -10,7 +10,6 @@
 - drag and drop cards!
 
 ## Doing
-- when a player discards all cards from a pokemon stack, reset status, i.e.: damage, conditions
 - when a player discards all cards from a pokemon stack, collapse the container
 
 ## Done
@@ -34,3 +33,4 @@
 - show letters in CAPS instead of lower-case
 - create a tying minigame for Samantha
 - store pokemon status to the DB when someone changes it, i.e.: damage, conditions
+- when a player discards all cards from a pokemon stack, reset status, i.e.: damage, conditions
