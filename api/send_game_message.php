@@ -466,12 +466,25 @@
         $target_player_id = $data['playerId'];
         $card_group = $data['cardGroup'];
 
+        $sanitized_data = [];
+        foreach ($data as $key => $value) {
+            if ($value == 'true') {
+                $sanitized_data[$key] = TRUE;
+                continue;
+            }
+            if ($value == 'false') {
+                $sanitized_data[$key] = FALSE;
+                continue;
+            }
+            $sanitized_data[$key] = $value;
+        }
+
         $game_state[$target_player_id][$card_group]['status']['conditions'] = [
-            'asleep' => $data['asleep'],
-            'paralyzed' => $data['paralyzed'],
-            'confused' => $data['confused'],
-            'poisoned' => $data['poisoned'],
-            'burned' => $data['burned'],
+            'asleep' => $sanitized_data['asleep'],
+            'paralyzed' => $sanitized_data['paralyzed'],
+            'confused' => $sanitized_data['confused'],
+            'poisoned' => $sanitized_data['poisoned'],
+            'burned' => $sanitized_data['burned'],
         ];
 
         save_game_state($game_id, $game_state);
@@ -481,7 +494,7 @@
             'judge',
             get_opponent_player_id($my_player_id),
             'setSpecialConditions',
-            $data
+            $sanitized_data
         );
 
         return TRUE;

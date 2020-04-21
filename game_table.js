@@ -26,7 +26,7 @@ var cardGroups = [
 ];
 var hoverIntentDelay = 400;
 var hoverTimeout;
-var pingInterval = 2000;
+var pingInterval = 500;
 var pingTimeout = setInterval(
     () => { pingServerMessages(); },
     pingInterval
@@ -52,7 +52,7 @@ $(function() {
 
             gameState.gameId = $('#game-id').val();
 
-            function initializePlayerCollections() {
+            function initializePlayers() {
                 const whichPlayers = ['myself', 'opponent'];
                 for (let key in whichPlayers) {
                     const whichPlayer = whichPlayers[key];
@@ -63,6 +63,8 @@ $(function() {
                         .then(function(compressedCardCollection) {
                             unpackCardCollection(whichPlayer, collectionName, compressedCardCollection);
                         });
+
+                    initializePokemonStatus(whichPlayer);
                 }
             };
 
@@ -70,8 +72,8 @@ $(function() {
                 .then(function(data) {
                     gameState[getPlayerId('myself')] = data[getPlayerId('myself')];
                     gameState[getPlayerId('opponent')] = data[getPlayerId('opponent')];
-                })
-                .then(initializePlayerCollections);
+                    initializePlayers();
+                });
 
             renderContainers([
                 'deck',
@@ -246,6 +248,36 @@ $(function() {
         statusChangeCallback($(this));
     });
 });
+
+function initializePokemonStatus(whichPlayer) {
+    for (let key in cardGroups) {
+        const group = cardGroups[key];
+        if (!group.match('pokemon')) {
+            continue;
+        }
+
+        // damage / hp
+        let $sliderDiv = $(`#${whichPlayer}-${group}-damage-hp-range`);
+
+        const damage = gameState[getPlayerId(whichPlayer)][group].status.damage;
+        $sliderDiv.slider("values", 0, damage);
+
+        const hp = gameState[getPlayerId(whichPlayer)][group].status.hp;
+        $sliderDiv.slider("values", 1, hp);
+
+        let $sliderText = $(`#${whichPlayer}-${group}-damage-hp`);
+        $sliderText.val(`${damage} / ${hp} HP`);
+        
+        // special conditions: asleep, poisoned, etc.
+        const conditions = {
+            ...gameState[getPlayerId(whichPlayer)][group].status.conditions
+        };
+        for (let conditionName in conditions) {
+            const hasCondition = conditions[conditionName];
+            $(`#${whichPlayer}-${group}-${conditionName}`).prop('checked', hasCondition);
+        }
+    }
+}
 
 function statusChangeCallback($checkbox) {
     // do not apply to uncheck event
@@ -901,21 +933,21 @@ function processServerMessage(message) {
         const targetPlayerId = message.data.playerId;
         const cardGroup = message.data.cardGroup;
         const conditions = {
-            'asleep': message.data.asleep == 'true',
-            'paralyzed': message.data.paralyzed == 'true',
-            'confused': message.data.confused == 'true',
-            'poisoned': message.data.poisoned == 'true',
-            'burned': message.data.burned == 'true',
+            'asleep': message.data.asleep,
+            'paralyzed': message.data.paralyzed,
+            'confused': message.data.confused,
+            'poisoned': message.data.poisoned,
+            'burned': message.data.burned,
         };
 
-        gameState[targetPlayerId][cardGroup].status.conditions = conditions;
+        gameState[targetPlayerId][cardGroup].status.conditions = { ...conditions };
 
         $('body').off('change', '.pokemon-stats input:checkbox');
 
         const whichPlayer = getWhichPlayer(targetPlayerId);
         for (let conditionName in conditions) {
-            const conditionState = conditions[conditionName];
-            $(`#${whichPlayer}-${cardGroup}-${conditionName}`).prop('checked', conditionState);
+            const hasCondition = conditions[conditionName];
+            $(`#${whichPlayer}-${cardGroup}-${conditionName}`).prop('checked', hasCondition);
         }
 
         $('body').on('change', '.pokemon-stats input:checkbox', function() {

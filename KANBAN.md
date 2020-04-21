@@ -7,12 +7,11 @@
 - collapse "pokemon" containers by default
 - when a player adds their first card to a pokemon stack, prompt for HP
 - add an 'Evolve' action which plays a card to a pokemon stack, then prompts for HP
-- when a player discards all cards from a pokemon stack, reset status, i.e.: damage, conditions
-- when a player discards all cards from a pokemon stack, collapse the container
 - drag and drop cards!
 
 ## Doing
-- store pokemon status to the DB when someone changes it, i.e.: damage, conditions
+- when a player discards all cards from a pokemon stack, reset status, i.e.: damage, conditions
+- when a player discards all cards from a pokemon stack, collapse the container
 
 ## Done
 - flip a coin
@@ -34,3 +33,4 @@
 - add a new expansion/set of cards to collect!
 - show letters in CAPS instead of lower-case
 - create a tying minigame for Samantha
+- store pokemon status to the DB when someone changes it, i.e.: damage, conditions
