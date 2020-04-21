@@ -21,10 +21,10 @@ $(function () {
         }
 
         // word has been completed and a new one has been requested
+        $('.cards-remaining').html(cards.length);
         currentInput = currentWord = '';
         if (cards.length == 0) { return endGame(); }
-
-        $('.cards-remaining').html(cards.length);
+        
         renderTypingCard(cards.pop());
     });
     $(document).on('keydown', function(event) {

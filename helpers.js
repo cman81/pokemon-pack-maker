@@ -453,7 +453,7 @@ function expandDeck(deck) {
     for (let cardKey in deck) {
         let cardValue = deck[cardKey];
         for (let count = 0; count < cardValue.quantity; count++) {
-            cards.push(cardValue.imgSrc);
+            cards.push(`${cardValue.expansionSet}/${cardValue.imgSrc}`);
         }
     }
 
