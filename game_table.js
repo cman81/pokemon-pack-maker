@@ -6,8 +6,12 @@ var deckImages = {
 }
 var gameState = {
     gameId: 0,
-    player1: {},
-    player2: {},
+    player1: {
+        'is_pokemon_hidden': true
+    },
+    player2: {
+        'is_pokemon_hidden': true
+    },
 };
 var cardGroups = [
     'deck',
@@ -56,6 +60,10 @@ $(function() {
                 const whichPlayers = ['myself', 'opponent'];
                 for (let key in whichPlayers) {
                     const whichPlayer = whichPlayers[key];
+                    $(`.${whichPlayer}`).addClass(getPlayerId(whichPlayer));
+
+                    initializePokemonStatus(whichPlayer);
+
                     const collectionName = gameState[getPlayerId(whichPlayer)]['collection_name'];
                     if (!collectionName) { continue; }
     
@@ -63,8 +71,6 @@ $(function() {
                         .then(function(compressedCardCollection) {
                             unpackCardCollection(whichPlayer, collectionName, compressedCardCollection);
                         });
-
-                    initializePokemonStatus(whichPlayer);
                 }
             };
 
@@ -257,7 +263,7 @@ function initializePokemonStatus(whichPlayer) {
 }
 
 function updatePokemonStatus(whichPlayer, group) {
-    if (gameState[whichPlayer].is_pokemon_hidden) {
+    if (gameState[getPlayerId(whichPlayer)].is_pokemon_hidden) {
         return;
     }
 
@@ -886,6 +892,10 @@ function pingServerMessages() {
 function processServerMessage(message) {
     if (message.type == 'renderCardGroup') {
         for (let cardGroup in message.data) {
+            if (gameState[getPlayerId('opponent')].is_pokemon_hidden && cardGroup.match('pokemon')) {
+                gameState[getPlayerId('opponent')].is_pokemon_hidden = false;    
+            }
+
             const value = message.data[cardGroup];
             gameState[getPlayerId('opponent')][cardGroup] = value;
             renderCardGroup('opponent', cardGroup);
@@ -924,8 +934,8 @@ function processServerMessage(message) {
         const damage = message.data.damage ?? 0;
         const hp = message.data.hp ?? 0;
 
-        gameState[targetPlayerId][cardGroup].status.damage = damage;
-        gameState[targetPlayerId][cardGroup].status.hp = hp;
+        gameState[targetPlayerId][cardGroup].status.damage = damage ?? 0;
+        gameState[targetPlayerId][cardGroup].status.hp = hp ?? 0;
 
         const $sliderDiv = $(`#${whichPlayer}-${cardGroup}-damage-hp-range`);
         $sliderDiv.off('slidechange');

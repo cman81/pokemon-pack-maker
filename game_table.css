@@ -115,3 +115,5 @@ button.pokemon {
 .pokemon-attachment img.pokemon-card.hover { opacity: 1; }
 
 .border .actions p { margin-bottom: 0.1rem; }
+.player1 { background-color: red; }
+.player2 { background-color: blue; }
