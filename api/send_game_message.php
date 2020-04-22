@@ -340,6 +340,11 @@
         if (strpos($group, 'pokemon') === FALSE) { return $game_state; }
         if (!empty($game_state[$player_id][$group]['cards'])) { return $game_state; }
 
+        if ($group != 'active-pokemon') {
+            $game_state[$player_id][$group]['status'] = [];
+            return $game_state;
+        }
+
         $game_state[$player_id][$group]['status'] = [
             'conditions' => [
                 'asleep' => false,
@@ -433,6 +438,13 @@
         $temp = $game_state[$player_id][$groupA];
         $game_state[$player_id][$groupA] = $game_state[$player_id][$groupB];
         $game_state[$player_id][$groupB] = $temp;
+
+        if ($groupA != 'active-pokemon') {
+            unset($game_state[$player_id][$groupA]['status']['conditions']);
+        }
+        if ($groupB != 'active-pokemon') {
+            unset($game_state[$player_id][$groupB]['status']['conditions']);
+        }
         
         save_game_state($game_id, $game_state);
 
@@ -490,7 +502,6 @@
     function set_special_conditions($game_id, $my_player_id, $data) {
         $game_state = load_game_state($game_id);
         $target_player_id = $data['playerId'];
-        $card_group = $data['cardGroup'];
 
         $sanitized_data = [];
         foreach ($data as $key => $value) {
@@ -505,7 +516,7 @@
             $sanitized_data[$key] = $value;
         }
 
-        $game_state[$target_player_id][$card_group]['status']['conditions'] = [
+        $game_state[$target_player_id]['active-pokemon']['status']['conditions'] = [
             'asleep' => $sanitized_data['asleep'],
             'paralyzed' => $sanitized_data['paralyzed'],
             'confused' => $sanitized_data['confused'],

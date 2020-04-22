@@ -283,6 +283,8 @@ function updatePokemonStatus(whichPlayer, group) {
     let $sliderText = $(`#${whichPlayer}-${group}-damage-hp`);
     $sliderText.val(`${damage} / ${hp} HP`);
 
+    if (group != 'active-pokemon') { return; }
+
     // special conditions: asleep, poisoned, etc.
     const conditions = {
         ...gameState[getPlayerId(whichPlayer)][group].status.conditions
@@ -294,31 +296,29 @@ function updatePokemonStatus(whichPlayer, group) {
 }
 
 function statusChangeCallback($checkbox) {
-    // do not apply to uncheck event
-    if (!$checkbox.prop("checked")) { return setSpecialConditions($checkbox); }
+    filterSpecialConditions($checkbox);
+    setSpecialConditions($checkbox);
+}
+
+function filterSpecialConditions($checkbox) {
+    // do not apply to unchecked event
+    if (!$checkbox.prop("checked")) { return; }
     
-    // only apply to certain special conditions
-    let concernedValues = [
-        'asleep',
-        'paralyzed',
-        'confused',
-    ];
-    let checkboxVal = $checkbox.val();
-    if (!concernedValues.includes(checkboxVal)) { return setSpecialConditions($checkbox); }
+    // do not apply to burned or poisoned
+    const checkboxVal = $checkbox.val();
+    if ($.inArray(checkboxVal, ['poisoned', 'burned'])) { return; }
     
     let checkBoxId = $checkbox.attr('id');
     let idParts = checkBoxId.split('-');
     idParts.pop();
     
-    let idPrefix = idParts.join('-');
+    const idPrefix = idParts.join('-');
     for (let key in concernedValues) {
-        let value = concernedValues[key];
+        const value = concernedValues[key];
         if (checkboxVal != value) {
             $(`#${idPrefix}-${value}`).prop('checked', false);
         }
     }
-
-    return setSpecialConditions($checkbox);
 }
 
 function setSpecialConditions($checkbox) {
@@ -329,11 +329,7 @@ function setSpecialConditions($checkbox) {
     idParts.pop();
     const idPrefix = idParts.join('-');
 
-    let cardGroup = idParts;
-    cardGroup.shift();
-    cardGroup = cardGroup.join('-');
-
-    gameState[targetPlayerId][cardGroup].status.conditions = {
+    gameState[targetPlayerId]['active-pokemon'].status.conditions = {
         'asleep': $(`#${idPrefix}-asleep`).prop('checked'),
         'paralyzed': $(`#${idPrefix}-paralyzed`).prop('checked'),
         'confused': $(`#${idPrefix}-confused`).prop('checked'),
@@ -342,9 +338,8 @@ function setSpecialConditions($checkbox) {
     }
 
     let specialConditions = {
-        ...gameState[targetPlayerId][cardGroup].status.conditions,
+        ...gameState[targetPlayerId]['active-pokemon'].status.conditions,
         'playerId': targetPlayerId,
-        'cardGroup': cardGroup,
     };
 
     sendGameMessage(getPlayerId('myself'), 'judge', 'setSpecialConditions', specialConditions);
@@ -727,28 +722,6 @@ function renderPokemonStatus($groupBody, whichPlayer, group) {
                 <input type="text" id="${whichPlayer}-${group}-damage-hp" readonly style="border:0; color:#f6931f; font-weight:bold;">
             </h4>
             <div class="slider" id="${whichPlayer}-${group}-damage-hp-range"></div>
-            <h4>Special Conditions:</h4>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-asleep" value="asleep" />
-                <label class="form-check-label" for="${whichPlayer}-${group}-asleep">Asleep</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-paralyzed" value="paralyzed" />
-                <label class="form-check-label" for="${whichPlayer}-${group}-paralyzed">Paralyzed</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-confused" value="confused" />
-                <label class="form-check-label" for="${whichPlayer}-${group}-confused">Confused</label>
-            </div>
-            <br />
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-poisoned" value="poisoned" />
-                <label class="form-check-label" for="${whichPlayer}-${group}-poisoned">Poisoned</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-burned" value="burned" />
-                <label class="form-check-label" for="${whichPlayer}-${group}-burned">Burned</label>
-            </div>
         </div>
     `);
 
@@ -761,18 +734,45 @@ function renderPokemonStatus($groupBody, whichPlayer, group) {
         step: 10,
         values: [0, 0],
         slide: function (event, ui) {
-            let damage = ui.values[0];
-            let total_hp = ui.values[1];
-            $sliderText.val(`${damage} / ${total_hp} HP`);
+            const damage = ui.values[0];
+            const totalHP = ui.values[1];
+            $sliderText.val(`${damage} / ${totalHP} HP`);
         },
     });
     $sliderDiv.on('slidechange', function(event, ui) {
         damageSliderChangeCallback(ui, whichPlayer, group);
     });
     
-    let damage = $sliderDiv.slider("values", 0);
-    let total_hp = $sliderDiv.slider("values", 1);
-    $sliderText.val(`${damage} / ${total_hp} HP`);
+    const damage = $sliderDiv.slider("values", 0);
+    const totalHP = $sliderDiv.slider("values", 1);
+    $sliderText.val(`${damage} / ${totalHP} HP`);
+
+    if (group != 'active-pokemon') { return; }
+
+    $groupBody.find('.pokemon-stats').append(`
+        <h4>Special Conditions:</h4>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-asleep" value="asleep" />
+            <label class="form-check-label" for="${whichPlayer}-${group}-asleep">Asleep</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-paralyzed" value="paralyzed" />
+            <label class="form-check-label" for="${whichPlayer}-${group}-paralyzed">Paralyzed</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-confused" value="confused" />
+            <label class="form-check-label" for="${whichPlayer}-${group}-confused">Confused</label>
+        </div>
+        <br />
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-poisoned" value="poisoned" />
+            <label class="form-check-label" for="${whichPlayer}-${group}-poisoned">Poisoned</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="${whichPlayer}-${group}-burned" value="burned" />
+            <label class="form-check-label" for="${whichPlayer}-${group}-burned">Burned</label>
+        </div>
+    `);
 }
 
 function damageSliderChangeCallback(ui, whichPlayer, group) {
@@ -951,7 +951,6 @@ function processServerMessage(message) {
 
     if (message.type == 'setSpecialConditions') {
         const targetPlayerId = message.data.playerId;
-        const cardGroup = message.data.cardGroup;
         const conditions = {
             'asleep': message.data.asleep,
             'paralyzed': message.data.paralyzed,
@@ -960,14 +959,14 @@ function processServerMessage(message) {
             'burned': message.data.burned,
         };
 
-        gameState[targetPlayerId][cardGroup].status.conditions = { ...conditions };
+        gameState[targetPlayerId]['active-pokemon'].status.conditions = { ...conditions };
 
         $('body').off('change', '.pokemon-stats input:checkbox');
 
         const whichPlayer = getWhichPlayer(targetPlayerId);
         for (let conditionName in conditions) {
             const hasCondition = conditions[conditionName];
-            $(`#${whichPlayer}-${cardGroup}-${conditionName}`).prop('checked', hasCondition);
+            $(`#${whichPlayer}-active-pokemon-${conditionName}`).prop('checked', hasCondition);
         }
 
         $('body').on('change', '.pokemon-stats input:checkbox', function() {

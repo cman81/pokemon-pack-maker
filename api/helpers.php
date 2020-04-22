@@ -144,12 +144,13 @@ function initialize_game_state() {
         $game_state['player2'][$value] = ['cards' => []];
 
         if (strpos($value, 'pokemon') !== FALSE) {
-            $game_state['player1'][$value]['status'] = [
-                'conditions' => [],
-            ];
-            $game_state['player2'][$value]['status'] = [
-                'conditions' => [],
-            ];
+            $game_state['player1'][$value]['status'] = [];
+            $game_state['player2'][$value]['status'] = [];
+        }
+
+        if ($value == 'active-pokemon') {
+            $game_state['player1'][$value]['status']['conditions'] = [];
+            $game_state['player2'][$value]['status']['conditions'] = [];
         }
     }
 
