@@ -7,7 +7,7 @@ var charsCompleted = 0;
 var cardsCompleted = 0;
 var currentWord = '';
 var currentInput = '';
-var timeLimit = 30;
+var timeLimit = 300;
 
 $(function () {
     loadTypingCards();

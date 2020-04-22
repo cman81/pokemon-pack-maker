@@ -4,14 +4,14 @@
     $sql = "
         SELECT *
         FROM cards
-        WHERE type != :energy
+        WHERE type = :pokemon
     ";
 
     $db = new PokemonDB();
     $stmt = $db->prepare($sql);
 
     // passing values to the parameters
-    $stmt->bindValue(':energy', 'energy');
+    $stmt->bindValue(':pokemon', 'pokemon');
 
     $ret = $stmt->execute();
     while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
