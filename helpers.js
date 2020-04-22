@@ -234,16 +234,50 @@ function loadCards(expansion) {
         },
         function(data) {
             energyCards = data.energyCards ?? [];
+            preloadImages(energyCards);
+
             commonCards = data.commonCards ?? [];
+            preloadImages(commonCards);
+
             uncommonCards = data.uncommonCards ?? [];
+            preloadImages(uncommonCards);
+
             rareCards = {
                 '03 rare': data.rareCards ?? [],
                 '04 rare holo': data.rareHoloCards ?? [],
                 '05 rare ultra': data.rareUltraCards ?? [],
                 '06 rare secret': data.rareSecretCards ?? [],
             };
+            for (let key in rareCards) {
+                const cards = rareCards[key];
+                preloadImages(cards);
+            }
+
         }
     );
+
+    function preloadImages(cards) {
+        for (let key in cards) {
+            const value = cards[key];
+
+            const path = `cards/${value.expansionSet}/${value.imgSrc}`;
+            if (preloadedCards[path]) { return; }
+
+            preloadsRemaining++;
+            let image = new Image();
+            image.onload = function () {
+                preloadsRemaining--;
+                
+                if (preloadsRemaining) {
+                    $('.spinner-border').show();
+                } else {
+                    $('.spinner-border').hide();
+                }
+            }
+            image.src = path;
+            preloadedCards[path] = image;
+        }
+    }
 }
 
 function saveProfile() {

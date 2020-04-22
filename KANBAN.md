@@ -1,6 +1,8 @@
 # Kanban
 
 ## To Do
+- consider allowing proxies in the deck
+- search for cards
 - change to another random card in the typing game
 - organize collection by rarity
 - organize collection by type: pokemon, trainer, energy
@@ -8,9 +10,10 @@
 - when a player adds their first card to a pokemon stack, prompt for HP
 - add an 'Evolve' action which plays a card to a pokemon stack, then prompts for HP
 - drag and drop cards!
+- when a player discards all cards from a pokemon stack, collapse the container
 
 ## Doing
-- when a player discards all cards from a pokemon stack, collapse the container
+- remove special conditions from the benched pokemon
 
 ## Done
 - flip a coin

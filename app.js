@@ -35,6 +35,9 @@ var expansions = {
         energy: 'SMb'
     },
 };
+
+var preloadedCards = [];
+var preloadsRemaining = 0;
   
 $(document).ready(function() {
     $('#open-pack').click(function() {
@@ -64,7 +67,7 @@ $(document).ready(function() {
         collection = compileCollection(collection);
 
         activateSection('collection');
-        renderCards(collection, 50, '#collection');
+        renderCards(collection, 0, '#collection');
     });
 
     $('#main-actions').on('click', '#view-battle-deck', function() {
@@ -112,7 +115,7 @@ $(document).ready(function() {
                 updateStats();
                 collection = compileCollection(collection);
                 activateSection('collection');
-                renderCards(collection, 50, '#collection');
+                renderCards(collection, 0, '#collection');
             }
         );
     });

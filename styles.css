@@ -82,6 +82,7 @@ img.uncommon {
     float: left;
     margin-bottom: 15px;
 }
+.expansions img { height: 38px; }
 .expansions img.selected { border: 1px solid #990000; }
-.symbol img { height: 40px; }
+.symbol img { height: 38px; }
 li.nav-item { margin: 0 5px; }
