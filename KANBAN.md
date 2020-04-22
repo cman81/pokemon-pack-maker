@@ -4,14 +4,14 @@
 - change to another random card in the typing game
 - organize collection by rarity
 - organize collection by type: pokemon, trainer, energy
-- collapse "pokemon" containers by default
 - when a player adds their first card to a pokemon stack, prompt for HP
+- when a player adds their first card to a pokemon stack, expand the container
 - add an 'Evolve' action which plays a card to a pokemon stack, then prompts for HP
 - drag and drop cards!
 - when a player discards all cards from a pokemon stack, collapse the container
 
 ## Doing
-- search cards
+- collapse "pokemon" containers by default
 
 ## Done
 - flip a coin
@@ -37,3 +37,4 @@
 - when a player discards all cards from a pokemon stack, reset status, i.e.: damage, conditions
 - remove special conditions from the benched pokemon
 - parent mode: add any card to a deck
+- search cards

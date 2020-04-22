@@ -146,6 +146,21 @@ $(document).ready(function() {
         loadCards($(this).data('expansion'));
     });
 
+    $('#filterQuery').on('keyup', function() {
+        needle = $(this).val().toUpperCase();
+
+        // Loop through all list items, and hide those who don't match the search query
+        $('.collection').find('.card-wrapper').each(function(index, element) {
+            const haystack = $(element).find('img').attr('src').split('/').pop();
+            if (haystack.toUpperCase().match(needle)) {
+                $(element).show();
+                return;
+            }
+
+            $(element).hide();
+        });
+    });
+
     for (let key in expansions) {
         const value = expansions[key];
         $('.top.container').find('.expansions').append(`
