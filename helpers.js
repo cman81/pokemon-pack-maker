@@ -134,15 +134,25 @@ function addToBattleDeck($thisImg) {
 function compileCollection(collection) {
     var collectionClone = [...collection];
     collectionClone.sort(function(a, b) {
-        const firstIdx = parseInt(a.cardId.match(/\d{3}/), 10);
-        const secondIdx = parseInt(b.cardId.match(/\d{3}/), 10);
+        let firstIdx = parseInt(a.cardId.match(/\d{3}/), 10);
+        let secondIdx = parseInt(b.cardId.match(/\d{3}/), 10);
 
         if (a.rarity == 'energy' && b.rarity == 'energy') {
             return firstIdx - secondIdx;
         }
         if (a.rarity != 'energy' && b.rarity != 'energy') {
+            if (a.expansionSet != b.expansionSet) {
+                const expansionSort = Object.keys(expansions);
+                firstIdx = expansionSort.indexOf(a.expansionSet);
+                secondIdx = expansionSort.indexOf(b.expansionSet);
+                
+                return firstIdx - secondIdx;
+            }
+
             return firstIdx - secondIdx;
         }
+
+        // place energy cards at the end
         if (a.rarity == 'energy') {
             return 1;
         }
