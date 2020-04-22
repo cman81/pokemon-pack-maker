@@ -34,6 +34,11 @@ var expansions = {
         expansionSet: 'SM10',
         energy: 'SMb'
     },
+    'SM9': {
+        name: 'Team Up',
+        expansionSet: 'SM9',
+        energy: 'SMb'
+    },
 };
 
 var preloadedCards = [];

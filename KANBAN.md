@@ -1,7 +1,6 @@
 # Kanban
 
 ## To Do
-- consider allowing proxies in the deck
 - change to another random card in the typing game
 - organize collection by rarity
 - organize collection by type: pokemon, trainer, energy
@@ -12,7 +11,7 @@
 - when a player discards all cards from a pokemon stack, collapse the container
 
 ## Doing
-- search for cards
+- search cards
 
 ## Done
 - flip a coin
@@ -37,3 +36,4 @@
 - store pokemon status to the DB when someone changes it, i.e.: damage, conditions
 - when a player discards all cards from a pokemon stack, reset status, i.e.: damage, conditions
 - remove special conditions from the benched pokemon
+- parent mode: add any card to a deck
