@@ -265,28 +265,28 @@ function loadCards(expansion) {
 
         }
     );
+}
 
-    function preloadImages(cards) {
-        for (let key in cards) {
-            const value = cards[key];
+function preloadImages(cards) {
+    for (let key in cards) {
+        const value = cards[key];
 
-            const path = `cards/${value.expansionSet}/${value.imgSrc}`;
-            if (preloadedCards[path]) { return; }
+        const path = `cards/${value.expansionSet}/${value.imgSrc}`;
+        if (preloadedCards[path]) { return; }
 
-            preloadsRemaining++;
-            let image = new Image();
-            image.onload = function () {
-                preloadsRemaining--;
-                
-                if (preloadsRemaining) {
-                    $('.spinner-border').show();
-                } else {
-                    $('.spinner-border').hide();
-                }
+        preloadsRemaining++;
+        let image = new Image();
+        image.onload = function () {
+            preloadsRemaining--;
+            
+            if (preloadsRemaining) {
+                $('.spinner-border').show();
+            } else {
+                $('.spinner-border').hide();
             }
-            image.src = path;
-            preloadedCards[path] = image;
         }
+        image.src = path;
+        preloadedCards[path] = image;
     }
 }
 
@@ -329,6 +329,8 @@ function playSound(cssId) {
 }
 
 function renderCards(pack, timeInterval, cssId) {
+    preloadImages(pack);
+
     $(cssId + ' .card-wrapper').remove();
 
     let time = timeInterval;

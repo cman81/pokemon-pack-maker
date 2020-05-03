@@ -14,6 +14,11 @@ var uncommonCards = [];
 var rareCards = {};
 
 var expansions = {
+    'SWSH2': {
+        name: 'Rebel Clash',
+        expansionSet: 'SWSH2',
+        energy: 'SWSH'
+    },
     'SWSH1': {
         name: 'Sword & Shield',
         expansionSet: 'SWSH1',
@@ -180,5 +185,5 @@ $(document).ready(function() {
         `);
     }
 
-    loadCards('SWSH1');
+    $('.spinner-border').hide();
 });
