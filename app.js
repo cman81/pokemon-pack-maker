@@ -146,15 +146,6 @@ $(document).ready(function() {
         loadCards($(this).data('expansion'));
     });
 
-    $('.pack.section').on('click', '.card-wrapper.flipped', function() {
-        $(this).removeClass('flipped');
-
-        const rarity = $(this).data('rarity');
-        $(this).addClass(rarity);
-        $('#status-message').html(`You got a ${rarity} card!`);
-        $(this).find('.rarity').html(rarity);
-    })
-
     const filterKeyUp = debounce(
         function() {
             if ($(this).val().length < 3) { return; }
