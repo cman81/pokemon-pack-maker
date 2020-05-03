@@ -146,20 +146,27 @@ $(document).ready(function() {
         loadCards($(this).data('expansion'));
     });
 
-    $('#filterQuery').on('keyup', function() {
-        needle = $(this).val().toUpperCase();
-
-        // Loop through all list items, and hide those who don't match the search query
-        $('.collection').find('.card-wrapper').each(function(index, element) {
-            const haystack = $(element).find('img').attr('src').split('/').pop();
-            if (haystack.toUpperCase().match(needle)) {
-                $(element).show();
-                return;
-            }
-
-            $(element).hide();
-        });
-    });
+    const filterKeyUp = debounce(
+        function() {
+            if ($(this).val().length < 3) { return; }
+            console.log('searching...');
+            const needle = $(this).val().toUpperCase();
+            
+            // Loop through all list items, and hide those who don't match the search query
+            $('.collection').find('.card-wrapper').each(function (index, element) {
+                const haystack = $(element).find('img').attr('src').split('/').pop();
+                
+                if (haystack.toUpperCase().match(needle)) {
+                    $(element).show();
+                    return;
+                }
+                
+                $(element).hide();
+            });
+        },
+        250
+    );
+    $('#filterQuery').on('keyup', filterKeyUp);
 
     for (let key in expansions) {
         const value = expansions[key];
