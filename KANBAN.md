@@ -11,6 +11,7 @@
 - when a player discards all cards from a pokemon stack, collapse the container
 
 ## Doing
+- when opening a pack, flip over rare cards for a little suspense
 - collapse "pokemon" containers by default
 
 ## Done

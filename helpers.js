@@ -343,13 +343,18 @@ function renderCards(pack, timeInterval, cssId) {
                 symbolSpan = `<span class="symbol"><img src="logos/${value.expansionSet}_Symbol.png" /></span>`;
             }
 
+            const flipped = (value.rarity.match('rare')) ? 'flipped' : value.rarity;
+            const rarity = (value.rarity.match('rare')) ? '???' : value.rarity;
+
             $(cssId).append(`
-                <div class="card-wrapper ${value.rarity}">
+                <div class="card-wrapper ${flipped}" data-rarity="${value.rarity}">
                     <img src="cards/${value.expansionSet}/${value.imgSrc}"
                         class="${value.rarity} pokemon-card front" />
+                    <img src="card-back.png"
+                        class="pokemon-card back" />
                     <br />
                     ${symbolSpan}
-                    <span class="rarity">${value.rarity}</span>
+                    <span class="rarity">${rarity}</span>
                     ${quantitySpan}
                 </div>
             `);
@@ -387,7 +392,6 @@ function generatePack() {
     let rareCardsClone = {};
     Object.assign(rareCardsClone, rareCards);
     const rarityKey = determineRarity();
-    $('#status-message').html(`You got a ${rarityKey.substring(3)} card!`);
     console.log(`Your rare card was a: ${rarityKey}!`);
     rareCardsClone = rareCardsClone[rarityKey];
     thisCard = rareCardsClone[Math.floor(Math.random() * rareCardsClone.length)];

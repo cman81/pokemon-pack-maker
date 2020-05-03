@@ -146,6 +146,15 @@ $(document).ready(function() {
         loadCards($(this).data('expansion'));
     });
 
+    $('.pack.section').on('click', '.card-wrapper.flipped', function() {
+        $(this).removeClass('flipped');
+
+        const rarity = $(this).data('rarity');
+        $(this).addClass(rarity);
+        $('#status-message').html(`You got a ${rarity} card!`);
+        $(this).find('.rarity').html(rarity);
+    })
+
     const filterKeyUp = debounce(
         function() {
             if ($(this).val().length < 3) { return; }
@@ -172,7 +181,7 @@ $(document).ready(function() {
         const value = expansions[key];
         $('.top.container').find('.expansions').append(`
             <img
-                src="logos/${value.expansionSet}_Symbol.png"
+                src="logos/${value.expansionSet}_Logo_EN.png"
                 id="expansion-${value.expansionSet}"
                 title="${htmlentities.encode(value.name)}"
                 data-expansion="${value.expansionSet}"
