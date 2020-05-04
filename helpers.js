@@ -265,28 +265,28 @@ function loadCards(expansion) {
 
         }
     );
+}
 
-    function preloadImages(cards) {
-        for (let key in cards) {
-            const value = cards[key];
+function preloadImages(cards) {
+    for (let key in cards) {
+        const value = cards[key];
 
-            const path = `cards/${value.expansionSet}/${value.imgSrc}`;
-            if (preloadedCards[path]) { return; }
+        const path = `cards/${value.expansionSet}/${value.imgSrc}`;
+        if (preloadedCards[path]) { return; }
 
-            preloadsRemaining++;
-            let image = new Image();
-            image.onload = function () {
-                preloadsRemaining--;
-                
-                if (preloadsRemaining) {
-                    $('.spinner-border').show();
-                } else {
-                    $('.spinner-border').hide();
-                }
+        preloadsRemaining++;
+        let image = new Image();
+        image.onload = function () {
+            preloadsRemaining--;
+            
+            if (preloadsRemaining) {
+                $('.spinner-border').show();
+            } else {
+                $('.spinner-border').hide();
             }
-            image.src = path;
-            preloadedCards[path] = image;
         }
+        image.src = path;
+        preloadedCards[path] = image;
     }
 }
 
@@ -329,6 +329,8 @@ function playSound(cssId) {
 }
 
 function renderCards(pack, timeInterval, cssId) {
+    preloadImages(pack);
+
     $(cssId + ' .card-wrapper').remove();
 
     let time = timeInterval;
@@ -343,18 +345,13 @@ function renderCards(pack, timeInterval, cssId) {
                 symbolSpan = `<span class="symbol"><img src="logos/${value.expansionSet}_Symbol.png" /></span>`;
             }
 
-            const flipped = (value.rarity.match('rare')) ? 'flipped' : value.rarity;
-            const rarity = (value.rarity.match('rare')) ? '???' : value.rarity;
-
             $(cssId).append(`
-                <div class="card-wrapper ${flipped}" data-rarity="${value.rarity}">
+                <div class="card-wrapper ${value.rarity}" data-rarity="${value.rarity}">
                     <img src="cards/${value.expansionSet}/${value.imgSrc}"
                         class="${value.rarity} pokemon-card front" />
-                    <img src="card-back.png"
-                        class="pokemon-card back" />
                     <br />
                     ${symbolSpan}
-                    <span class="rarity">${rarity}</span>
+                    <span class="rarity">${value.rarity}</span>
                     ${quantitySpan}
                 </div>
             `);
@@ -391,11 +388,15 @@ function generatePack() {
     // 1 random rare card of varying rarity
     let rareCardsClone = {};
     Object.assign(rareCardsClone, rareCards);
+
     const rarityKey = determineRarity();
     console.log(`Your rare card was a: ${rarityKey}!`);
     rareCardsClone = rareCardsClone[rarityKey];
     thisCard = rareCardsClone[Math.floor(Math.random() * rareCardsClone.length)];
-    addCardToPack(pack, thisCard, rarityKey.substring(3));
+
+    const rarity = rarityKey.substring(3);
+    $('#status-message').html(`You got a ${rarity} card!`);
+    addCardToPack(pack, thisCard, rarity);
     
     return pack;
 }
