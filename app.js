@@ -44,6 +44,11 @@ var expansions = {
         expansionSet: 'SM9',
         energy: 'SMb'
     },
+    'SM5': {
+        name: 'Ultra Prism',
+        expansionSet: 'SM5',
+        energy: 'SMb'
+    },
 };
 
 var preloadedCards = [];
