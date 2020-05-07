@@ -63,6 +63,11 @@ collector sets or 3 packs."
         expansionSet: 'SM7',
         energy: 'SMb'
     },
+    'SM6': {
+        name: 'Forbidden Light',
+        expansionSet: 'SM6',
+        energy: 'SMb'
+    },
     'SM5': {
         name: 'Ultra Prism',
         expansionSet: 'SM5',
