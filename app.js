@@ -44,6 +44,21 @@ var expansions = {
         expansionSet: 'SM9',
         energy: 'SMb'
     },
+    'SM8': {
+        name: 'Lost Thunder',
+        expansionSet: 'SM8',
+        energy: 'SMb'
+    },
+    'SM7b': {
+        name: 'Dragon Majesty',
+        expansionSet: 'SM7b',
+        energy: 'SMb'
+    },
+    'SM7': {
+        name: 'Celestial Storm',
+        expansionSet: 'SM7',
+        energy: 'SMb'
+    },
     'SM5': {
         name: 'Ultra Prism',
         expansionSet: 'SM5',
