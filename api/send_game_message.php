@@ -32,7 +32,6 @@
         $ret = $stmt->execute();
         $result = $ret->fetchArray(SQLITE3_ASSOC);
         $db->close();
-        unset($db);
 
         if (empty($result)) {
             $result['game_state'] = json_encode(create_new_game_state($game_id));
@@ -43,7 +42,7 @@
             return $game_state;
         }
 
-        clear_game_messages($game_id, $player_id, $db);
+        clear_game_messages($game_id, $player_id);
 
         $partial_game_state = [
             'player1' => [

@@ -185,16 +185,14 @@ function get_game_messages($game_id, $recipient) {
         ];
     }
 
-    clear_game_messages($game_id, $recipient, $db);
+    clear_game_messages($game_id, $recipient);
 
     return $out;
 }
 
-function clear_game_messages($game_id, $recipient, $db = FALSE) {
-    if (empty($db)) {
-        $db = new PokemonDB();
-        $db->busyTimeout(250);    
-    }
+function clear_game_messages($game_id, $recipient) {
+    $db = new PokemonDB();
+    $db->busyTimeout(250);    
 
     $sql = "
         DELETE FROM game_message_queue
