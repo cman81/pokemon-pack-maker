@@ -1,6 +1,7 @@
 # Kanban
 
 ## To Do
+- Handle when an expansion does not have a certain type of rarity, e.g.: Dragon Majesty
 - change to another random card in the typing game
 - organize collection by rarity
 - organize collection by type: pokemon, trainer, energy
@@ -9,9 +10,9 @@
 - add an 'Evolve' action which plays a card to a pokemon stack, then prompts for HP
 - drag and drop cards!
 - when a player discards all cards from a pokemon stack, collapse the container
+- Open 3-card packs for $1
 
 ## Doing
-- when opening a pack, flip over rare cards for a little suspense
 - collapse "pokemon" containers by default
 
 ## Done

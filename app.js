@@ -49,11 +49,15 @@ var expansions = {
         expansionSet: 'SM8',
         energy: 'SMb'
     },
+/* TODO: this card has no "regular rares" which is crashing the app! fix it.
+Here may be why: "You can’t buy single booster packs of Dragon Majesty... they only sell them in
+collector sets or 3 packs."
     'SM7b': {
         name: 'Dragon Majesty',
         expansionSet: 'SM7b',
         energy: 'SMb'
     },
+*/
     'SM7': {
         name: 'Celestial Storm',
         expansionSet: 'SM7',
