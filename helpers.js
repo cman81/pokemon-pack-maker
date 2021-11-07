@@ -463,7 +463,12 @@ function activateSection(name) {
 }
 
 function updateStats() {
-    $('#cash-added').html(formatter.format(cashAdded));
+    if (wallet >= 4) {
+        $('#open-pack').removeAttr('disabled');
+    } else {
+        $('#open-pack').attr('disabled', 'disabled');
+    }
+
     $('#wallet').html(formatter.format(wallet));
     $('#packs-opened').html(packsOpened);
     
