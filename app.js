@@ -14,6 +14,16 @@ var uncommonCards = [];
 var rareCards = {};
 
 var expansions = {
+    'SWSH4': {
+        name: 'Vivid Voltage',
+        expansionSet: 'SWSH4',
+        energy: 'SWSH'
+    },
+    'SWSH3': {
+        name: 'Darkness Ablaze',
+        expansionSet: 'SWSH3',
+        energy: 'SWSH'
+    },
     'SWSH2': {
         name: 'Rebel Clash',
         expansionSet: 'SWSH2',
@@ -136,6 +146,8 @@ $(document).ready(function() {
         wallet += amountToAdd;
         sessionCash -= amountToAdd;
         updateStats();
+
+        $('.add-cash').hide();
     });
 
     $('.load-profile').click(function() {
@@ -160,6 +172,7 @@ $(document).ready(function() {
     });
 
     $('#collection').on('click', '.pokemon-card', function() {
+return;
         if ($('#collection-click-action').val() == 'add-to-deck') {
             addToBattleDeck($(this));
         }
